@@ -38,14 +38,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/selenium-server-standalone-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/monte-screen-recorder-0.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/selenium-java-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/poi-ooxml-schemas-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/poi-ooxml-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/poi-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/selenium-java-3.141.59/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/selenium-java-3.141.59.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/selenium-server-standalone-3.141.59.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
