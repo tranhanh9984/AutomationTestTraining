@@ -1,33 +1,11 @@
 package autocom.common;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringReader;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import java.util.concurrent.TimeUnit;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -35,15 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.internal.TouchAction;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.Assert;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import sun.net.www.protocol.http.HttpURLConnection;
 
 public class CommonPage {
 
@@ -95,9 +65,9 @@ public class CommonPage {
 	 * 
 	 * @param URL
 	 */
-	public WebDriver initDriverTestWeb(String url, String browser) {
+	public WebDriver startBrower(String url, String browser) {
 		if ("chrome".equals(browser)) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if ("iexplorer".equals(browser)) {
 			driver = new InternetExplorerDriver();
@@ -108,7 +78,13 @@ public class CommonPage {
 		}
 
 		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.navigate().to(url);
 		return driver;
+	}
+	
+	public void closeBrowser(WebDriver dr) {
+		dr.close();
 	}
 
 	/**
