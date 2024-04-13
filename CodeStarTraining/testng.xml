@@ -21,4 +21,7 @@
         </classes>
     </test>
   -->  
+    
+    <parameter name="browserType" value="chrome"></parameter>
+    <parameter name="appURL" value=""></parameter>
 </suite>

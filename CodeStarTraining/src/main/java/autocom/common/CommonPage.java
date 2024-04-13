@@ -35,7 +35,7 @@ public class CommonPage {
 
 	/**
 	 * switch to a frame
-	 * 
+	 *
 	 * @param locator
 	 * @param opParams
 //	 */
@@ -62,7 +62,7 @@ public class CommonPage {
 
 	/**
 	 * init Driver
-	 * 
+	 *
 	 * @param URL
 	 */
 	public WebDriver startBrower(String url, String browser) {
@@ -82,14 +82,14 @@ public class CommonPage {
 		driver.navigate().to(url);
 		return driver;
 	}
-	
+
 	public void closeBrowser(WebDriver dr) {
 		dr.close();
 	}
 
 	/**
 	 * pause driver in timeInMillis
-	 * 
+	 *
 	 * @param timeInMillis
 	 */
 	public void pause(long timeInMillis) {
@@ -101,7 +101,7 @@ public class CommonPage {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param locator
 	 * @param opParams
 	 * @return
@@ -139,15 +139,15 @@ public class CommonPage {
 		try {
 			elem = dr.findElement(by);
 		} catch (NoSuchElementException e) {
-		
+
 			pause(WAIT_INTERVAL);
 			getElement(locator, dr);
 		} catch (StaleElementReferenceException e) {
-		
+
 			pause(WAIT_INTERVAL);
 			getElement(locator, dr);
 		} catch (WebDriverException e) {
-		
+
 			pause(WAIT_INTERVAL);
 			getElement(locator, dr);
 		}
@@ -156,7 +156,7 @@ public class CommonPage {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param locator
 	 * @return
 	 */
@@ -181,7 +181,7 @@ public class CommonPage {
 
 //	public WebElement getElementPresent(Object locator) {
 //		WebElement elem = null;
-//		
+//
 //		for (int tick = 0; tick < timeout / WAIT_INTERVAL; tick++) {
 //			if (notDisplayE == 2) {
 //				elem = getElement(locator);
@@ -225,11 +225,11 @@ public class CommonPage {
 
 	/**
 	 * get a display element in web page
-	 * 
+	 *
 	 * @param locator @ return
 	 */
 	public WebElement getDisplayedElement(Object locator, WebDriver dr) {
-		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());	
+		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
 		WebElement e = null;
 		try {
 			if (by != null)
@@ -239,7 +239,7 @@ public class CommonPage {
 					return e;
 			}
 		} catch (NoSuchElementException ex) {
-		
+
 			pause(WAIT_INTERVAL);
 //			getDisplayedElement(locator);
 		} catch (StaleElementReferenceException ex) {
@@ -256,7 +256,7 @@ public class CommonPage {
 
 	/**
 	 * checking an element is displayed in web page
-	 * 
+	 *
 	 * @param locator
 	 * @return
 	 */
@@ -275,11 +275,11 @@ public class CommonPage {
 		return bool;
 	}
 
-	
+
 
 	/**
 	 * click on an element
-	 * 
+	 *
 	 * @param locator
 	 * @param opParams
 	 */
@@ -312,7 +312,7 @@ public class CommonPage {
 //
 //	/**
 //	 * Click on an element of list element
-//	 * 
+//	 *
 //	 * @param locator
 //	 * @param index
 //	 */
@@ -326,7 +326,7 @@ public class CommonPage {
 //
 //	/**
 //	 * input data to element
-//	 * 
+//	 *
 //	 * @param locator
 //	 * @param value
 //	 * @param validate
@@ -397,7 +397,7 @@ public class CommonPage {
 //
 //	/**
 //	 * get value of element in web page
-//	 * 
+//	 *
 //	 * @param locator
 //	 * @return
 //	 */
@@ -416,7 +416,7 @@ public class CommonPage {
 //
 //	/**
 //	 * get text of element
-//	 * 
+//	 *
 //	 * @param locator
 //	 * @return
 //	 */
@@ -436,7 +436,7 @@ public class CommonPage {
 //
 //	/**
 //	 * get absolute path of file
-//	 * 
+//	 *
 //	 * @param relativeFilePath
 //	 * @return
 //	 */
@@ -448,7 +448,7 @@ public class CommonPage {
 //
 //	/**
 //	 * compare 2 string
-//	 * 
+//	 *
 //	 * @param s1
 //	 * @param s2
 //	 */
@@ -463,7 +463,7 @@ public class CommonPage {
 //	}
 //
 //	/**
-//	 * 
+//	 *
 //	 * @param dateBefore
 //	 * @param dateAfter
 //	 */
@@ -488,7 +488,7 @@ public class CommonPage {
 //
 //	/**
 //	 * scroll to text in screen
-//	 * 
+//	 *
 //	 * @param text
 //	 */
 //	public void scrollToText(String text) {
@@ -560,7 +560,7 @@ public class CommonPage {
 //
 //	/**
 //	 * parse to object from a xpath contains option
-//	 * 
+//	 *
 //	 * @param xpathOption
 //	 * @param option
 //	 * @return
@@ -583,7 +583,7 @@ public class CommonPage {
 //
 //	/**
 //	 * get first day of month of next month
-//	 * 
+//	 *
 //	 * @param addMonth
 //	 * @return
 //	 */
@@ -612,7 +612,7 @@ public class CommonPage {
 //	}
 //
 //	/**
-//	 * 
+//	 *
 //	 * @param tbSearch
 //	 * @param textSearch
 //	 * @param xpath
@@ -633,7 +633,7 @@ public class CommonPage {
 //
 //	/**
 //	 * Open page at not loaded status, as clear cache
-//	 * 
+//	 *
 //	 * @param pageUrl
 //	 * @param driver
 //	 */
@@ -659,7 +659,7 @@ public class CommonPage {
 //	}
 //
 //	/**
-//	 * 
+//	 *
 //	 * @param urlText
 //	 * @param data
 //	 * @param column
@@ -719,7 +719,7 @@ public class CommonPage {
 //	}
 //
 //	/**
-//	 * 
+//	 *
 //	 * @param input
 //	 * @return
 //	 * @throws IOException
@@ -732,7 +732,7 @@ public class CommonPage {
 //
 //	/**
 //	 * get message from Toast object
-//	 * 
+//	 *
 //	 * @return
 //	 */
 //	public String getMessageToast() {
@@ -743,7 +743,7 @@ public class CommonPage {
 //	}
 //
 //	/**
-//	 * 
+//	 *
 //	 * @param elementStart
 //	 * @param elementEnd
 //	 */

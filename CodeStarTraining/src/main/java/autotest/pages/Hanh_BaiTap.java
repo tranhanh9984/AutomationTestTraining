@@ -41,4 +41,5 @@ public class Hanh_BaiTap extends CommonPage{
 			Assert.assertEquals("Tran Mai Hanh", text);		
 		}
 
+
 }
