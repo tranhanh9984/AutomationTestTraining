@@ -26,7 +26,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
@@ -38,13 +38,17 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/selenium-java-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-ooxml-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-ooxml-schemas-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/selenium-server-standalone-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/selenium-java-3.141.59.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/selenium-server-standalone-3.141.59.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/monte-screen-recorder-0.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/selenium-java-3.141.59 (2)/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/slf4j-api-2.0.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hbrullan/Downloads/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
