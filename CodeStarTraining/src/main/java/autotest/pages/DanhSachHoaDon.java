@@ -1,5 +1,7 @@
-package autocom.common;
+package autotest.pages;
 
+import autocom.common.CommonFuncs;
+import autocom.common.CommonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

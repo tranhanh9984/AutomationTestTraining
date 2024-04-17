@@ -1,12 +1,12 @@
-package autocom.common;
+package autotest.pages;
 
+import autocom.common.CommonFuncs;
+import autocom.common.CommonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import autocom.common.HomePage;
 
 public class TaoHoaDon extends CommonPage {
     private WebDriver driver;
@@ -90,7 +90,7 @@ public class TaoHoaDon extends CommonPage {
             Luu.click();
     }
 
-    public DanhSachHoaDon luu(String nguoiMuaHang,String sodienthoai,String stk,String tennganhang) throws Exception{
+    public DanhSachHoaDon luu(String nguoiMuaHang, String sodienthoai, String stk, String tennganhang) throws Exception{
         clickMST();
         enterNguoiMuaHang(nguoiMuaHang);
         enterSDT(sodienthoai);

@@ -1,15 +1,17 @@
-package autocom.common;
+package autotest.pages;
 
+import autocom.common.CommonFuncs;
+import autocom.common.CommonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import autocom.constant.KeywordConstant;
 
 public class SignInPage extends CommonPage {
     private WebDriver driver;
     private CommonFuncs commonFuncs;
+    private KeywordConstant keywordConstant;
 
     private final By email_input = By.id("companyUsername");
     private final By password_input = By.id("password");
@@ -40,32 +42,33 @@ public class SignInPage extends CommonPage {
 
     }
 
-    public HomePage sigin(String email,String password,String taxcode) throws Exception{
-        enterEmail(email);
-        enterPassword(password);
-        enterTaxcode(taxcode);
+    public HomePage sigin() throws Exception{
+        enterEmail();
+        enterPassword();
+        enterTaxcode();
         clickSignIn();
 
         return new HomePage(driver);
     }
 
-    public void enterEmail(String email){
+    public void enterEmail(){
         WebElement email_tb = driver.findElement(email_input);
         Assert.assertTrue(email_tb.isDisplayed(),"Textbox email khong hien thi");
-        email_tb.sendKeys(email);
+        email_tb.sendKeys(keywordConstant.EMAIL);
     }
 
-    public void enterPassword(String password){
+    public void enterPassword(){
         WebElement pass_tb = driver.findElement(password_input);
-        if(pass_tb.isDisplayed())
-            pass_tb.sendKeys(password);
+        if(pass_tb.isDisplayed()) {
+            pass_tb.sendKeys(keywordConstant.PASSWORD);
+        }
     }
 
 
-    public void enterTaxcode(String taxcode){
+    public void enterTaxcode(){
         WebElement taxcode_tb = driver.findElement(taxcode_input);
         if(taxcode_tb.isDisplayed())
-            taxcode_tb.sendKeys(taxcode);
+            taxcode_tb.sendKeys(keywordConstant.MST);
     }
 
     public void clickSignIn(){
@@ -73,9 +76,5 @@ public class SignInPage extends CommonPage {
         if(sigin.isDisplayed())
             sigin.click();
     }
-
-
-
-
 
 }
