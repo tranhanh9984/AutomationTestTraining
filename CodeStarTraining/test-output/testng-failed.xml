@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.pages.Exam2">
+      <class name="autotest.testcases.TaoHoaDonTestcases">
         <methods>
-          <include name="startPage"/>
           <include name="closePage"/>
-          <include name="testXpath"/>
+          <include name="taoHoaDonThanhCong"/>
+          <include name="startPage"/>
         </methods>
-      </class> <!-- autotest.pages.Exam2 -->
+      </class> <!-- autotest.testcases.TaoHoaDonTestcases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

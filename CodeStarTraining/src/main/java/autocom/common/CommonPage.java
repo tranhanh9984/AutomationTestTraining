@@ -83,6 +83,22 @@ public class CommonPage {
 		return driver;
 	}
 	
+	
+	//Truyền vào string = "Hóa đơn\Tạo hoá đơn"
+	public void clickMenu(String strSelected) {	
+		String txtMenu = "//span[text() = '%s']/ancestor::a";
+		String[] menus = new String[2];
+		menus = strSelected.split("/");	
+		pause(1000);
+		
+		for(int i = 0; i < menus.length; i++) {
+			if(!driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).isDisplayed()) {
+				pause(1000);
+			}
+			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();			
+		}
+	}	
+	
 	public void closeBrowser(WebDriver dr) {
 		dr.close();
 	}
