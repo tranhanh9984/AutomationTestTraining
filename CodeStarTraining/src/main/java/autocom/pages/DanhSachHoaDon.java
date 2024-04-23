@@ -3,7 +3,9 @@ package autocom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class DanhSachHoaDon {
+import autocom.common.CommonPage;
+
+public class DanhSachHoaDon extends CommonPage {
 
 	WebDriver driver;
 
@@ -16,8 +18,10 @@ public class DanhSachHoaDon {
 	String txtStartDate = "//input[@name='startDate']";
 	String txtEndDate = "//input[@name='endDate']";
 
-	public void locHoaDon(String tuNgay, String denNgay) {
-
+	public void locHoaDon(String startDate, String endDate) {
+this.selectStartDate(startDate);
+pause(1000);
+this.selectEndDate(endDate);
 	}
 
 	public void openFilterDataHoaDon() {
@@ -26,15 +30,21 @@ public class DanhSachHoaDon {
 
 	}
 
-	public void selectStartDate() {
+	public void selectStartDate(String startDate) {
 
 		driver.findElement(By.xpath(txtStartDate)).click();
+		driver.findElement(By.xpath(txtStartDate)).sendKeys(startDate);
 
 	}
 
-	public void selectEndDate() {
+	public void selectEndDate(String endDate ) {
 
 		driver.findElement(By.xpath(txtEndDate)).click();
-
+		driver.findElement(By.xpath(txtStartDate)).sendKeys(endDate);
 	}
+	
+	public void getNoHoaDon(String NoHoaDon) {
+	}
+	
+	
 }

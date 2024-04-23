@@ -35,7 +35,7 @@ public class CommonPage {
 		}
 
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(url);
 		return driver;
 	}
@@ -134,18 +134,17 @@ public class CommonPage {
 		return bool;
 	}
 
-	
-	// truyen vao String StrSelected = Hoa Don/Tao Hoa Don
-	public void clickMenu(String strSelected) {	
+	public void clickMenu(String strSelected) {
 		String txtMenu = "//span[text() = '%s']/ancestor::a";
-		String[] menus = strSelected.split("\\");	
+		String[] menus = strSelected.split("/");
 		pause(1000);
-		
-		for(int i = 0; i < menus.length; i++) {
-			if(!driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).isDisplayed()) {
+
+		for (int i = 0; i < menus.length; i++) {
+			if (!driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).isDisplayed()) {
 				pause(1000);
 			}
-			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();			
+			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();
 		}
+
 	}
-	}
+}

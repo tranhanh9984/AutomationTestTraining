@@ -12,13 +12,12 @@ import autocom.pages.HoaDonPage;
 import autocom.pages.HomePage;
 import autocom.pages.LoginPage;
 
-public class TaoHoaDonTestCase extends CommonPage {
+public class CheckSoHoaDonDisplayCorrectTestCase extends CommonPage {
+	
 	WebDriver driver;
 	HomePage homePage;
 	HoaDonPage hoadon;
 	CommonPage commonPage;
-	
-	String noti = "//div[@id= '9']";
 
 	@BeforeTest
 	public void startPage() {
@@ -46,24 +45,14 @@ public class TaoHoaDonTestCase extends CommonPage {
 		//DanhSachHoaDon dshd = new DanhSachHoaDon(driver);
 		//dshd.getDSHoaDon();
 		//HomePage homePage = new HomePage(driver);
-		//HoaDonPage hoadon = new HoaDonPage(driver);
-
-		hoadon.clickMenu("Hóa đơn/Tạo hoá đơn");
-		hoadon.selectMSTKhachHang("44444");
-		pause(1000);
-		hoadon.inputCustomerName("Huong");
-		pause(2000);
-		hoadon.inputCustomerPhone("0912345678");
-		hoadon.selectProductCodeService("Xăng RON 95-V");
-		hoadon.clickLuuvaKyButton();
-
-		//String notiSuccess = driver.findElement(By.xpath(noti)).getText();
-		//Assert.assertTrue(notiSuccess.contains("Phát hành hóa đơn thành công"));
-		String pageTitle = hoadon.pageTitleVerify();
-		Assert.assertEquals(pageTitle, "Danh sách hoá đơn");
+		DanhSachHoaDon dshd = new DanhSachHoaDon(driver);
+		hoadon.clickMenu("Hóa đơn/Danh sách hoá đơn");
+		dshd.openFilterDataHoaDon();
+		dshd.selectStartDate("04/20/2024");
+		dshd.selectEndDate("04/20/2024");
 		
-
-		
+		String lblSoHoaDon = driver.findElement(By.xpath("//div[@data-column-id= 'no']")).getText();
+		Assert.assertTrue(lblSoHoaDon.contains("00018773"));
 		
 	}
 }

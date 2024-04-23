@@ -2,9 +2,18 @@ package autocom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import autocom.constant.KeywordConstant;
 
 public class LoginPage {
 
+	
+public void login() {
+	
+}
+	
 	String txtEmail = "//input[@id='companyUsername']";
 	String txtPass = "//input[@id='password']";
 	String txtTaxCode = "//input[@id='taxCode']";
@@ -42,4 +51,5 @@ public class LoginPage {
 	public void signIn(String userEmail, String password, String taxCode) {
 
 	}
+
 }

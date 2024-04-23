@@ -13,6 +13,10 @@ public class HomePage extends CommonPage {
 	String txtTitle = "//div[@id='company-info']";
 	String txtHoaDon = "//span[(text()='Hóa đơn')]/ancestor::a";
 	String txtTaoHoaDon = "//span[(text()='Tạo hoá đơn')]/ancestor::a";
+	String txtMenuHoaDon = "//span[(text()='%s')]/ancestor::a";
+	String txtDanhSachHoaDon = "//span[(text()='Danh sách hoá đơn')]/ancestor::a";
+
+
 
 	WebDriver driver;
 
@@ -27,11 +31,24 @@ public class HomePage extends CommonPage {
 	public void clickMenuTaoHoaDon() {
 		driver.findElement(By.xpath(txtTaoHoaDon)).click();
 	}
+	
+	public void clickDanhSachHoaDon() {
+		driver.findElement(By.xpath(txtDanhSachHoaDon)).click();
+	}
 
 	public void logout() {
 
 	}
 
+	
+	//Click String = Hoa don --> Tao Hoa don
+	
+	//public void clickMenu(String txtMenu) {
+		//pause(500);
+		//driver.findElement(By.xpath(String.format(txtMenuHoaDon, txtMenu))).click();
+	//}
+	
+	
 }
 
 // public void clickHoaDonMenu(String text) {
