@@ -38,13 +38,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/selenium-java-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-ooxml-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/poi-ooxml-schemas-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/selenium-server-standalone-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Downloads/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/selenium-java-3.141.59 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/testng-7.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LENOVO/Downloads/selenium-java-3.141.59.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
