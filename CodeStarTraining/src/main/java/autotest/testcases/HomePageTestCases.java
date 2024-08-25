@@ -6,4 +6,8 @@ public class HomePageTestCases {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public void testing() {
+		
+	}
 }
