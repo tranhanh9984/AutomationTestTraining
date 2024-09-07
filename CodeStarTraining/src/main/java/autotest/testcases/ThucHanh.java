@@ -28,7 +28,7 @@ public class ThucHanh extends CommonPage {
 	//}
 	@Test
 	public void khoiTaoWeb() {
-		this.startBrower("https://www.youtube.com/", "chrome");
+		this.startBrower("https://v2.vietinvoice.vn/auth/dang-nhap", "chrome");
 		pause(500);
 		Assert.assertEquals(false, false);
 	}

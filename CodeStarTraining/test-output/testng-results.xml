@@ -2,16 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-04T03:07:36 ICT" name="Default suite" finished-at="2024-09-04T03:07:44 ICT" duration-ms="8635">
+  <suite started-at="2024-09-08T04:32:08 ICT" name="Default suite" finished-at="2024-09-08T04:32:15 ICT" duration-ms="7223">
     <groups>
     </groups>
-    <test started-at="2024-09-04T03:07:36 ICT" name="Default test" finished-at="2024-09-04T03:07:44 ICT" duration-ms="8635">
-      <class name="autotest.testcases.ThucHanh">
-        <test-method signature="khoiTaoWeb()[pri:0, instance:autotest.testcases.ThucHanh@57cf54e1]" started-at="2024-09-04T03:07:36 ICT" name="khoiTaoWeb" finished-at="2024-09-04T03:07:44 ICT" duration-ms="8610" status="PASS">
+    <test started-at="2024-09-08T04:32:08 ICT" name="Default test" finished-at="2024-09-08T04:32:15 ICT" duration-ms="7223">
+      <class name="autotest.pages.Practice">
+        <test-method is-config="true" signature="StartPage()[pri:0, instance:autotest.pages.Practice@506ae4d4]" started-at="2024-09-08T04:32:08 ICT" name="StartPage" finished-at="2024-09-08T04:32:12 ICT" duration-ms="4551" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- khoiTaoWeb -->
-      </class> <!-- autotest.testcases.ThucHanh -->
+        </test-method> <!-- StartPage -->
+        <test-method signature="TC1()[pri:0, instance:autotest.pages.Practice@506ae4d4]" started-at="2024-09-08T04:32:12 ICT" name="TC1" finished-at="2024-09-08T04:32:15 ICT" duration-ms="2586" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC1 -->
+        <test-method is-config="true" signature="ClosePage()[pri:0, instance:autotest.pages.Practice@506ae4d4]" started-at="2024-09-08T04:32:15 ICT" name="ClosePage" finished-at="2024-09-08T04:32:15 ICT" duration-ms="63" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ClosePage -->
+      </class> <!-- autotest.pages.Practice -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
