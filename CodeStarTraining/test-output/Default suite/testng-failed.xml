@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.pages.Practice">
+      <class name="autotest.testcases.LoginTestcases">
         <methods>
           <include name="ClosePage"/>
-          <include name="TC1"/>
+          <include name="verifyClickOnEyesIcon"/>
           <include name="StartPage"/>
         </methods>
-      </class> <!-- autotest.pages.Practice -->
+      </class> <!-- autotest.testcases.LoginTestcases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

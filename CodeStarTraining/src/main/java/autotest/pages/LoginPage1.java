@@ -1,6 +1,9 @@
 package autotest.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -9,29 +12,29 @@ import org.testng.annotations.Test;
 import autocom.common.CommonPage;
 
 public class LoginPage1 extends CommonPage {
-	private String gmail = "caonv174@gmail.com";
-	private String password = "123456";
-	private String MST = "0312303803-999";
-	private String text = "Xin chào, Nguyễn Văn Cao";
-
-	@BeforeTest
-	public void StartPage() {
-		this.startBrower("https://v2.vietinvoice.vn/auth/dang-nhap", "chrome");
-		pause(50);
+	String txtCompanyName = "companyUsername";
+	public String txtPassword = "password";
+	String txtTaxCode = "taxCode";
+	String btnLogin = "//button[@title='Đăng nhập']";
+	String eyesIcon = "//div[@class='KTFormInput ']//i";
+	
+	public void inputAllFields(String gmail, String password, String MST) {
+		driver.findElement(By.id(txtCompanyName)).sendKeys(gmail);
+		driver.findElement(By.id(txtPassword)).sendKeys(password);
+		driver.findElement(By.id(txtTaxCode)).sendKeys(MST);		
 	}
-
-	@Test
-	public void TC1() {
-		driver.findElement(By.id("companyUsername")).sendKeys(gmail);
-		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.id("taxCode")).sendKeys(MST);
-		driver.findElement(By.xpath("//button[@title='Đăng nhập']")).click();
+	
+	public void clickSubmitButton() {
+		driver.findElement(By.xpath(btnLogin)).click();
 		pause(1500);
-		Assert.assertEquals(driver.findElement(By.xpath("//*[contains(text(), '" + text + "')]")).getText(), text);
 	}
-
-	@AfterTest
-	public void ClosePage() {
-		this.closeBrowser(driver);
+	
+	public void leaveAllFieldsWithBlank(String gmail) {
+		driver.findElement(By.id(txtCompanyName)).sendKeys(gmail);
+		driver.findElement(By.id(txtCompanyName)).clear();
+	}
+	
+	public void clickEyesIcon() {
+		driver.findElement(By.xpath(eyesIcon)).click();
 	}
 }
