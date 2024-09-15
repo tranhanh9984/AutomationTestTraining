@@ -10,36 +10,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import autocom.common.CommonPage;
+import autocom.constant.KeywordConstant;
 import autotest.pages.LoginPage1;
 
-public class LoginTestcases extends LoginPage1 {
-	String gmail = "caonv174@gmail.com";
+public class LoginTestcases extends CommonPage {
+	String txtPassword = "password";
 	String unregisteredgmail = "khoaminhtran1999@gmail.com";
-	String password = "123456";
 	String wrongpassword = "abc@123";
-	String MST = "0312303803-999";
 	String wrongMST = "0312303803-9";
-	String text = "Nguyễn Văn Cao";
-	String unexistedmessage = "Không tìm thấy tài khoản";
-	String wrongpasswordmessage = "Sai mật khẩu";
-	String wrongMSTmessage = "Thiếu mã số thuế hoặc mã số thuế không hợp lệ";
-	String requiredFieldsMessage = "Bắt buộc";
-//	LoginTestcases(WebDriver dr) {
-//		super();
-//		// TODO Auto-generated constructor stub
-//	}
-//
-//
-////	LoginTestcases(WebDriver dr) {
-////		super(dr);
-////		// TODO Auto-generated constructor stub
-////	}
-//
-//
-//	WebDriver driver;
-////	public LoginTestcases() {
-////		// TODO Auto-generated constructor stub
-////	}
+	
+	KeywordConstant comConstant =  new KeywordConstant();
 
 	@BeforeTest
 	public void StartPage() {
@@ -47,48 +28,53 @@ public class LoginTestcases extends LoginPage1 {
 		pause(50);
 	}
 
-	//@Test
+	@Test
 	public void loginSuccessfully() {
+		LoginPage1 loginPage1 = new LoginPage1(driver);
 		// Kiem tra login thanh cong
-		this.inputAllFields(gmail, password, MST);
-		this.clickSubmitButton();
+		loginPage1.inputAllFields(comConstant.EMAIL, comConstant.PASSWORD, comConstant.MST);
+		loginPage1.clickSubmitButton();
 		Assert.assertTrue(
-				driver.findElement(By.xpath("//*[contains(text(), 'Xin chào, Nguyễn Văn Cao')]")).getText().contains(text));
+				driver.findElement(By.xpath("//*[contains(text(), 'Xin chào, " + comConstant.HO_TEN +"')]")).getText().contains(comConstant.HO_TEN)); //move to homepage
 	}
 	
 	//@Test
 	public void loginWithUnexistedAccount() {
+		LoginPage1 loginPage1 = new LoginPage1(driver);
 		// Kiem tra login sai email 
-		this.inputAllFields(unregisteredgmail, password, MST);
-		this.clickSubmitButton();
+		loginPage1.inputAllFields(unregisteredgmail, comConstant.PASSWORD, comConstant.MST);
+		loginPage1.clickSubmitButton();
 		Assert.assertTrue(
-				driver.findElement(By.xpath("//*[contains(text(), '" + unexistedmessage + "')]")).getText().contains(unexistedmessage));
+				driver.findElement(By.xpath("//*[contains(text(), '" + comConstant.unexistedmessage + "')]")).getText().contains(comConstant.unexistedmessage));
 	}
 	
 	//@Test
 	public void loginWithWrongPassword() {
+		LoginPage1 loginPage1 = new LoginPage1(driver);
 		// Kiem tra login sai password
-		this.inputAllFields(gmail, wrongpassword, MST);
-		this.clickSubmitButton();
+		loginPage1.inputAllFields(comConstant.EMAIL, wrongpassword, comConstant.MST);
+		loginPage1.clickSubmitButton();
 		Assert.assertTrue(
-				driver.findElement(By.xpath("//*[contains(text(), '" + wrongpasswordmessage + "')]")).getText().contains(wrongpasswordmessage));
+				driver.findElement(By.xpath("//*[contains(text(), '" + comConstant.wrongpasswordmessage + "')]")).getText().contains(comConstant.wrongpasswordmessage));
 	}
 	
 	//@Test
 	public void loginWithWrongMST() {
+		LoginPage1 loginPage1 = new LoginPage1(driver);
 		// Kiem tra login sai MST
-		this.inputAllFields(gmail, password, wrongMST);
-		this.clickSubmitButton();
+		loginPage1.inputAllFields(comConstant.EMAIL, comConstant.PASSWORD, wrongMST);
+		loginPage1.clickSubmitButton();
 		Assert.assertTrue(
-				driver.findElement(By.xpath("//*[contains(text(), '" + wrongMSTmessage + "')]")).getText().contains(wrongMSTmessage));
+				driver.findElement(By.xpath("//*[contains(text(), '" + comConstant.wrongMSTmessage + "')]")).getText().contains(comConstant.wrongMSTmessage));
 	}
 	
 	//@Test
 	public void leaveAllRequiredFieldsWithBlank() {
+		LoginPage1 loginPage1 = new LoginPage1(driver);
 		// Kiem tra login khi khong nhap tat ca field bat buoc
-		this.leaveAllFieldsWithBlank(gmail);
-		this.clickSubmitButton();
-		List<WebElement> errmsg = driver.findElements(By.xpath("//*[contains(text(), '" + requiredFieldsMessage + "')]"));
+		loginPage1.leaveAllFieldsWithBlank(comConstant.EMAIL);
+		loginPage1.clickSubmitButton();
+		List<WebElement> errmsg = driver.findElements(By.xpath("//*[contains(text(), '" + comConstant.requiredFieldsMessage + "')]"));
 		int count = 0;
         for (WebElement ele: errmsg) {
             count++;
@@ -98,10 +84,11 @@ public class LoginTestcases extends LoginPage1 {
 	
 	//@Test
 	public void verifyClickOnEyesIcon() {
+		LoginPage1 loginPage1 = new LoginPage1(driver);
 		// Kiem tra click on Eyes Icon
-		this.inputAllFields(gmail, password, MST);
-		this.clickEyesIcon();
-		Assert.assertEquals(driver.findElement(By.id(txtPassword)).getAttribute("value"), password);
+		loginPage1.inputAllFields(comConstant.EMAIL, comConstant.PASSWORD, comConstant.MST);
+		loginPage1.clickEyesIcon();
+		Assert.assertEquals(driver.findElement(By.id(txtPassword)).getAttribute("value"), comConstant.PASSWORD);
 	}
 
 	@AfterTest

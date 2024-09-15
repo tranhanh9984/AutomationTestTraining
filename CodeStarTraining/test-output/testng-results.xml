@@ -2,20 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-10T05:01:07 ICT" name="Default suite" finished-at="2024-09-10T05:01:14 ICT" duration-ms="6723">
+  <suite started-at="2024-09-15T19:31:19 ICT" name="Default suite" finished-at="2024-09-15T19:31:32 ICT" duration-ms="12435">
     <groups>
     </groups>
-    <test started-at="2024-09-10T05:01:07 ICT" name="Default test" finished-at="2024-09-10T05:01:14 ICT" duration-ms="6723">
-      <class name="autotest.pages.Practice">
-        <test-method is-config="true" signature="StartPage()[pri:0, instance:autotest.pages.Practice@72e5a8e]" started-at="2024-09-10T05:01:07 ICT" name="StartPage" finished-at="2024-09-10T05:01:13 ICT" duration-ms="5431" status="PASS">
+    <test started-at="2024-09-15T19:31:19 ICT" name="Default test" finished-at="2024-09-15T19:31:32 ICT" duration-ms="12435">
+      <class name="autotest.testcases.HomePageTestCases">
+        <test-method is-config="true" signature="StartPage()[pri:0, instance:autotest.testcases.HomePageTestCases@7d4f9aae]" started-at="2024-09-15T19:31:19 ICT" name="StartPage" finished-at="2024-09-15T19:31:22 ICT" duration-ms="3277" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- StartPage -->
-        <test-method signature="TC5()[pri:0, instance:autotest.pages.Practice@72e5a8e]" started-at="2024-09-10T05:01:13 ICT" name="TC5" finished-at="2024-09-10T05:01:14 ICT" duration-ms="1271" status="PASS">
+        <test-method signature="clickOnMenuHoaDon()[pri:0, instance:autotest.testcases.HomePageTestCases@7d4f9aae]" started-at="2024-09-15T19:31:22 ICT" name="clickOnMenuHoaDon" finished-at="2024-09-15T19:31:31 ICT" duration-ms="9025" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC5 -->
-      </class> <!-- autotest.pages.Practice -->
+        </test-method> <!-- clickOnMenuHoaDon -->
+        <test-method is-config="true" signature="ClosePage()[pri:0, instance:autotest.testcases.HomePageTestCases@7d4f9aae]" started-at="2024-09-15T19:31:31 ICT" name="ClosePage" finished-at="2024-09-15T19:31:32 ICT" duration-ms="107" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ClosePage -->
+      </class> <!-- autotest.testcases.HomePageTestCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
