@@ -18,6 +18,9 @@ public class KeywordConstant {
 	public static final String EMAIL = "caonv174@gmail.com";
 	public static final String PASSWORD = "123456";	
 	public static final String MST = "0312303803-999";
-	
-	public static final String HO_TEN = "Nguyễn Văn Cao";	
+	public static final String HO_TEN = "Nguyễn Văn Cao";
+	public static final String unexistedmessage = "Không tìm thấy tài khoản";
+	public static final String wrongpasswordmessage = "Sai mật khẩu";
+	public static final String wrongMSTmessage = "Thiếu mã số thuế hoặc mã số thuế không hợp lệ";
+	public static final String requiredFieldsMessage = "Bắt buộc";
 }

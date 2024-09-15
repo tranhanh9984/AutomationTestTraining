@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcases.TaoHoaDonTestcases">
+      <class name="autotest.testcases.HomePageTestCases">
         <methods>
-          <include name="closePage"/>
-          <include name="taoHoaDonThanhCong"/>
-          <include name="startPage"/>
+          <include name="clickOnMenuHoaDon"/>
+          <include name="ClosePage"/>
+          <include name="StartPage"/>
         </methods>
-      </class> <!-- autotest.testcases.TaoHoaDonTestcases -->
+      </class> <!-- autotest.testcases.HomePageTestCases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
