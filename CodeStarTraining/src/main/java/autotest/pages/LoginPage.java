@@ -1,6 +1,7 @@
 package autotest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import autocom.common.CommonPage;
@@ -11,7 +12,7 @@ public class LoginPage extends CommonPage {
 	String txtUserName = "//input[@id = 'companyUsername']";
 	String txtPassword = "//input[@id = 'password']";
 	String txtMST = "//input[@id = 'taxCode']";
-	String btnDangNhap = "//button[text() = 'Đăng nhập']";
+	String btnDangNhap = "//button[@title = 'Đăng nhập']";
 	
 	WebDriver driver;
 	public LoginPage(WebDriver dr){
@@ -31,6 +32,18 @@ public class LoginPage extends CommonPage {
 		driver.findElement(By.xpath(txtPassword)).sendKeys(password);
 		driver.findElement(By.xpath(txtMST)).sendKeys(mst);
 		driver.findElement(By.xpath(btnDangNhap)).click();
+	}	
+	
+	public void clearText(String xpath) {
+		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].value = '';", driver.findElement(By.xpath(xpath)));
+	}
+	
+	public void clearLogin() {		
+		this.clearText(txtMST);
+		this.clearText(txtUserName);
+		this.clearText(txtPassword);
 	}	
 	
 	public void signIn(String email, String password, String mst) {
