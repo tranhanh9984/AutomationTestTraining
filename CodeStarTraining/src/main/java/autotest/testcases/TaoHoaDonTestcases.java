@@ -1,43 +1,51 @@
-package autotest.testcases;
+package autotest.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
-import autotest.pages.DanhSachHoaDon;
-import autotest.pages.LoginPage;
-import autotest.pages.TaoHoaDon;
 
-public class TaoHoaDonTestcases extends CommonPage {
+public class TaoHoaDon extends CommonPage {
 
-	@Test
-	public void taoHoaDonThanhCong() {
-		// login thành công vào trang
-		LoginPage login = new LoginPage(driver);
-		login.login();
-		// input thông tin hoa đơn
-		this.clickMenu("Hóa đơn/Tạo hoá đơn");
+	String mst = "//input[@name = 'customerTaxCode']";
+	//chọn gia trị mst da ton tai
+	String drMst = "//div[@data-column-id = '4']/p[contains(text(), '45')]";//%s
+	String donvi = "//input[@name = 'customerCompanyName']";
+	String diachiNguoiMua = "//input[@name = 'customerFullAddress']";
+	String nguoiMuaHang= "//input[@name = 'customerName']";
+	String sdtNguoiMua = "//input[@name = 'customerPhone']";
+	String stknguoiMua = "//input[@name = 'customerAccountNumber']";
+	String bankNam = "//input[@name = 'customerName']";
+	String hinhThucThanhToan = "//span[text()= 'Hình thức TT:']/following-sibling::div"; //click
+	String xyzTextHTTT = "//*[contains(text(), '%s')]"; //click //Đối trừ công nợ
+	String email = "//input[@name = 'customerName'";
+	String tenHHDV = "//div[text() = '1']/parent::td/following-sibling::td[1]//input";	//%s
+	String btnSaveKy = "//span[text()='Lưu và ký']/parent::button";
+	
+	
+	WebDriver driver;
+	
+	public TaoHoaDon(WebDriver dr) {
+		// TODO Auto-generated constructor stub
+		driver = dr;
+	}
+
+	public void createNew() {		
+		driver.findElement(By.xpath(mst)).sendKeys("45");
+		driver.findElement(By.xpath(drMst)).click();
 		
-		TaoHoaDon taoHD = new TaoHoaDon(driver);
-		taoHD.createNew();
+		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(hinhThucThanhToan)));
 		
-		// kiểm tra hóa đơn được store trên màn danh sách
-		DanhSachHoaDon dshd = new DanhSachHoaDon(driver);
-		dshd.getDSHoaDon();
-	}
-
-	@BeforeClass
-	public void startPage() {
-		driver = this.startBrower("https://v2.vietinvoice.vn/dang-nhap", "chrome");
-
-	}
-
-	@AfterClass
-	public void closePage() throws InterruptedException {
-//			Thread.sleep(2);
-		this.closeBrowser(driver);
-	}
-
+		driver.findElement(By.xpath(hinhThucThanhToan)).click();
+		driver.findElement(By.xpath(xyzTextHTTT)).click();
+		pause(4000);
+		
+		driver.findElement(By.xpath(btnSaveKy)).click();
+	}	
 }
