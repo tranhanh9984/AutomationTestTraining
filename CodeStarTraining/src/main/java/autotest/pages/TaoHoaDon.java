@@ -11,8 +11,7 @@ import autocom.common.CommonPage;
 
 public class TaoHoaDon extends CommonPage {
 
-	String mst = "//input[@name = 'customerTaxCode']";
-	//chọn gia trị mst da ton tai
+	String mst = "//input[@name = 'customerTaxCode']";	//chọn gia trị mst da ton tai
 	String drMst = "//div[@data-column-id = '4']/p[contains(text(), '45')]";//%s
 	String donvi = "//input[@name = 'customerCompanyName']";
 	String diachiNguoiMua = "//input[@name = 'customerFullAddress']";
