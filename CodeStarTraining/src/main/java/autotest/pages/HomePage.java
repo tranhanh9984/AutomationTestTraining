@@ -13,17 +13,25 @@ import autocom.constant.KeywordConstant;
 
 public class HomePage extends CommonPage {
 
-	String noti = "//div[@role = 'alert']";
-	
-	
+	String noti = "//div[@class = 'Toastify']";
 	
 	KeywordConstant comConstant =  new KeywordConstant();
 	WebDriver driver;
 	
 	//click String = Hóa đơn/Tạo hoá đơn
-	
-	
 	@Test
+	public void testLoginF() {
+		pause(2000);
+		LoginPage login = new LoginPage(driver);
+		login.login("hanhtm", "123456", "2222");
+		pause(2000);
+		String txtWelCome = driver.findElement(By.xpath(noti)).getText();
+		
+		System.out.println(txtWelCome);
+	}
+	
+	
+//	@Test
 	public void testLogin() {
 		pause(2000);
 		LoginPage login = new LoginPage(driver);

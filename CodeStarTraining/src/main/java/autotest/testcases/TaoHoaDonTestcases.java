@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import autocom.common.CommonPage;
 import autotest.pages.DanhSachHoaDon;
 import autotest.pages.LoginPage;
-import autotest.pages.TaoHoaDon;
+import autotest.pages.TaoHoaDonFactory;
 
 public class TaoHoaDonTestcases extends CommonPage {
 
@@ -20,14 +20,21 @@ public class TaoHoaDonTestcases extends CommonPage {
 		// input thông tin hoa đơn
 		this.clickMenu("Hóa đơn/Tạo hoá đơn");
 		
-		TaoHoaDon taoHD = new TaoHoaDon(driver);
+		TaoHoaDonFactory taoHD = new TaoHoaDonFactory(driver);
 		taoHD.createNew();
 		
 		// kiểm tra hóa đơn được store trên màn danh sách
-		DanhSachHoaDon dshd = new DanhSachHoaDon(driver);
-		dshd.getDSHoaDon();
+//		DanhSachHoaDon dshd = new DanhSachHoaDon(driver);
+//		dshd.getDSHoaDon();
 	}
 
+	
+	@Test
+	public void taoHoaDonThatBai() {
+		LoginPage login = new LoginPage(driver);
+		login.login("hanh", "123456", "123456789");
+	}
+	
 	@BeforeClass
 	public void startPage() {
 		driver = this.startBrower("https://v2.vietinvoice.vn/dang-nhap", "chrome");

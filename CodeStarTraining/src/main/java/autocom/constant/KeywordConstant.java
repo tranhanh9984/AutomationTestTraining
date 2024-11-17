@@ -17,7 +17,6 @@ public class KeywordConstant {
 	
 	public static final String EMAIL = "caonv174@gmail.com";
 	public static final String PASSWORD = "123456";	
-	public static final String MST = "0312303803-999";
-	
+	public static final String MST = "0312303803-999";	
 	public static final String HO_TEN = "Nguyễn Văn Cao";	
 }
