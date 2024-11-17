@@ -1,8 +1,8 @@
 package autotest.testcases;
 
-public class TestGit {
+public class TestThu {
 
-	public TestGit() {
+	public TestThu() {
 		// TODO Auto-generated constructor stub
 	}
 
