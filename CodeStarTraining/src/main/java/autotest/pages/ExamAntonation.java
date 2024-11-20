@@ -78,10 +78,10 @@ public class ExamAntonation {
     public void testOneMethod() {
         System.out.println("Test method One");
     }
-//
-//    @Test(groups = { "testTwo" })
-//    public void testTwoMethod() {
-//        System.out.println("Test method Two");
-//    }
+
+    @Test(groups = { "testTwo" })
+    public void testTwoMethod() {
+        System.out.println("Test method Two");
+    }
 
 }
