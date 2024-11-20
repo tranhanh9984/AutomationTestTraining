@@ -4,7 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 @Test
-public class THbuoi7 {
+public class THbuoi7_ChuHong {
 
 	
 	
