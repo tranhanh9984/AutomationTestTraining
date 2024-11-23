@@ -3,9 +3,9 @@ import org.testng.annotations.*;
 
 import static org.testng.Assert.assertEquals;;
 @Test
-public class THBuoi7 {
+public class THBuoi7Tran_Phuc {
 
-	public THBuoi7() {
+	public THBuoi7Tran_Phuc() {
 		// TODO Auto-generated constructor stub
 	}
 	@Test
