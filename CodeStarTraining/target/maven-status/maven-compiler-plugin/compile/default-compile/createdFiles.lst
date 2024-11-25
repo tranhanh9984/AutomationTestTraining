@@ -1,0 +1,5 @@
+autotest\testcases\HomePageTestCases.class
+autocom\common\CommonFuncs.class
+autocom\common\CommonBase.class
+autocom\common\CommonPage.class
+autocom\constant\KeywordConstant.class
