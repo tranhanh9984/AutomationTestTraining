@@ -42,8 +42,8 @@ public class PracticeLocatorDay8 extends CommonBase {
 		System.out.println("Select option in drop-down list successfully");
 
 		// pick a date
-//		driver.findElement(By.xpath("//input[@name='the_date']")).click();
-//		System.out.println("Select date in calendar successfully");
+		driver.findElement(By.xpath("//input[@name='the_date']")).sendKeys("11/26/2024");
+		System.out.println("Select date in calendar successfully");
 
 		// Users Table
 		driver.findElement(By.xpath("//input[@value = '25']")).click();
