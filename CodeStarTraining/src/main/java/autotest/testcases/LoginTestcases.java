@@ -8,7 +8,7 @@ import autotest.pages.LoginPage;
 
 public class LoginTestcases extends LoginPage {
 	LoginTestcases(WebDriver dr) {
-		super(dr);
+//		super(dr);
 		// TODO Auto-generated constructor stub
 	}
 

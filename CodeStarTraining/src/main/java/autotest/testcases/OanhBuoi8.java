@@ -23,21 +23,22 @@ public class OanhBuoi8 extends CommonBase {
 //		driver.findElement(By.name("mobile number")).sendKeys("0868799867");
 //		driver.findElement(By.xpath("//button[contains(text(),'Submit')]")).click();
 //		pause(5000);
-//		//enter name
+////		//enter name
 //		driver.findElement(By.xpath("//label[contains(text(),'Can you enter name')]/*[name()='svg']")).click();
 //		driver.findElement(By.xpath("//input[@placeholder='First Enter name']")).sendKeys("oanh");
 //		pause(5000);
-//		
-//		// drop button
+////		
+////		// drop button
 //		driver.findElement(By.xpath("//button[text()='Checkout here']")).click();
 //		driver.findElement(By.xpath("//a[text()='Join Training']")).click();
 //		pause(5000);
-		// select button
-		driver.findElement(By.id("cars")).click();
-		driver.findElement(By.xpath("//option[@value='saab']")).click();
-		pause(3000);
-		driver.findElement(By.name("the_date")).sendKeys("12/23/2023");
-		pause(7000);
+//		// select button
+//		driver.findElement(By.id("cars")).click();
+//		driver.findElement(By.xpath("//option[@value='saab']")).click();
+//		pause(3000);
+//		//date picker
+//		driver.findElement(By.name("the_date")).sendKeys("12/23/2023");
+//		pause(3000);
 		
 	}
 	@AfterClass

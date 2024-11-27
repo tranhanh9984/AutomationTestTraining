@@ -51,21 +51,22 @@ public class LoginPage extends CommonBase {
 //		
 //	}
 	@Test
-//	public void tc1() {
-//		System.out.println("Thuc hanh TC1");
-//		driver.findElement(By.id("email")).sendKeys("0312303803-999");
-//		driver.findElement(By.id("password")).sendKeys("0312303803-999");
-//		driver.findElement((By.xpath("//button"))).submit();
-//		
-//	}
-//	
-//	@BeforeClass
-//	public void startPage() {
-//		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
-//
-//	}
-//	@AfterClass
-//	public void closePage() {
-//		this.closeBrowser();
-//	}
+	public void login() {
+		driver.findElement(By.id("email")).sendKeys("0312303803-999");
+		driver.findElement(By.id("password")).sendKeys("0312303803-999");
+		driver.findElement((By.xpath("//button"))).submit();
+		pause(3000);
+		System.out.println("Thuc hanh TC1");
+		
+	}
+	
+	@BeforeClass
+	public void startPage() {
+		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
+
+	}
+	@AfterClass
+	public void closePage() {
+		this.closeBrowser();
+	}
 }
