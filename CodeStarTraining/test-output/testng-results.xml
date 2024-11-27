@@ -1,63 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="1" failed="1" skipped="0">
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-11-20T21:59:29 GMT+07:00" name="Default suite" finished-at="2024-11-20T21:59:29 GMT+07:00" duration-ms="62">
+  <suite started-at="2024-11-26T22:43:42 GMT+07:00" name="Default suite" finished-at="2024-11-26T22:44:07 GMT+07:00" duration-ms="24897">
     <groups>
     </groups>
-    <test started-at="2024-11-20T21:59:29 GMT+07:00" name="Default test" finished-at="2024-11-20T21:59:29 GMT+07:00" duration-ms="62">
-      <class name="autotest.testcases.ThucHanhBuoi7_TuyenNguyen">
-        <test-method signature="tc1()[pri:0, instance:autotest.testcases.ThucHanhBuoi7_TuyenNguyen@130161f7]" started-at="2024-11-20T21:59:29 GMT+07:00" name="tc1" finished-at="2024-11-20T21:59:29 GMT+07:00" duration-ms="21" status="PASS">
+    <test started-at="2024-11-26T22:43:42 GMT+07:00" name="Default test" finished-at="2024-11-26T22:44:07 GMT+07:00" duration-ms="24897">
+      <class name="autotest.testcases.ThucHanhBuoi8">
+        <test-method is-config="true" signature="init()[pri:0, instance:autotest.testcases.ThucHanhBuoi8@3bb9a3ff]" started-at="2024-11-26T22:43:42 GMT+07:00" name="init" finished-at="2024-11-26T22:43:53 GMT+07:00" duration-ms="10955" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="tc1()[pri:0, instance:autotest.testcases.ThucHanhBuoi8@3bb9a3ff]" started-at="2024-11-26T22:43:53 GMT+07:00" name="tc1" finished-at="2024-11-26T22:43:53 GMT+07:00" duration-ms="16" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc1 -->
-        <test-method signature="tc2()[pri:0, instance:autotest.testcases.ThucHanhBuoi7_TuyenNguyen@130161f7]" started-at="2024-11-20T21:59:29 GMT+07:00" name="tc2" finished-at="2024-11-20T21:59:29 GMT+07:00" duration-ms="3" status="FAIL">
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[expected [4] but found [3]]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [4] but found [3]
-at org.testng.Assert.fail(Assert.java:99)
-at org.testng.Assert.failNotEquals(Assert.java:1037)
-at org.testng.Assert.assertEqualsImpl(Assert.java:140)
-at org.testng.Assert.assertEquals(Assert.java:122)
-at org.testng.Assert.assertEquals(Assert.java:907)
-at org.testng.Assert.assertEquals(Assert.java:917)
-at autotest.testcases.ThucHanhBuoi7_TuyenNguyen.tc2(ThucHanhBuoi7_TuyenNguyen.java:20)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+        <test-method signature="tc2()[pri:0, instance:autotest.testcases.ThucHanhBuoi8@3bb9a3ff]" started-at="2024-11-26T22:43:53 GMT+07:00" name="tc2" finished-at="2024-11-26T22:44:02 GMT+07:00" duration-ms="9255" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc2 -->
-      </class> <!-- autotest.testcases.ThucHanhBuoi7_TuyenNguyen -->
+        <test-method signature="tc3()[pri:0, instance:autotest.testcases.ThucHanhBuoi8@3bb9a3ff]" started-at="2024-11-26T22:44:02 GMT+07:00" name="tc3" finished-at="2024-11-26T22:44:06 GMT+07:00" duration-ms="3509" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc3 -->
+        <test-method signature="tcWithTable()[pri:0, instance:autotest.testcases.ThucHanhBuoi8@3bb9a3ff]" started-at="2024-11-26T22:44:06 GMT+07:00" name="tcWithTable" finished-at="2024-11-26T22:44:06 GMT+07:00" duration-ms="511" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tcWithTable -->
+        <test-method is-config="true" signature="close()[pri:0, instance:autotest.testcases.ThucHanhBuoi8@3bb9a3ff]" started-at="2024-11-26T22:44:06 GMT+07:00" name="close" finished-at="2024-11-26T22:44:07 GMT+07:00" duration-ms="585" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+      </class> <!-- autotest.testcases.ThucHanhBuoi8 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
