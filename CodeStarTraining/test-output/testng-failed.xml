@@ -5,9 +5,9 @@
     <classes>
       <class name="autotest.pages.PageLogin">
         <methods>
+          <include name="loginDeactivatedAccount"/>
+          <include name="tearDown"/>
           <include name="startBrowser"/>
-          <include name="closeBrowser"/>
-          <include name="practiseStartBrowser"/>
         </methods>
       </class> <!-- autotest.pages.PageLogin -->
     </classes>
