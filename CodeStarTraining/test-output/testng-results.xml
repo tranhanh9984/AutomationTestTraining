@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-11-29T12:03:56 ICT" name="Default suite" finished-at="2024-11-29T12:04:00 ICT" duration-ms="3636">
+    <groups>
+    </groups>
+    <test started-at="2024-11-29T12:03:56 ICT" name="Default test" finished-at="2024-11-29T12:04:00 ICT" duration-ms="3636">
+      <class name="autotest.pages.PracticeLocatorBai2">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.pages.PracticeLocatorBai2@4d465b11]" started-at="2024-11-29T12:03:56 ICT" name="startBrowser" finished-at="2024-11-29T12:03:59 ICT" duration-ms="2773" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startBrowser -->
+        <test-method signature="checkLocator()[pri:0, instance:autotest.pages.PracticeLocatorBai2@4d465b11]" started-at="2024-11-29T12:03:59 ICT" name="checkLocator" finished-at="2024-11-29T12:03:59 ICT" duration-ms="619" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkLocator -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:autotest.pages.PracticeLocatorBai2@4d465b11]" started-at="2024-11-29T12:03:59 ICT" name="tearDown" finished-at="2024-11-29T12:04:00 ICT" duration-ms="201" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- autotest.pages.PracticeLocatorBai2 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
