@@ -1,13 +1,8 @@
 package autotest.pages;
 
-
-
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -39,34 +34,43 @@ public class PageInvoice extends CommonBase {
 	String btnHinhThucTT = "//p-dropdown[@id='paymentInstrumentEnumId']//div[contains(@class, 'p-dropdown-trigger ng-tns-c60')]";
 	String listHinhThucTT = "//li[@aria-label='Tiền mặt']";
 
-//
 	String btnLoaiTien = "//p-dropdown[@id='currencyUomId']//div[contains(@class, 'p-dropdown-trigger ng-tns-c60')]";
 	String listLoaiTien = "//ul//li[@aria-label='VND']";
 
-//
 	String txtExchangeRate = "//p-inputnumber[@id='exchangeRate']";
 
-//
-	String btnChietKhau = "//p-dropdown[@id='discountTypeEnumId']//div[contains(@class, 'p-dropdown-trigger ng-tns-c60')]";
+	String btnChietKhau = "//p-dropdown[contains(@id, 'discountTypeEnumId')]//div[contains(@class, 'p-dropdown-trigger ng-tns')]";
 	String listChietKhau = "//ul//li[@aria-label='Không chiết khấu']";
 
-//
-	String btnTinhChat = "//p-dropdown[@class='p-element p-inputwrapper ng-tns-c60-29 p-inputwrapper-filled ng-pristine ng-valid ng-star-inserted ng-touched']//div[contains(@class, 'p-dropdown-trigger ng-tns-c60')]";
-	String listTinhChat = "//li[@aria-label='Chiết khấu thương mại']";
+	String layoutTinhChat = "(//td[@class = 'p-element p-editable-column'])[1]";
+	String btnTinhChat = "(//p-dropdown[contains(@class, 'p-element p-inputwrapper ng-tns-c60')]//div[contains(@class, 'p-dropdown-trigger ng-tns-c60')])[6]";
+	String listTinhChat = "//ul//li[@aria-label='Chiết khấu thương mại']";
 
-//
-	String txtTenHangHoa = "//input[@class='ng-tns-c110-33 p-autocomplete-input p-inputtext p-component ng-star-inserted']";
-	String txtDonViTinh = "(//td[@class='p-element p-editable-column'])[2]";
-	String txtSoLuong = "(//td[@class='p-element p-text-right p-editable-column'])[1]";
-	String txtDonGia = "(//td[@class='p-element p-text-right p-editable-column'])[2]";
-	String txtThanhTien = "(//td[@class='p-element p-text-right p-editable-column'])[3]";
+	String txtTenHangHoa = "//p-autocomplete[@field = 'productName']//input[contains(@class, 'ng-tns-c110')]";
 
-//
-	String btnThue = "//span[@class='p-dropdown-trigger-icon ng-tns-c60-42 pi pi-chevron-down']";
-	String listThue = "//li[@aria-label='5%']";
+	String layoutDonViTinh = "//tr//td[@class = 'p-element p-editable-column p-cell-editing']";
+	String txtDonViTinh = "//input[@class='p-inputtext p-component p-element ng-pristine ng-valid ng-star-inserted ng-touched']";
 
-//
+	String layoutSoLuong = "//td[contains(@class, 'p-element p-text-right p-editable-column')]";
+	String txtSoLuong = "//td[contains(@class, 'p-element p-text-right p-editable-column')]//p-inputnumber//input[@inputmode = 'decimal']";
+
+	String layoutDonGia = "//td[@class = 'p-element p-text-right p-editable-column']";
+	String txtDonGia = "//input[@class='p-inputtext p-component p-element p-inputnumber-input']";
+
+	String layoutThue = "(//td[contains(@class , 'p-element p-text-right p-editable-column ng-star-inserted')])[1]";
+	String btnThue = "(//td[contains(@class , 'p-element p-text-right p-editable-column ng-star-inserted')])[1]";
+	String selectedThue = "//li[@aria-label='10%']";
+
+	String btnThemSP = "//button[@class='p-ripple p-element p-button-rounded p-button-info p-button-outlined p-button-sm p-button p-component p-button-icon-only']";
+	String listCheckbox = "//div[@class = 'p-checkbox p-component']";
+	String checkboxSP01 = "(//div[@class = 'p-checkbox p-component'])[4]";
+	String checkboxSP02 = "(//div[@class = 'p-checkbox p-component'])[5]";
+	String checkboxSP03 = "(//div[@class = 'p-checkbox p-component'])[6]";
+
+	String btnThem = "//button//span[text() = 'Thêm']";
+
 	String btnLuuVaKy = "//button/span[text() = 'Lưu và ký']";
+	String popupXacNhan = "//span[text() = 'Chờ xác nhận chữ ký số...']";
 
 	public PageInvoice() {
 		// TODO Auto-generated constructor stub
@@ -118,6 +122,7 @@ public class PageInvoice extends CommonBase {
 		}
 	}
 
+	// Verify: create Invoice successfully
 	@Test(enabled = true, priority = 2)
 	public void createInvoice() {
 
@@ -133,7 +138,7 @@ public class PageInvoice extends CommonBase {
 		driver.findElement(By.xpath(CCCD)).sendKeys("123456789");
 
 		driver.findElement(By.xpath(txtEmailAdd)).clear();
-		driver.findElement(By.xpath(txtEmailAdd)).sendKeys("a@test.test");
+		driver.findElement(By.xpath(txtEmailAdd)).sendKeys("atest@mailinator.com");
 
 		driver.findElement(By.xpath(txtTelecomNumber)).clear();
 		driver.findElement(By.xpath(txtTelecomNumber)).sendKeys("0988123897");
@@ -145,50 +150,76 @@ public class PageInvoice extends CommonBase {
 		driver.findElement(By.xpath(txtBankName)).sendKeys("Vietcombank");
 
 		driver.findElement(By.xpath(btnHinhThucTT)).click();
-		driver.findElement(By.xpath(listHinhThucTT)).click();;
-		System.out.println("Chọn Hình Thức Thanh Toán: OK");
-		
-		//JavascriptExecutor jse6 = (JavascriptExecutor) driver;
-		((JavascriptExecutor) driver).executeScript(
-            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(btnLoaiTien)));
-		
-		
+		driver.findElement(By.xpath(listHinhThucTT)).click();
+		;
+
+		// JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
+				driver.findElement(By.xpath(btnLoaiTien)));
+
 		pauseBrowser(3);
 		driver.findElement(By.xpath(btnLoaiTien)).click();
-		
-//		// Tìm tất cả các phần tử <li> trong <p-dropdownitem> có class xác định
-//		List<WebElement> liElements = driver.findElements(By.xpath(listLoaiTien));
-//
-//		// Duyệt qua tất cả các thẻ <li> và in ra nội dung
-//		for (WebElement li : liElements) {
-//		    System.out.println("Nội dung thẻ <li>: " + li.getText());
-//		}
+
 		driver.findElement(By.xpath(listLoaiTien)).click();
 
-//		
-		
-		System.out.println("Chọn Loại Tiền: OK");
-//
-		driver.findElement(By.xpath(txtExchangeRate)).sendKeys("3600");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
+				driver.findElement(By.xpath(btnChietKhau)));
 
 		driver.findElement(By.xpath(btnChietKhau)).click();
 		driver.findElement(By.xpath(listChietKhau)).click();
-		System.out.println("Chọn Ck: OK");
-//
-//
-//		driver.findElement(By.xpath(btnTinhChat)).click();
-//		driver.findElement(By.xpath(listTinhChat)).click();
-//
-//		driver.findElement(By.xpath(txtTenHangHoa)).sendKeys("Sách");
-//		driver.findElement(By.xpath(txtDonViTinh)).sendKeys("Quyển");
-//		driver.findElement(By.xpath(txtSoLuong)).sendKeys("5");
-//		driver.findElement(By.xpath(txtDonGia)).sendKeys("1600");
-//
-//		driver.findElement(By.xpath(btnThue)).click();
-//		driver.findElement(By.xpath(listThue)).click();
-//
-//		pauseBrowser(20);
-//		driver.findElement(By.xpath(btnLuuVaKy)).click();
+
+		/*
+		 * driver.findElement(By.xpath(layoutTinhChat)).click();
+		 * driver.findElement(By.xpath(btnTinhChat)).click();
+		 * driver.findElement(By.xpath(listTinhChat)).click();
+		 * //System.out.println("TC: OK");
+		 * 
+		 * driver.findElement(By.xpath(txtTenHangHoa)).sendKeys("Sách");
+		 * 
+		 * driver.findElement(By.xpath(layoutDonViTinh)).click();
+		 * System.out.println("OK");
+		 * 
+		 * //driver.findElement(By.xpath(txtDonViTinh)).sendKeys("Quyển");
+		 * 
+		 * 
+		 * driver.findElement(By.xpath(layoutSoLuong)).click();
+		 * driver.findElement(By.xpath(txtSoLuong)).sendKeys("5");
+		 * 
+		 * driver.findElement(By.xpath(layoutDonGia)).click();
+		 * driver.findElement(By.xpath(txtDonGia)).sendKeys("1600");
+		 * 
+		 * driver.findElement(By.xpath(layoutThue)).click();
+		 * driver.findElement(By.xpath(btnThue)).click();
+		 * driver.findElement(By.xpath(selectedThue)).click();
+		 */
+
+		// add products
+		driver.findElement(By.xpath(btnThemSP)).click();
+
+		Boolean isSelectedSP1 = driver.findElement(By.xpath(checkboxSP01)).isSelected();
+		if (isSelectedSP1 == false) {
+			driver.findElement(By.xpath(checkboxSP01)).click();
+		}
+
+		Boolean isSelectedSP2 = driver.findElement(By.xpath(checkboxSP02)).isSelected();
+		if (isSelectedSP2 == false) {
+			driver.findElement(By.xpath(checkboxSP02)).click();
+		}
+
+		Boolean isSelectedSP3 = driver.findElement(By.xpath(checkboxSP03)).isSelected();
+		if (isSelectedSP3 == false) {
+			driver.findElement(By.xpath(checkboxSP03)).click();
+		}
+
+		driver.findElement(By.xpath(btnThem)).click();
+
+		driver.findElement(By.xpath(btnLuuVaKy)).click();
+		WebElement popupXacNhanElement = driver.findElement(By.xpath(popupXacNhan));
+		if (popupXacNhanElement.isDisplayed()) {
+			System.out.println("Chờ xác nhận chữ ký số...");
+		} else {
+			System.out.println("Có Lỗi");
+		}
 
 		pauseBrowser(10);
 
