@@ -1,15 +1,60 @@
 package autotest.pages;
 
-import org.openqa.selenium.By;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import autocom.common.NguoiMua;
 import autocom.constant.KeywordConstant;
 
 public class CreateInvoicePage extends LoginPage {
 	
-	String xpathBTNTaoMoi = "//button[@type='submit']";
+	String xpathBtnTaoMoi = "//button[@type='submit']";
 	
-	String errorText = "Tên đơn vị hoặc người mua hàng không được bỏ trống";
-
+	String xpathAutoComplete = "//p-autocomplete[@id='%s']//input";
+	String idMSTNguoiMua = "toPartyTaxId";
+	String idTenDonVi = "toPartyName";
+	
+	String xpathBtnDropdownOfAutoComplete = "//p-autocomplete[@id='%s']//button[contains(@class,'p-autocomplete-dropdown')]";
+	String xpathListItem = "//p-autocomplete[@id='%s']//ul[contains(@class,'p-autocomplete-items')]/li";
+	
+	String xpathInput = "//input[@id='%s']";
+	String idDiaChi = "toAddress";
+	String idNguoiMuaHang = "toName";
+	String idCCCD = "toIdentification";
+	String idEmail = "toEmailAddress";
+	String idSoDienThoai = "toTelecomNumber";
+	String idSoTaiKhoan = "accountNumber";
+	String idNganHang = "bankName";
+	
+	String xpathDropDown = "//p-dropdown[@id='%s']";
+	String xpathSpanOfDropDown = "//p-dropdown[@id='%s']/div/span";
+	String idHinhThucThanhToan = "paymentInstrumentEnumId";
+	String idLoaiTien = "currencyUomId";
+	String idChietKhau = "discountTypeEnumId";
+	
+	String xpathDropDownItem = "//p-dropdown[@id='%s']//ul//li//span[text()='%s']";
+	
+	String xpathInputNumber = "//p-inputnumber[@id='%s']//input";
+	String idTyGia = "exchangeRate";
+	
+	String xpathBtnThemHangHoa = "//p-button[@icon='pi pi-plus']/button[@type='button']";
+	String xpathCheckAllHangHoa = "//app-dialog-add-product//table/thead/tr/th/p-tableheadercheckbox";
+	String xpathThemOnThemHangHoaPopup = "//app-dialog-add-product//p-footer//p-button[contains(@icon,'pi-check')]";
+	String xpathDongOnThemHangHoaPopup = "//app-dialog-add-product//p-footer//p-button[contains(@icon,'pi-times')]";
+	
+	String xpathTableHangHoa = "//form//table/tbody/tr";
+	String xpathBtnRemove = "./td/p-button[@icon='pi pi-trash']";
+	String xpathBtnConfirmYes = "//div[contains(@class,'p-confirm-popup')]//div[contains(@class,'p-confirm-popup-footer')]/button[contains(@class,'p-confirm-popup-accept')]";
+//	
+//	String xpathProductName = "./td/p-autocomplete[@field='productName']//input";
+//	String xpathDonVi = "./td/p-celleditor/input";
+//	String xpathSoLuong = "./td/p-celleditor/p-inputnumber//input";
+	
+	
 	public CreateInvoicePage() {
 		// TODO Auto-generated constructor stub
 	}
@@ -25,11 +70,168 @@ public class CreateInvoicePage extends LoginPage {
 	}
 	
 	public void clickTaoMoi() {
-		driver.findElement(By.xpath(xpathBTNTaoMoi)).click();
+		driver.findElement(By.xpath(xpathBtnTaoMoi)).click();
 	}
 	
-	public void fillData() {
+	// using p-autocomplete
+	public void fillData_MSTNguoiMua(String value) {
+		this.setValue(String.format(xpathAutoComplete, idMSTNguoiMua), value);
+	}
+	
+	public String getData_MSTNguoiMua() {
+		return this.getValue(String.format(xpathAutoComplete, idMSTNguoiMua));
+	}
+	
+	public void select_MSTNguoiMua(String value) {
+		driver.findElement(By.xpath(String.format(xpathBtnDropdownOfAutoComplete, idMSTNguoiMua))).click();
 		
+		List<WebElement> items = driver.findElements(By.xpath(String.format(xpathListItem, idMSTNguoiMua)));
+		boolean find = false;
+		for (WebElement item : items) {
+			List<String> divItems = item.findElements(By.xpath("./div[contains(@class,'p-grid')]/child::div"))
+					.stream().map(x -> x.getAttribute("textContent")).filter(x -> x.contains(value)).collect(Collectors.toList());
+			if (divItems != null && divItems.size() > 0) {
+				item.click();
+				find = true;
+				break;
+			}
+		}
+		if (!find) {
+			this.setValue(String.format(xpathAutoComplete, idMSTNguoiMua), value);
+		}
+	}
+	
+	// using p-autocomplete
+	public void fillData_TenDonVi(String value) {
+		this.setValue(String.format(xpathAutoComplete, idTenDonVi), value);
+	}
+	// using input
+	public void fillData_DiaChi(String value) {
+		this.setValue(String.format(xpathInput, idDiaChi), value);
+	}
+	// using input
+	public void fillData_NguoiMuaHang(String value) {
+		this.setValue(String.format(xpathInput, idNguoiMuaHang), value);
+	}
+	// using input
+	public void fillData_CCCD(String value) {
+		this.setValue(String.format(xpathInput, idCCCD), value);
+	}
+	// using input
+	public void fillData_Email(String value) {
+		this.setValue(String.format(xpathInput, idEmail), value);
+	}
+	
+	public WebElement getElementEmail() {
+		return driver.findElement(By.xpath(String.format(xpathInput, idEmail)));
+	}
+	
+	public void fillData_SDT(String value) {
+		this.setValue(String.format(xpathInput, idSoDienThoai), value);
 	}
 
+	public void fillData_STK(String value) {
+		this.setValue(String.format(xpathInput, idSoTaiKhoan), value);
+	}
+	
+	public void fillData_NganHang(String value) {
+		this.setValue(String.format(xpathInput, idNganHang), value);
+	}
+	
+	public void fillData_HinhThucThanhToan(String value) {
+		WebElement dropDown = driver.findElement(By.xpath(String.format(xpathDropDown, idHinhThucThanhToan)));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dropDown);
+		dropDown.click();
+		driver.findElement(By.xpath(String.format(xpathDropDownItem, idHinhThucThanhToan, value))).click();
+	}
+	
+	public void fillData_LoaiTien(String value) {
+		driver.findElement(By.xpath(String.format(xpathDropDown, idLoaiTien))).click();
+		driver.findElement(By.xpath(String.format(xpathDropDownItem, idLoaiTien, value))).click();
+	}
+	
+	public void fillData_TyGia(double value) {
+		this.setValue(String.format(xpathInputNumber, idTyGia), value + "");
+	}
+	
+	public void fillData_ChietKhau(String value) {
+		driver.findElement(By.xpath(String.format(xpathDropDown, idChietKhau))).click();
+		driver.findElement(By.xpath(String.format(xpathDropDownItem, idChietKhau, value))).click();
+	}
+	
+	public void fillData_All(NguoiMua nguoiMua) {
+		this.select_MSTNguoiMua(nguoiMua.getMstNguoiMua());
+		this.fillData_TenDonVi(nguoiMua.getTenDonVi());
+		this.fillData_DiaChi(nguoiMua.getDiaChi());
+		this.fillData_NguoiMuaHang(nguoiMua.getTenNguoiMuaHang());
+		this.fillData_CCCD(nguoiMua.getCccd());
+		this.fillData_Email(nguoiMua.getEmailAddress());
+		this.fillData_SDT(nguoiMua.getSoDienThoai());
+		this.fillData_STK(nguoiMua.getSoTaiKhoan());
+		this.fillData_NganHang(nguoiMua.getTenNganHang());
+		this.fillData_HinhThucThanhToan(nguoiMua.getHinhThuThanhToan());
+		this.fillData_LoaiTien(nguoiMua.getLoaiTien());
+		this.fillData_TyGia(nguoiMua.getTyGia());
+		this.fillData_ChietKhau(nguoiMua.getChietKhau());
+	}
+	
+	public void clickThemHangHoa() {
+		WebElement btnThemHangHoa = driver.findElement(By.xpath(xpathBtnThemHangHoa));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnThemHangHoa);
+		btnThemHangHoa.click();
+	}
+	
+	public void checkAllHangHoa() {
+		driver.findElement(By.xpath(xpathCheckAllHangHoa)).click();
+	}
+	
+	public void clickThemOnThemHangHoaPopup() {
+		driver.findElement(By.xpath(xpathThemOnThemHangHoaPopup)).click();
+	}
+	
+	public void clickDongOnThemHangHoaPopup() {
+		driver.findElement(By.xpath(xpathDongOnThemHangHoaPopup)).click();
+	}
+	
+
+	public void themAllHangHoa() {
+		this.clickThemHangHoa();
+		this.checkAllHangHoa();
+		this.clickThemOnThemHangHoaPopup();
+	}
+	
+	public void themHangHoa(int numberOfHangHoa) {
+		this.clickThemHangHoa();
+		String xpathCheckbox = "//app-dialog-add-product//table/tbody/tr[%d]/td/p-tablecheckbox";
+		for (int i = 1; i <= numberOfHangHoa; i++) {
+			driver.findElement(By.xpath(String.format(xpathCheckbox, i))).click();
+		}
+		this.clickThemOnThemHangHoaPopup();
+	}
+	
+	public void clearSelectedHangHoa() {
+		List<WebElement> tableRows = driver.findElements(By.xpath(xpathTableHangHoa));
+		if (tableRows.size() < 2) return;
+		for (int i = tableRows.size() - 2; i >= 0; i--) {
+			WebElement btnRemove = tableRows.get(i).findElement(By.xpath(xpathBtnRemove));
+			if (btnRemove.isDisplayed()) {
+				btnRemove.click();
+				driver.findElement(By.xpath(xpathBtnConfirmYes)).click();
+			}
+		}
+	}
+	
+	public void clearTextFormInvoice() {
+		this.clearText(String.format(xpathAutoComplete, idMSTNguoiMua));
+		this.clearText(String.format(xpathAutoComplete, idTenDonVi));
+		this.clearText(String.format(xpathInput, idDiaChi));
+		this.clearText(String.format(xpathInput, idNguoiMuaHang));
+		this.clearText(String.format(xpathInput, idCCCD));
+		this.clearText(String.format(xpathInput, idEmail));
+		this.clearText(String.format(xpathInput, idSoDienThoai));
+		this.clearText(String.format(xpathInput, idSoTaiKhoan));
+		this.clearText(String.format(xpathInput, idNganHang));
+		this.clearText(String.format(xpathInputNumber, idTyGia));
+	}
+	
 }

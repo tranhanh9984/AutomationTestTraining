@@ -5,9 +5,11 @@
     <classes>
       <class name="autotest.testcases.CreateInvoicePageTestCase">
         <methods>
+          <include name="tc4_TaoMoiThanhCong"/>
           <include name="close"/>
+          <include name="tc2_ClickTaoMoi_Validate_Email" invocation-numbers="2 4"/>
           <include name="init"/>
-          <include name="tc1_GoToPage_Successful"/>
+          <include name="tc3_ClickTaoMoi_Validate_Error" invocation-numbers="0"/>
         </methods>
       </class> <!-- autotest.testcases.CreateInvoicePageTestCase -->
     </classes>

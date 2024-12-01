@@ -11,6 +11,8 @@ public class CommonPage {
 	
 	public WebDriver driver;
 
+	String xpathMessage = "//div[contains(@class, 'p-toast-detail') and contains(text(), '%s')]";
+	
 	public CommonPage() {
 		// TODO Auto-generated constructor stub
 	}
@@ -45,13 +47,15 @@ public class CommonPage {
 	}
 	
 	public void setValue(String xpath, String value) {
-		this.clearText(xpath);
-		
 		driver.findElement(By.xpath(xpath)).sendKeys(value);
 	}
 	
 	public String getValue(String xpath) {
 		return driver.findElement(By.xpath(xpath)).getAttribute("value");
+	}
+	
+	public boolean isShowAlert(String message) {
+		return driver.findElement(By.xpath(String.format(xpathMessage, message))).isDisplayed();
 	}
 
 }

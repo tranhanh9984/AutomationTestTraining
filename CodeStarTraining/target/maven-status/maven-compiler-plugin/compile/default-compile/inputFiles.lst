@@ -1,18 +1,14 @@
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonFuncs.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonPage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\JDBCConnection.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestLogger.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestReport.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\constant\KeywordConstant.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\DanhSachHoaDon.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Exam1.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Exam2.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\ExamAntonation.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Hanh_BaiTap.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\HomePage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\LoginPage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\TaoHoaDon.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Thuy_BaiTap.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\HomePageTestCases.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\LoginTestcases.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\TaoHoaDonTestcases.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/CommonFuncs.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/CommonPage.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/CommonPage1.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/JDBCConnection.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/NguoiMua.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/TestLogger.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/common/TestReport.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autocom/constant/KeywordConstant.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autotest/pages/CreateInvoicePage.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autotest/pages/LoginPage.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autotest/pages/MenuBar.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autotest/testcases/CreateInvoicePageTestCase.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autotest/testcases/LoginPageTestCase.java
+/Volumes/Data/AutomationTest/SeleniumTest/AutomationTestTraining/CodeStarTraining/src/main/java/autotest/testcases/ThucHanhBuoi7_TuyenNguyen.java
