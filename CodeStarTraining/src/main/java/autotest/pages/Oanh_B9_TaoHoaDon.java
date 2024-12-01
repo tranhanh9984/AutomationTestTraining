@@ -117,9 +117,16 @@ public class Oanh_B9_TaoHoaDon extends CommonBase {
 //		clearData();
 	}
 	
+	public void createInvoiceFail() {
+		//Tao hoa don khi khong nhap truong gia tri nao
+		this.setButton(btnCreate);
+		String result= this.awaitElementVisible(noti).getText();
+		System.out.print(result);
+		assertEquals(result.contains("Tên đơn vị hoặc người mua hàng không được bỏ trống"), true);
+	}
 	
 	@Test
-	public void creatInvoice() {
+	public void creatInvoiceSuccess() {
 		// khong tim thay account
 		this.setText("123456789", mst);
 //		pause(30000);

@@ -29,6 +29,13 @@ public class CommonBase {
 	            "arguments[0].value = '';", driver.findElement(By.xpath(xpath)));
 	}
 	
+	public void scrollScreen (String xpath) {
+		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(xpath)));
+	}
+	
+	
 	public void setButton( String xpath) {
 		driver.findElement(By.xpath(xpath)).click();
 //		assert content == this.getAtrribute(xpath, "value");
