@@ -69,8 +69,8 @@ public class PageInvoice extends CommonBase {
 
 	String btnThem = "//button//span[text() = 'Thêm']";
 
-	String btnLuuVaKy = "//button/span[text() = 'Lưu và ký']";
-	String popupXacNhan = "//span[text() = 'Chờ xác nhận chữ ký số...']";
+	String btnTaoMoi= "//button/span[text() = 'Tạo mới']";
+	String popupXacNhan = "//div[text() = 'Thành công!']";
 
 	public PageInvoice() {
 		// TODO Auto-generated constructor stub
@@ -132,7 +132,7 @@ public class PageInvoice extends CommonBase {
 		driver.findElement(By.xpath(listMstNguoiMua)).click();
 
 		driver.findElement(By.xpath(nguoiMuaHang)).clear();
-		driver.findElement(By.xpath(nguoiMuaHang)).sendKeys("Customer A");
+		driver.findElement(By.xpath(nguoiMuaHang)).sendKeys("Customer C");
 
 		driver.findElement(By.xpath(CCCD)).clear();
 		driver.findElement(By.xpath(CCCD)).sendKeys("123456789");
@@ -193,7 +193,7 @@ public class PageInvoice extends CommonBase {
 		 * driver.findElement(By.xpath(selectedThue)).click();
 		 */
 
-		// add products
+		// thêm 3 sản phẩm
 		driver.findElement(By.xpath(btnThemSP)).click();
 
 		Boolean isSelectedSP1 = driver.findElement(By.xpath(checkboxSP01)).isSelected();
@@ -212,11 +212,13 @@ public class PageInvoice extends CommonBase {
 		}
 
 		driver.findElement(By.xpath(btnThem)).click();
+		
+		//
 
-		driver.findElement(By.xpath(btnLuuVaKy)).click();
+		driver.findElement(By.xpath(btnTaoMoi)).click();
 		WebElement popupXacNhanElement = driver.findElement(By.xpath(popupXacNhan));
 		if (popupXacNhanElement.isDisplayed()) {
-			System.out.println("Chờ xác nhận chữ ký số...");
+			System.out.println("Thành Công");
 		} else {
 			System.out.println("Có Lỗi");
 		}
