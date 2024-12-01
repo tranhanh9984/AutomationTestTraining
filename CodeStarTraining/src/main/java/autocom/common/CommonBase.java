@@ -5,7 +5,10 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonBase {
 	protected WebDriver driver;
@@ -35,7 +38,12 @@ public class CommonBase {
 		
 	}
 	
-	
+	//ham dung de cho 1 element xuat hien
+	public WebElement awaitElementVisible(String xpath) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		return element;
+	}
 	
 	public WebDriver startBrower(String url, String browser) {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");

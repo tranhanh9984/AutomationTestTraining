@@ -33,6 +33,7 @@ public class TaoHoaDon extends CommonPage {
 		// TODO Auto-generated constructor stub
 		driver = dr;
 	}
+	
 
 	public void createNew() {		
 		driver.findElement(By.xpath(mst)).sendKeys("45");
