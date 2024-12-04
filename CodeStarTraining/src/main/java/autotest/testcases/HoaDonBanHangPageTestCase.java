@@ -1,9 +1,17 @@
 package autotest.testcases;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import autocom.common.CommonFuncs;
 import autocom.constant.KeywordConstant;
 import autotest.pages.HoaDonBanHangPage;
 
@@ -26,7 +34,13 @@ public class HoaDonBanHangPageTestCase extends HoaDonBanHangPage {
 	
 	@Test
 	public void tc1() {
-		this.viewAll();
+//		LocalDate fromDate = CommonFuncs.convertToDateByFormat(KeywordConstant.FORMAT_DATE, "23/09/2024");
+//		this.setFromDate(fromDate);
+//		
+//		LocalDate toDate = CommonFuncs.convertToDateByFormat(KeywordConstant.FORMAT_DATE, "24/01/2025");
+//		this.setToDate(toDate);
+		
+		this.quickSearch();
 		
 		pause(5);
 	}

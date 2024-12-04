@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcases.CreateInvoicePageTestCase">
+      <class name="autotest.testcases.HoaDonBanHangPageTestCase">
         <methods>
-          <include name="tc4_TaoMoiThanhCong"/>
-          <include name="close"/>
-          <include name="tc2_ClickTaoMoi_Validate_Email" invocation-numbers="2 4"/>
           <include name="init"/>
-          <include name="tc3_ClickTaoMoi_Validate_Error" invocation-numbers="0"/>
+          <include name="tc1"/>
+          <include name="close"/>
         </methods>
-      </class> <!-- autotest.testcases.CreateInvoicePageTestCase -->
+      </class> <!-- autotest.testcases.HoaDonBanHangPageTestCase -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

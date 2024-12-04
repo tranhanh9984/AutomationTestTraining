@@ -7,6 +7,8 @@ public class KeywordConstant {
 	public static final String CREATE_INVOICE_URL = "https://uat-invoice.kaike.vn/customer/invoice/hdbh/create";
 	public static final String INVOICE_URL = "https://uat-invoice.kaike.vn/customer/invoice/hdbh";
 	
+	public static final String FORMAT_DATE = "dd/MM/yyyy";
+	
 	// menu bar INVOICE
 	public static final String MENUBAR_INVOICE = "Hóa đơn ";
 	public static final String MENUBAR_INVOICE_SUB_LHD = "Lập hoá đơn";

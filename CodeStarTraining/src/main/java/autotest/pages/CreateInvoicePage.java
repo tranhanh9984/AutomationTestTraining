@@ -1,5 +1,6 @@
 package autotest.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
+import autocom.common.CommonFuncs;
+import autocom.common.HangHoa;
 import autocom.common.NguoiMua;
 import autocom.constant.KeywordConstant;
 
@@ -49,10 +52,13 @@ public class CreateInvoicePage extends LoginPage {
 	String xpathTableHangHoa = "//form//table/tbody/tr";
 	String xpathBtnRemove = "./td/p-button[@icon='pi pi-trash']";
 	String xpathBtnConfirmYes = "//div[contains(@class,'p-confirm-popup')]//div[contains(@class,'p-confirm-popup-footer')]/button[contains(@class,'p-confirm-popup-accept')]";
-//	
-//	String xpathProductName = "./td/p-autocomplete[@field='productName']//input";
-//	String xpathDonVi = "./td/p-celleditor/input";
-//	String xpathSoLuong = "./td/p-celleditor/p-inputnumber//input";
+
+	String xpathCommonTable = "//form//table/tbody/tr[%d]/td[%d]";
+	String xpathCommonInput = "//form//table/tbody/tr[%d]/td[%d]//input";
+	String xpathCommonDropdown = "//form//table/tbody/tr[%d]/td[%d]//p-dropdown";
+	String xpathCommonDropdownItem = "//ul[contains(@class,'p-dropdown-items')]//p-dropdownitem/li/span[text()='%s']";
+	String xpathCommonSpan = "//form//table/tbody/tr[%d]/td[%d]//span";
+	String xpathInputTotal = "//p-inputnumber[@id='%s']//input";
 	
 	
 	public CreateInvoicePage() {
@@ -122,6 +128,10 @@ public class CreateInvoicePage extends LoginPage {
 		this.setValue(String.format(xpathInput, idEmail), value);
 	}
 	
+	public void clear_Email() {
+		this.clearText(String.format(xpathInput, idEmail));
+	}
+	
 	public WebElement getElementEmail() {
 		return driver.findElement(By.xpath(String.format(xpathInput, idEmail)));
 	}
@@ -139,13 +149,13 @@ public class CreateInvoicePage extends LoginPage {
 	}
 	
 	public void fillData_HinhThucThanhToan(String value) {
-		WebElement dropDown = driver.findElement(By.xpath(String.format(xpathDropDown, idHinhThucThanhToan)));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dropDown);
-		dropDown.click();
+		this.scrollBarToElement(String.format(xpathDropDown, idHinhThucThanhToan));
+		driver.findElement(By.xpath(String.format(xpathDropDown, idHinhThucThanhToan))).click();
 		driver.findElement(By.xpath(String.format(xpathDropDownItem, idHinhThucThanhToan, value))).click();
 	}
 	
 	public void fillData_LoaiTien(String value) {
+		this.scrollBarToElement(String.format(xpathDropDown, idLoaiTien));
 		driver.findElement(By.xpath(String.format(xpathDropDown, idLoaiTien))).click();
 		driver.findElement(By.xpath(String.format(xpathDropDownItem, idLoaiTien, value))).click();
 	}
@@ -171,7 +181,7 @@ public class CreateInvoicePage extends LoginPage {
 		this.fillData_NganHang(nguoiMua.getTenNganHang());
 		this.fillData_HinhThucThanhToan(nguoiMua.getHinhThuThanhToan());
 		this.fillData_LoaiTien(nguoiMua.getLoaiTien());
-		this.fillData_TyGia(nguoiMua.getTyGia());
+//		this.fillData_TyGia(nguoiMua.getTyGia());
 		this.fillData_ChietKhau(nguoiMua.getChietKhau());
 	}
 	
@@ -234,4 +244,52 @@ public class CreateInvoicePage extends LoginPage {
 		this.clearText(String.format(xpathInputNumber, idTyGia));
 	}
 	
+	public String getDataFromTableHangHoa(int indexRow, int indexColumn) {
+		return driver.findElement(By.xpath(String.format(xpathCommonSpan, indexRow, indexColumn))).getAttribute("textContent").trim();
+	}
+	
+	public void setDataFromTableHangHoa(int indexRow, int indexColumn, String value) {
+		driver.findElement(By.xpath(String.format(xpathCommonTable, indexRow, indexColumn))).click();
+		if (indexColumn == 9) {
+			driver.findElement(By.xpath(String.format(xpathCommonDropdown, indexRow, indexColumn))).click();
+			driver.findElement(By.xpath(String.format(xpathCommonDropdownItem, value))).click();
+		} else {
+			driver.findElement(By.xpath(String.format(xpathCommonInput, indexRow, indexColumn))).sendKeys(value);
+		}
+	}
+	
+	public void themSPMoi(int indexRow, HangHoa hangHoa) {
+		// fill ten hang hoa
+		this.setDataFromTableHangHoa(indexRow, 3, hangHoa.getTenHangHoa());
+		this.setDataFromTableHangHoa(indexRow, 4, hangHoa.getDonViTinh());
+		this.setDataFromTableHangHoa(indexRow, 5, hangHoa.getSoLuong() + "");
+		this.setDataFromTableHangHoa(indexRow, 6, hangHoa.getDonGia() + "");
+		this.setDataFromTableHangHoa(indexRow, 9, hangHoa.getThueGTGT() + "%");
+	}
+	
+	public ArrayList<HangHoa> getDanhSachHangHoa(){
+		List<WebElement> tableRows = driver.findElements(By.xpath(xpathTableHangHoa));
+		if (tableRows.size() < 2) return null;
+		ArrayList<HangHoa> lstHangHoa = new ArrayList<HangHoa>();
+		for(int i = 1; i < tableRows.size(); i ++) {
+			String tenHangHoa = this.getDataFromTableHangHoa(i, 3);
+			String donViTinh = this.getDataFromTableHangHoa(i, 4);
+			String soLuong = this.getDataFromTableHangHoa(i, 5);
+			String donGia = this.getDataFromTableHangHoa(i, 6);
+			String thueGTGT = this.getDataFromTableHangHoa(i, 9);
+			
+			String thanhTien = this.getDataFromTableHangHoa(i, 7);
+			String thanhTienQD = this.getDataFromTableHangHoa(i, 8);
+			String tienThue = this.getDataFromTableHangHoa(i, 10);
+			
+			HangHoa hh = new HangHoa(tenHangHoa, donViTinh, CommonFuncs.convertStringToInt(soLuong), CommonFuncs.convertStringToLong(donGia), CommonFuncs.convertStringToInt(thueGTGT),
+					CommonFuncs.convertStringToLong(thanhTien), CommonFuncs.convertStringToLong(thanhTienQD), CommonFuncs.convertStringToLong(tienThue));
+			lstHangHoa.add(hh);
+		}
+		return lstHangHoa;
+	}
+	
+	public String getDataTotal(String fieldName) {
+		return driver.findElement(By.xpath(String.format(xpathInputTotal, fieldName))).getAttribute("value");
+	}
 }

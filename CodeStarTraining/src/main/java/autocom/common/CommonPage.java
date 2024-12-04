@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CommonPage {
@@ -56,6 +57,11 @@ public class CommonPage {
 	
 	public boolean isShowAlert(String message) {
 		return driver.findElement(By.xpath(String.format(xpathMessage, message))).isDisplayed();
+	}
+	
+	public void scrollBarToElement(String xpath) {
+		WebElement element = driver.findElement(By.xpath(xpath));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
 }
