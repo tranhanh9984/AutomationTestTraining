@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import autocom.common.CommonBase;
@@ -16,27 +18,33 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginPage extends CommonBase {
+	private static final boolean SCROLL = true;
+	private static final boolean NO_SCROLL = false;
+	JavascriptExecutor jss = (JavascriptExecutor) driver;
+
 	@Test
 	public void tc_01() {
 		System.out.println("HaDV_start Browser");
-		testWrongUser();
-		testWrongPass();
 		testLoginSuccess();
 		pause(5000);
+		// lap hoa don
 		clickMenus();
-		this.tc_dienThongtin();
-	}
-	
-	
-public void clickMenus() {
-	driver.findElement(
-			By.xpath("//ul[@role=\"menubar\"]//span[contains(@class,\"p-menuitem-text\")][text()=\"Hóa đơn \"]"))
-			.click();
+		tc_taoMoiHoaDon();
+		tc_dienThongtin();
 
-	driver.findElement(
-			By.xpath("//ul[@role=\"menubar\"]//span[contains(@class,\"p-menuitem-text\")][text()=\"Lập hoá đơn\"]"))
-			.click();	
-}
+		// testWrongUser();
+		// testWrongPass();
+		// testLimitedLoginFail();
+	}
+
+	public void clickMenus() {
+		driver.findElement(
+				By.xpath("//ul[@role='menubar']//span[contains(@class,'p-menuitem-text')][text()='Hóa đơn ']")).click();
+		driver.findElement(
+				By.xpath("//ul[@role='menubar']//span[contains(@class,'p-menuitem-text')][text()='Lập hoá đơn']"))
+				.click();
+	}
+
 	public void testLoginSuccess() {
 		inputText("0312303803-999", "//input[@id='email']");
 		inputText("0312303803-999", "//input[@id='password']");
@@ -76,110 +84,118 @@ public void clickMenus() {
 	}
 
 	public void tc_dienThongtin() {
-		// driver.findElement(By.xpath(""));
-
-		driver.findElement(By.xpath("//p-dropdown[@id='invoiceTemplatePartyId']/div[contains(@class,'p-dropdown')]"))
-				.click();
+		// click Ky hieu
+		pause(3000);
+		click("//p-dropdown[@id='invoiceTemplatePartyId']/div[contains(@class,'p-dropdown')]", SCROLL);
 		System.out.println("1");
-		driver.findElement(By.xpath("//li[@aria-label=\"1C24TAA\"]")).click();
+		// select Ky hieu
+		click("//p-dropdown[@id='invoiceTemplatePartyId']//p-dropdownitem[1]//li", NO_SCROLL);
 		System.out.println("2");
-		driver.findElement(By.xpath("//p-autocomplete[@id=\"toPartyTaxId\"]//input")).sendKeys("0312303803-999");
-
+		// input text MST người mua
+		setText("//p-autocomplete[@id='toPartyTaxId']//input", "0312303803-999", false);
 		// click vào Lấy Thông Tin btn để pre-filled các thông tin có trong data
-		driver.findElement(By.xpath("//span[text()=\"Lấy thông tin\"]")).click();
-
-		// Check các filed xem đã được pre-filled chưa. Nếu trống thì điền thông tin vào
-		String filedValue = driver.findElement(By.xpath("//input[@id=\"toName\"]")).getAttribute("value");
-		if (filedValue.isEmpty()) {
-			driver.findElement(By.xpath("//input[@id=\"toName\"]")).sendKeys("Do Viet Ha");
-		}
-
-		String toIdentification = driver.findElement(By.xpath("//input[@id=\"toIdentification\"]"))
-				.getAttribute("value");
-		if (toIdentification.isEmpty()) {
-			driver.findElement(By.xpath("//input[@id=\"toIdentification\"]")).sendKeys("001191123456");
-		}
-		// Check giá trị pre-filled
-
-		String toEmailAddress = driver.findElement(By.xpath("//input[@id=\"toEmailAddress\"]")).getAttribute("value");
-		if (toEmailAddress.isEmpty()) {
-			driver.findElement(By.xpath("//input[@id=\"toEmailAddress\"]")).sendKeys("vietha@gmail.com");
-		}
-		// Check giá trị pre-filled
-
-		String toTelecomNumber = driver.findElement(By.xpath("//input[@id=\"toTelecomNumber\"]")).getAttribute("value");
-		if (toTelecomNumber.isEmpty()) {
-			driver.findElement(By.xpath("//input[@id=\"toTelecomNumber\"]")).sendKeys("09777111123");
-		}
-		// Check giá trị pre-filled
-
-		String accountNumber = driver.findElement(By.xpath("//input[@id=\"accountNumber\"]")).getAttribute("value");
-		if (accountNumber.isEmpty()) {
-			driver.findElement(By.xpath("//input[@id=\"accountNumber\"]")).sendKeys("001002003");
-		}
-		// Check giá trị pre-filled
-
-		String bankName = driver.findElement(By.xpath("//input[@id=\"bankName\"]")).getAttribute("value");
-		if (bankName.isEmpty()) {
-			driver.findElement(By.xpath("//input[@id=\"bankName\"]")).sendKeys("Vietcombank");
-		}
-		
-		driver.findElement(By.xpath("//p-dropdown[@id=\"paymentInstrumentEnumId\"]")).click();	
-		driver.findElement(By.xpath("//ul[@id='pr_id_14_list']//li[@aria-label='Tiền mặt']")).click();
-	
-
-//		driver.findElement(By.xpath("//p-dropdown[@id='currencyUomId']/div[1]")).click();
-//		System.out.println("4");
-
-//		driver.findElement(By.xpath("//li[@id=\"p-highlighted-option\" and @aria-label=\"VND\"]")).click();
-//		System.out.println("5");
-
-		// Check giá trị pre-filled
-
-		String exchangeRate = driver.findElement(By.xpath("//p-inputnumber[@id=\"exchangeRate\"]//input")).getAttribute("value");
-		System.out.println("6");
-		if (exchangeRate.isEmpty()) {
-			driver.findElement(By.xpath("//p-inputnumber[@id=\\\"exchangeRate\\\"]//input")).sendKeys("20000");
-			System.out.println("7");
-		}
-
-		driver.findElement(By.xpath("//p-dropdown[@id='paymentInstrumentEnumId']")).click();
-		System.out.println("8");
-		
-		driver.findElement(By.xpath("//ul[@id='pr_id_18_list']//li[@aria-label='Theo từng mặt hàng']")).click();
+		click("//span[text()='Lấy thông tin']/..", SCROLL);
+		// Check các filed xem đã được pre-filled chưa. Nếu trống thì điền thông
+		// tin vào
+		// Người mua hàng
+		setText("//input[@id='toName']", "Do Viet Ha", false);
+		// CCCD
+		setText("//input[@id='toIdentification']", "001191123456", false);
+		// Email
+		setText("//input[@id='toEmailAddress']", "vietha@gmail.com", false);
+		// Số điện thoại
+		setText("//input[@id='toTelecomNumber']", "09777111123", false);
+		// Số tài khoản
+		setText("//input[@id='accountNumber']", "001002003", false);
+		// Ngân hàng
+		setText("//input[@id='bankName']", "Vietcombank", false);
+		// Click dropdown Hình thức TT
+		click("//p-dropdown[@id='paymentInstrumentEnumId']/div[contains(@class,'p-dropdown')]", SCROLL);
+		click("//p-dropdown[@id='paymentInstrumentEnumId']//li[@aria-label='Tiền mặt']", NO_SCROLL);
+		// Ty gia
+		setCommasIntText("//p-inputnumber[@id='exchangeRate']//input", "20000", true);
+		// select Chiet khau
+		click("//p-dropdown[@id='discountTypeEnumId']/div[contains(@class,'p-dropdown')]", SCROLL);
+		click("//ul[@id='pr_id_18_list']//li[@aria-label='Theo từng mặt hàng']", NO_SCROLL);
 		System.out.println("9");
-		
-		driver.findElement(By.xpath("//p-button[@title=\'Thêm\']")).click();
+
+	}
+
+	public void tc_taoMoiHoaDon() {
+		tc_dienThongtin();
+		// ( hàng hóa, dịch vụ ) click Thêm
+		driver.findElement(By.xpath("//p-button[@title='Thêm']")).click();
 		System.out.println("10");
 		// Add hàng vào hóa đơn
 		// Kiểm tra nếu checkbox chưa được chọn, thì click để chọn
 
-		String ariaChecked = driver.findElement(By.xpath("//div[@id=\"pr_id_44\"]//tr[3]//div[@role=\"checkbox\"]"))
+		String ariaChecked = driver.findElement(By.xpath(
+				"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[3]//div[@role='checkbox']"))
 				.getAttribute("aria-checked");
 		if (ariaChecked.equals("false")) {
 			// Checkbox chưa được chọn, thực hiện click để chọn
-			driver.findElement(By.xpath("//div[@id=\"pr_id_44\"]//tr[3]//div[@role=\"checkbox\"]")).click();
+			driver.findElement(By.xpath(
+					"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[3]//div[@role='checkbox']"))
+					.click();
 		}
 
-		String ariaChecked2 = driver.findElement(By.xpath("//div[@id=\"pr_id_44\"]//tr[5]//div[@role=\"checkbox\"]"))
+		String ariaChecked2 = driver.findElement(By.xpath(
+				"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[5]//div[@role='checkbox']"))
 				.getAttribute("aria-checked");
 		if (ariaChecked2.equals("false")) {
 			// Checkbox chưa được chọn, thực hiện click để chọn
-			driver.findElement(By.xpath("//div[@id=\"pr_id_44\"]//tr[5]//div[@role=\"checkbox\"]")).click();
+			driver.findElement(By.xpath(
+					"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[5]//div[@role='checkbox']"))
+					.click();
 		}
 
-		driver.findElement(By.xpath("//p-footer//span[text()=\"Thêm dòng trống\"]")).click();
-		driver.findElement(By.xpath("//p-button[@type=\"submit\"]//span[text()=\"Tạo mới\"]")).click();
+		driver.findElement(By.xpath("//app-dialog-add-product//span[text()='Thêm']")).click();
+		driver.findElement(By.xpath("//p-button[@type='submit']//span[text()='Tạo mới']")).click();
 	}
 
-	public void setText(String content, String xpath) {
-		driver.findElement(By.xpath(xpath)).sendKeys(content);
-		;
-		assert content == this.getAttribute(xpath, "value");
+	public void click(String xPath, boolean doScroll) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		System.out.println("click xpath ::::" + xPath);
+		if (doScroll == true) {
+			js.executeScript("document.evaluate(\"" + xPath
+					+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+
+		}
+		pause(300);
+		driver.findElement(By.xpath(xPath)).click();
 	}
 
-	public void getText(String content, String xpath) {
+	public void setText(String xPath, String content, boolean doClear) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String textFieldValue = getInputText(xPath);
+		System.out.println("textFieldValue ::::" + textFieldValue);
+		if (textFieldValue.isEmpty()) {
+			js.executeScript("document.evaluate(\"" + xPath
+					+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='';");
+			pause(200);
+			driver.findElement(By.xpath(xPath)).sendKeys(content);
 
+		} else {
+			if (doClear == true) {
+				js.executeScript("document.evaluate(\"" + xPath
+						+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='"
+						+ content + "';");
+			}
+			pause(100);
+		}
+		pause(500);
+		Assert.assertEquals(content, driver.findElement(By.xpath(xPath)).getAttribute("value"), "value khong khop");
+	}
+	public void setCommasIntText(String xPath, String content, boolean doClear) {
+		jss.executeScript("document.evaluate(\"" + xPath
+				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='';");
+		pause(200);
+		driver.findElement(By.xpath(xPath)).sendKeys(content);
+	}
+
+	public String getInputText(String xpath) {
+		String textFieldValue = driver.findElement(By.xpath(xpath)).getText().toString();
+		return textFieldValue;
 	}
 
 	public String getAttribute(String xpath, String att) {
@@ -191,9 +207,9 @@ public void clickMenus() {
 		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
 
 	}
-//@AfterClass
-//	public void close() {
-//		this.closeBrowser();
-//	}
+	// @AfterClass
+	// public void close() {
+	// this.closeBrowser();
+	// }
 
 }

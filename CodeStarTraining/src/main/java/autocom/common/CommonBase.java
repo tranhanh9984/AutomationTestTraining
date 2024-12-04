@@ -4,6 +4,8 @@ package autocom.common;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +15,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class CommonBase {
 	public WebDriver driver;
-
+	
 	public CommonBase() {
 		// TODO Auto-generated constructor stub
 	}
