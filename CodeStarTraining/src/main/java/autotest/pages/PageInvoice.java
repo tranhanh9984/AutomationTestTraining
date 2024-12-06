@@ -1,5 +1,7 @@
 package autotest.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -48,15 +50,6 @@ public class PageInvoice extends CommonBase {
 
 	String txtTenHangHoa = "//p-autocomplete[@field = 'productName']//input[contains(@class, 'ng-tns-c110')]";
 
-	String layoutDonViTinh = "//tr//td[@class = 'p-element p-editable-column p-cell-editing']";
-	String txtDonViTinh = "//input[@class='p-inputtext p-component p-element ng-pristine ng-valid ng-star-inserted ng-touched']";
-
-	String layoutSoLuong = "//td[contains(@class, 'p-element p-text-right p-editable-column')]";
-	String txtSoLuong = "//td[contains(@class, 'p-element p-text-right p-editable-column')]//p-inputnumber//input[@inputmode = 'decimal']";
-
-	String layoutDonGia = "//td[@class = 'p-element p-text-right p-editable-column']";
-	String txtDonGia = "//input[@class='p-inputtext p-component p-element p-inputnumber-input']";
-
 	String layoutThue = "(//td[contains(@class , 'p-element p-text-right p-editable-column ng-star-inserted')])[1]";
 	String btnThue = "(//td[contains(@class , 'p-element p-text-right p-editable-column ng-star-inserted')])[1]";
 	String selectedThue = "//li[@aria-label='10%']";
@@ -67,9 +60,23 @@ public class PageInvoice extends CommonBase {
 	String checkboxSP02 = "(//div[@class = 'p-checkbox p-component'])[5]";
 	String checkboxSP03 = "(//div[@class = 'p-checkbox p-component'])[6]";
 
+	String quantitySP01 = "//tbody/tr[1]/td[5]";
+	String priceSP01 = "//tbody/tr[1]/td[6]";
+	String totalSP01 = "//tbody/tr[1]/td[7]";
+
+	String quantitySP02 = "//tbody/tr[2]/td[5]";
+	String priceSP02 = "//tbody/tr[2]/td[6]";
+	String totalSP02 = "//tbody/tr[2]/td[7]";
+
+	String quantitySP03 = "//tbody/tr[3]/td[5]";
+	String priceSP03 = "//tbody/tr[3]/td[6]";
+	String totalSP03 = "//tbody/tr[3]/td[7]";
+
+	String txtTongTienHang = "//p-inputnumber[@id='grandTotal']//input[@class='p-inputtext p-component p-element p-inputnumber-input p-filled']";
+
 	String btnThem = "//button//span[text() = 'Thêm']";
 
-	String btnTaoMoi= "//button/span[text() = 'Tạo mới']";
+	String btnTaoMoi = "//button/span[text() = 'Tạo mới']";
 	String popupXacNhan = "//div[text() = 'Thành công!']";
 
 	public PageInvoice() {
@@ -122,6 +129,26 @@ public class PageInvoice extends CommonBase {
 		}
 	}
 
+	// Tính đơn giá, số lượng
+	public double calculateProductCost(double dongia, double soluong) {
+		return (dongia * soluong);
+
+	}
+
+	// So sánh thành tiền
+	public boolean compareTotal(double thanhTien, double tongdon) {
+		if (thanhTien != tongdon) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	// tính tổng thành tiền đơn hàng
+	public double calculateTotalOrder(double gia01, double gia02, double gia03) {
+		return (gia01 + gia02 + gia03);
+	}
+
 	// Verify: create Invoice successfully
 	@Test(enabled = true, priority = 2)
 	public void createInvoice() {
@@ -132,13 +159,13 @@ public class PageInvoice extends CommonBase {
 		driver.findElement(By.xpath(listMstNguoiMua)).click();
 
 		driver.findElement(By.xpath(nguoiMuaHang)).clear();
-		driver.findElement(By.xpath(nguoiMuaHang)).sendKeys("Customer C");
+		driver.findElement(By.xpath(nguoiMuaHang)).sendKeys("Customer D");
 
 		driver.findElement(By.xpath(CCCD)).clear();
 		driver.findElement(By.xpath(CCCD)).sendKeys("123456789");
 
 		driver.findElement(By.xpath(txtEmailAdd)).clear();
-		driver.findElement(By.xpath(txtEmailAdd)).sendKeys("atest@mailinator.com");
+		driver.findElement(By.xpath(txtEmailAdd)).sendKeys("dtest@mailinator.com");
 
 		driver.findElement(By.xpath(txtTelecomNumber)).clear();
 		driver.findElement(By.xpath(txtTelecomNumber)).sendKeys("0988123897");
@@ -168,31 +195,6 @@ public class PageInvoice extends CommonBase {
 		driver.findElement(By.xpath(btnChietKhau)).click();
 		driver.findElement(By.xpath(listChietKhau)).click();
 
-		/*
-		 * driver.findElement(By.xpath(layoutTinhChat)).click();
-		 * driver.findElement(By.xpath(btnTinhChat)).click();
-		 * driver.findElement(By.xpath(listTinhChat)).click();
-		 * //System.out.println("TC: OK");
-		 * 
-		 * driver.findElement(By.xpath(txtTenHangHoa)).sendKeys("Sách");
-		 * 
-		 * driver.findElement(By.xpath(layoutDonViTinh)).click();
-		 * System.out.println("OK");
-		 * 
-		 * //driver.findElement(By.xpath(txtDonViTinh)).sendKeys("Quyển");
-		 * 
-		 * 
-		 * driver.findElement(By.xpath(layoutSoLuong)).click();
-		 * driver.findElement(By.xpath(txtSoLuong)).sendKeys("5");
-		 * 
-		 * driver.findElement(By.xpath(layoutDonGia)).click();
-		 * driver.findElement(By.xpath(txtDonGia)).sendKeys("1600");
-		 * 
-		 * driver.findElement(By.xpath(layoutThue)).click();
-		 * driver.findElement(By.xpath(btnThue)).click();
-		 * driver.findElement(By.xpath(selectedThue)).click();
-		 */
-
 		// thêm 3 sản phẩm
 		driver.findElement(By.xpath(btnThemSP)).click();
 
@@ -212,9 +214,66 @@ public class PageInvoice extends CommonBase {
 		}
 
 		driver.findElement(By.xpath(btnThem)).click();
-		
-		//
 
+		String soLuongSP1 = driver.findElement(By.xpath(quantitySP01)).getText();
+		String donGiaSP1 = driver.findElement(By.xpath(priceSP01)).getText();
+		String totalSP1 = driver.findElement(By.xpath(totalSP01)).getText();
+
+		double SL1 = convertStringToDouble(soLuongSP1);
+		double DG1 = convertStringToDouble(donGiaSP1);
+		double TT1 = convertStringToDouble(totalSP1);
+		double giaSP1 = calculateProductCost(SL1, DG1);
+		boolean sosanh1 = compareTotal(TT1, giaSP1);
+		if (sosanh1) {
+			System.out.println("thành tiền sp1 tính đúng");
+		} else {
+			System.out.println("thành tiền sp1 tính sai");
+		}
+
+		String soLuongSP2 = driver.findElement(By.xpath(quantitySP02)).getText();
+		String donGiaSP2 = driver.findElement(By.xpath(priceSP02)).getText();
+		String totalSP2 = driver.findElement(By.xpath(totalSP02)).getText();
+
+		double SL2 = convertStringToDouble(soLuongSP2);
+		double DG2 = convertStringToDouble(donGiaSP2);
+		double TT2 = convertStringToDouble(totalSP2);
+		double giaSP2 = calculateProductCost(SL2, DG2);
+		boolean sosanh2 = compareTotal(TT2, giaSP2);
+		if (sosanh2) {
+			System.out.println("thành tiền sp2 tính đúng");
+		} else {
+			System.out.println("thành tiền sp2 tính sai");
+		}
+
+		String soLuongSP3 = driver.findElement(By.xpath(quantitySP03)).getText();
+		String donGiaSP3 = driver.findElement(By.xpath(priceSP03)).getText();
+		String totalSP3 = driver.findElement(By.xpath(totalSP03)).getText();
+
+		double SL3 = convertStringToDouble(soLuongSP3);
+		double DG3 = convertStringToDouble(donGiaSP3);
+		double TT3 = convertStringToDouble(totalSP3);
+		double giaSP3 = calculateProductCost(SL3, DG3);
+		boolean sosanh3 = compareTotal(TT3, giaSP3);
+		if (sosanh3) {
+			System.out.println("thành tiền sp3 tính đúng");
+		} else {
+			System.out.println("thành tiền sp3 tính sai");
+		}
+
+		double gia = calculateTotalOrder(giaSP1, giaSP2, giaSP3);
+		System.out.println("Tổng đơn: " + gia);
+
+		String tongTienHang = driver.findElement(By.xpath(txtTongTienHang)).getAttribute("value");
+		double txtTongTien = convertStringToDouble(tongTienHang);
+
+		boolean compareTotalOrder = compareTotal(gia, txtTongTien);
+		if (compareTotalOrder) {
+			System.out.println("Tổng Tiền Hàng tính đúng");
+		} else {
+			System.out.println("Tổng Tiền Hàng tính đúng");
+		}
+
+		// tạo mới thành công
 		driver.findElement(By.xpath(btnTaoMoi)).click();
 		WebElement popupXacNhanElement = driver.findElement(By.xpath(popupXacNhan));
 		if (popupXacNhanElement.isDisplayed()) {
@@ -226,6 +285,8 @@ public class PageInvoice extends CommonBase {
 		pauseBrowser(10);
 
 	}
+	
+	
 
 	@AfterTest
 	public void tearDown() {

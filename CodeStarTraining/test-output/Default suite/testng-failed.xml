@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.pages.PageLogin">
+      <class name="autotest.pages.PageInvoice">
         <methods>
-          <include name="loginDeactivatedAccount"/>
-          <include name="tearDown"/>
-          <include name="startBrowser"/>
+          <include name="createInvoice"/>
+          <include name="navigateLoginPage"/>
         </methods>
-      </class> <!-- autotest.pages.PageLogin -->
+      </class> <!-- autotest.pages.PageInvoice -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

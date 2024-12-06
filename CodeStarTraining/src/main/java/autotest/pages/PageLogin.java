@@ -1,6 +1,5 @@
 package autotest.pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -50,7 +49,7 @@ public class PageLogin extends CommonBase {
 	}
 
 	// Verify: Login with Valid Account
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void loginValidAccount() {
 
 		driver.findElement(By.xpath(txtEmail)).sendKeys("0312303803-999");
@@ -152,7 +151,7 @@ public class PageLogin extends CommonBase {
 	}
 
 	// Verify: Click on Forgot Password
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void clickFortgetPassword() {
 		driver.findElement(By.xpath(linkForgotPassword)).click();
 		pauseBrowser(10);
