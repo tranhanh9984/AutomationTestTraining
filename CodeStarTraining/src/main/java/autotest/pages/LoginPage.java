@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
-import org.openqa.selenium.JavascriptExecutor;
+
 import org.openqa.selenium.WebDriver;
 
 import autocom.common.CommonBase;
@@ -20,20 +20,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class LoginPage extends CommonBase {
 	private static final boolean SCROLL = true;
 	private static final boolean NO_SCROLL = false;
-	JavascriptExecutor jss = (JavascriptExecutor) driver;
 
 	@Test
 	public void tc_01() {
 		System.out.println("HaDV_start Browser");
 		testLoginSuccess();
 		pause(5000);
-		// lap hoa don
-		clickMenus();
-		tc_taoMoiHoaDon();
-		tc_dienThongtin();
+
+		clickMenus(); // tạo hóa đơn
+		taoMoiHoaDon_Failed1(); // tạo hóa đơn failed do blank field
+		taoMoiHoaDon_Failed2(); // Nhập sai MST và click vào Lấy Thông Tin -> Expected: Hiển thị Error Mess
+//		 tc_taoMoiHoaDon();
 
 		// testWrongUser();
 		// testWrongPass();
+
 		// testLimitedLoginFail();
 	}
 
@@ -71,16 +72,6 @@ public class LoginPage extends CommonBase {
 		WebElement errorMessage = driver.findElement(
 				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"));
 		Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed for invalid password.");
-	}
-
-	public void inputText(String giatri, String locator) {
-		// Now clear the text input field
-		driver.findElement(By.xpath(locator)).clear();
-		driver.findElement(By.xpath(locator)).sendKeys(giatri);
-		driver.findElement(By.xpath(locator)).getAttribute("value");
-		// assert giatri == driver.findElement(By.xpath(locator)).getAttribute("value");
-		Assert.assertEquals(giatri, driver.findElement(By.xpath(locator)).getAttribute("value"),
-				"input va value khong khop");
 	}
 
 	public void tc_dienThongtin() {
@@ -121,14 +112,12 @@ public class LoginPage extends CommonBase {
 
 	}
 
-	public void tc_taoMoiHoaDon() {
-		tc_dienThongtin();
-		// ( hàng hóa, dịch vụ ) click Thêm
+	public void themHangHoaDichVu() {
+		// ( hàng hóa, dịch vụ ) click Thêm.
+		// Add hàng vào hóa đơn.
+		// Kiểm tra nếu checkbox chưa được chọn, thì click để chọn.
 		driver.findElement(By.xpath("//p-button[@title='Thêm']")).click();
 		System.out.println("10");
-		// Add hàng vào hóa đơn
-		// Kiểm tra nếu checkbox chưa được chọn, thì click để chọn
-
 		String ariaChecked = driver.findElement(By.xpath(
 				"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[3]//div[@role='checkbox']"))
 				.getAttribute("aria-checked");
@@ -140,66 +129,62 @@ public class LoginPage extends CommonBase {
 		}
 
 		String ariaChecked2 = driver.findElement(By.xpath(
-				"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[5]//div[@role='checkbox']"))
+				"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[4]//div[@role='checkbox']"))
 				.getAttribute("aria-checked");
 		if (ariaChecked2.equals("false")) {
 			// Checkbox chưa được chọn, thực hiện click để chọn
 			driver.findElement(By.xpath(
-					"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[5]//div[@role='checkbox']"))
+					"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[4]//div[@role='checkbox']"))
 					.click();
 		}
 
+		String ariaChecked3 = driver.findElement(By.xpath(
+				"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[2]//div[@role='checkbox']"))
+				.getAttribute("aria-checked");
+		if (ariaChecked3.equals("false")) {
+			// Checkbox chưa được chọn, thực hiện click để chọn
+			driver.findElement(By.xpath(
+					"//app-dialog-add-product//*[contains(@class,'p-datatable-tbody')]//tr[2]//div[@role='checkbox']"))
+					.click();
+		}
 		driver.findElement(By.xpath("//app-dialog-add-product//span[text()='Thêm']")).click();
+	}
+
+	public void tc_taoMoiHoaDon() {
+		tc_dienThongtin();
+		themHangHoaDichVu();
 		driver.findElement(By.xpath("//p-button[@type='submit']//span[text()='Tạo mới']")).click();
 	}
 
-	public void click(String xPath, boolean doScroll) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		System.out.println("click xpath ::::" + xPath);
-		if (doScroll == true) {
-			js.executeScript("document.evaluate(\"" + xPath
-					+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+	public void taoMoiHoaDon_Failed1() {
+		clickMenus();
+		tc_dienThongtin();
+		themHangHoaDichVu();
+		// Bỏ trống Người mua hàng và Tên Đơn Vị
+		setText("//input[@id='toName']", "", true);
+		setText("//p-autocomplete[@id='toPartyName']//input", "", true);
 
-		}
-		pause(300);
-		driver.findElement(By.xpath(xPath)).click();
+		click("//p-button[@type='submit']//span[text()='Tạo mới']", NO_SCROLL);
+		WebElement errorMessage = driver.findElement(By.xpath(
+				"//div[contains(@class,'p-toast-message-error')]//div[text()='Tên đơn vị hoặc người mua hàng không được bỏ trống']"));
+		Assert.assertTrue(errorMessage.isDisplayed(), "TC Failed: Error Mess hiển thị không đúng expect");
 	}
 
-	public void setText(String xPath, String content, boolean doClear) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String textFieldValue = getInputText(xPath);
-		System.out.println("textFieldValue ::::" + textFieldValue);
-		if (textFieldValue.isEmpty()) {
-			js.executeScript("document.evaluate(\"" + xPath
-					+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='';");
-			pause(200);
-			driver.findElement(By.xpath(xPath)).sendKeys(content);
+	public void taoMoiHoaDon_Failed2() {
+		// Nhập sai MST và click vào Lấy Thông Tin -> Expected: Hiển thị Error Mess
+		clickMenus();
 
-		} else {
-			if (doClear == true) {
-				js.executeScript("document.evaluate(\"" + xPath
-						+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='"
-						+ content + "';");
-			}
-			pause(100);
-		}
-		pause(500);
-		Assert.assertEquals(content, driver.findElement(By.xpath(xPath)).getAttribute("value"), "value khong khop");
-	}
-	public void setCommasIntText(String xPath, String content, boolean doClear) {
-		jss.executeScript("document.evaluate(\"" + xPath
-				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='';");
-		pause(200);
-		driver.findElement(By.xpath(xPath)).sendKeys(content);
-	}
+		// input text MST người mua
+		setText("//p-autocomplete[@id='toPartyTaxId']//input", "999", true);
 
-	public String getInputText(String xpath) {
-		String textFieldValue = driver.findElement(By.xpath(xpath)).getText().toString();
-		return textFieldValue;
-	}
+		// click vào Lấy Thông Tin btn để pre-filled các thông tin có trong data
+		click("//span[text()='Lấy thông tin']/..", SCROLL);
 
-	public String getAttribute(String xpath, String att) {
-		return driver.findElement(By.xpath(xpath)).getAttribute(att);
+		String MST = getInputText("//p-autocomplete[@id='toPartyTaxId']//input");
+
+		WebElement errorMessage = driver.findElement(By.xpath(
+				"//div[contains(@class,'p-toast-message-error')]//div[text()='Không tìm thấy thông tin doanh nghiệp/cá nhân có mã số thuế: " + MST + ". Hãy xem lại']"));
+		Assert.assertTrue(errorMessage.isDisplayed(), "TC Failed: Error Mess hiển thị không đúng expect");
 	}
 
 	@BeforeClass

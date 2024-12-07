@@ -84,11 +84,14 @@ public class CommonBase {
 			pause(100);
 		}
 		pause(500);
+		textFieldValue = getInputText(xPath);
+		System.out.println("after set text ::::" + textFieldValue);
+		System.out.println("after set text xpath::::" + xPath);
 		Assert.assertEquals(content, driver.findElement(By.xpath(xPath)).getAttribute("value"), "value khong khop");
 	}
 
 	public String getInputText(String xpath) {
-		String textFieldValue = driver.findElement(By.xpath(xpath)).getText().toString();
+		String textFieldValue = driver.findElement(By.xpath(xpath)).getAttribute("value").toString();
 		System.out.println("getInputText textFieldValue ::::" + textFieldValue);
 		return textFieldValue;
 	}
