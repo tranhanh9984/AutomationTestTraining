@@ -48,14 +48,14 @@ public class CommomBase {
 		
 	}
 	
-	public String ChooseMenuLevel1( int level) {
-		return ("/html/body/app-root/app-entities/div/div[1]/app-menu/p-menubar/div/p-menubarsub/ul/li[" + level +"]");
+	public String ChooseMenuLevel1( String name) {
+		return ("//p-menubar//li/a[.//span[text()='"+name+"']]");
 	}
 	
-	public String ChooseMenuLevel2( int level) {
-		return ("/html/body/app-root/app-entities/div/div[1]/app-menu/p-menubar/div/p-menubarsub/ul/li[2]/p-menubarsub/ul/li[" + level +"]");
+	public String ChooseMenuLevel2( String name) {
+		return ("//p-menubarsub//ul//li/a[.//span[text()='"+name+"']]");
 	}
-	
+	// Xóa text sau mỗi case
 	public void clearText(String xpath) {
 		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
 		((JavascriptExecutor) driver).executeScript(

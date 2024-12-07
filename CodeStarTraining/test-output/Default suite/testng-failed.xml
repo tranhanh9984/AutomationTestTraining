@@ -3,14 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.pages.LoginPage">
+      <class name="autocom.common.hoadon">
         <methods>
+          <include name="starBr"/>
+          <include name="tc_05"/>
           <include name="closeBr"/>
-          <include name="startBr"/>
-          <include name="TC01_Fail1"/>
-          <include name="TC01_Fail2"/>
         </methods>
-      </class> <!-- autotest.pages.LoginPage -->
+      </class> <!-- autocom.common.hoadon -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
