@@ -6,8 +6,8 @@ public class HangHoa {
 	private int soLuong;
 	private long donGia;
 	private int thueGTGT;
-	private long thanhTienQuyDoi;
 	private long tienThue;
+	private boolean isSelected;
 	
 	public long ThanhTienQuyDoi;
 	public long ThanhTien;
@@ -53,6 +53,14 @@ public class HangHoa {
 		this.thueGTGT = thueGTGT;
 	}
 	
+	public boolean getIsSelected() {
+		return isSelected;
+	}
+	
+	public void setIsSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	
 	public long getThanhTien() {
 		return this.soLuong * this.donGia;
 	}
@@ -61,12 +69,12 @@ public class HangHoa {
 		return (this.getThanhTien() * this.thueGTGT) / 100;
 	}
 	
-	public long getThanhTienQD() {
-		return thanhTienQuyDoi;
+	public long getThanhTienQD(long tyGia) {
+		return this.getThanhTien() * tyGia;
 	}
 	
-	public void setThanhTienQD(long thanhTienQD) {
-		this.thanhTienQuyDoi = thanhTienQD;
+	public long getTienThueQD(long tyGia) {
+		return (this.getThanhTienQD(tyGia) * this.thueGTGT) / 100;
 	}
 	
 	public HangHoa(String tenHH, String dvt, int sl, long dg, int thue) {

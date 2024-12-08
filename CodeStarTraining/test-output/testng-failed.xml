@@ -5,8 +5,8 @@
     <classes>
       <class name="autotest.testcases.HoaDonBanHangPageTestCase">
         <methods>
+          <include name="tc_downloadHoaDon_validate"/>
           <include name="init"/>
-          <include name="tc1"/>
           <include name="close"/>
         </methods>
       </class> <!-- autotest.testcases.HoaDonBanHangPageTestCase -->

@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import autocom.constant.KeywordConstant;
+import autotest.pages.MenuBar;
+
 public class CommonPage {
 	
 	public WebDriver driver;
@@ -62,6 +65,12 @@ public class CommonPage {
 	public void scrollBarToElement(String xpath) {
 		WebElement element = driver.findElement(By.xpath(xpath));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	
+	public void goToMenu(String menuName, String subMenuName) {
+		MenuBar menuBar = new MenuBar(driver);
+		menuBar.getMenuItemByText(menuName).click();
+		menuBar.getSubMenuItemByText(subMenuName).click();
 	}
 
 }

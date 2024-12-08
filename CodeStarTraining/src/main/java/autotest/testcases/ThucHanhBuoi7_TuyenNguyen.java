@@ -44,10 +44,10 @@ public class ThucHanhBuoi7_TuyenNguyen {
 	
 	@Test
 	public void tc_convertDate() {
-		LocalDate fromDate = CommonFuncs.convertToDateByFormat(KeywordConstant.FORMAT_DATE, "01/09/2024");
+		LocalDate fromDate = CommonFuncs.convertToDateByFormat(KeywordConstant.FORMAT_DATE, "23/09/2024");
 		//this.setFromDate(fromDate);
 		
-		LocalDate toDate = CommonFuncs.convertToDateByFormat(KeywordConstant.FORMAT_DATE, "01/01/2025");
+		LocalDate toDate = CommonFuncs.convertToDateByFormat(KeywordConstant.FORMAT_DATE, "24/01/2025");
 		//this.setToDate(toDate);
 		
 		long monthsBetween = ChronoUnit.MONTHS.between(fromDate, toDate);

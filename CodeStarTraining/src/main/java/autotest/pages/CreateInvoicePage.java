@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import autocom.common.CommonFuncs;
@@ -109,22 +110,27 @@ public class CreateInvoicePage extends LoginPage {
 	
 	// using p-autocomplete
 	public void fillData_TenDonVi(String value) {
+		this.clearText(String.format(xpathAutoComplete, idTenDonVi));
 		this.setValue(String.format(xpathAutoComplete, idTenDonVi), value);
 	}
 	// using input
 	public void fillData_DiaChi(String value) {
+		this.clearText(String.format(xpathInput, idDiaChi));
 		this.setValue(String.format(xpathInput, idDiaChi), value);
 	}
 	// using input
 	public void fillData_NguoiMuaHang(String value) {
+		this.clearText(String.format(xpathInput, idNguoiMuaHang));
 		this.setValue(String.format(xpathInput, idNguoiMuaHang), value);
 	}
 	// using input
 	public void fillData_CCCD(String value) {
+		this.clearText(String.format(xpathInput, idCCCD));
 		this.setValue(String.format(xpathInput, idCCCD), value);
 	}
 	// using input
 	public void fillData_Email(String value) {
+		this.clearText(String.format(xpathInput, idEmail));
 		this.setValue(String.format(xpathInput, idEmail), value);
 	}
 	
@@ -137,14 +143,17 @@ public class CreateInvoicePage extends LoginPage {
 	}
 	
 	public void fillData_SDT(String value) {
+		this.clearText(String.format(xpathInput, idSoDienThoai));
 		this.setValue(String.format(xpathInput, idSoDienThoai), value);
 	}
 
 	public void fillData_STK(String value) {
+		this.clearText(String.format(xpathInput, idSoTaiKhoan));
 		this.setValue(String.format(xpathInput, idSoTaiKhoan), value);
 	}
 	
 	public void fillData_NganHang(String value) {
+		this.clearText(String.format(xpathInput, idNganHang));
 		this.setValue(String.format(xpathInput, idNganHang), value);
 	}
 	
@@ -162,6 +171,10 @@ public class CreateInvoicePage extends LoginPage {
 	
 	public void fillData_TyGia(double value) {
 		this.setValue(String.format(xpathInputNumber, idTyGia), value + "");
+	}
+	
+	public long getTyGia() {
+		return CommonFuncs.convertStringToLong(this.getValue(String.format(xpathInputNumber, idTyGia)));
 	}
 	
 	public void fillData_ChietKhau(String value) {
@@ -183,6 +196,21 @@ public class CreateInvoicePage extends LoginPage {
 		this.fillData_LoaiTien(nguoiMua.getLoaiTien());
 //		this.fillData_TyGia(nguoiMua.getTyGia());
 		this.fillData_ChietKhau(nguoiMua.getChietKhau());
+	}
+	
+	public NguoiMua getDataNguoiMua() {
+		// NguoiMua nguoiMua = new NguoiMua();
+		String mstNguoiMua = this.getValue(String.format(xpathAutoComplete, idMSTNguoiMua));
+		String tenDV = this.getValue(String.format(xpathAutoComplete, idTenDonVi));
+		String diaChi = this.getValue(String.format(xpathInput, idDiaChi));
+		String nguoiMuaHang = this.getValue(String.format(xpathInput, idNguoiMuaHang));
+		String cccd = this.getValue(String.format(xpathInput, idCCCD));
+		String email = this.getValue(String.format(xpathInput, idEmail));
+		String sdt = this.getValue(String.format(xpathInput, idSoDienThoai));
+		String stk = this.getValue(String.format(xpathInput, idSoTaiKhoan));
+		String tenNganHang = this.getValue(String.format(xpathInput, idNganHang));
+		NguoiMua nguoiMua = new NguoiMua(mstNguoiMua, tenDV, diaChi, nguoiMuaHang, cccd, email, sdt, stk, tenNganHang, "", "", 0, "");
+		return nguoiMua;
 	}
 	
 	public void clickThemHangHoa() {
@@ -217,6 +245,32 @@ public class CreateInvoicePage extends LoginPage {
 			driver.findElement(By.xpath(String.format(xpathCheckbox, i))).click();
 		}
 		this.clickThemOnThemHangHoaPopup();
+	}
+	
+	public void filterMaSanPham(String maSP) {
+		String txtFilterMaSP = "//app-dialog-add-product//table//p-columnfilter[@field='pseudoId']//input";
+		WebElement filterMaSP = driver.findElement(By.xpath(txtFilterMaSP));
+		this.clearText(txtFilterMaSP);
+		filterMaSP.sendKeys(maSP);
+		filterMaSP.sendKeys(Keys.ENTER);
+	}
+	
+	public HangHoa selectHangHoaByMSP(String maSP) {
+		this.clickThemHangHoa();
+		String xpathCheckbox = "//app-dialog-add-product//table/tbody/tr[%d]/td/p-tablecheckbox";
+		this.filterMaSanPham(maSP);
+		driver.findElement(By.xpath(String.format(xpathCheckbox, 1))).click();
+		// get data
+		String spField = "//app-dialog-add-product//table//tbody/tr[%d]/td[%d]";
+		
+		String tenHangHoa = driver.findElement(By.xpath(String.format(spField, 1, 3))).getAttribute("textContent");
+		long donGia = CommonFuncs.convertStringToLong(driver.findElement(By.xpath(String.format(spField, 1, 4))).getAttribute("textContent"));
+		String donVi = driver.findElement(By.xpath(String.format(spField, 1, 5))).getAttribute("textContent");
+		
+		this.clickThemOnThemHangHoaPopup();
+		
+		return new HangHoa(tenHangHoa, donVi, 1, donGia, 0);
+		
 	}
 	
 	public void clearSelectedHangHoa() {

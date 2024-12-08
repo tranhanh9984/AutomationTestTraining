@@ -1,6 +1,7 @@
 package autotest.testcases;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ import autocom.common.LoaiTienEnum;
 import autocom.common.NguoiMua;
 import autocom.constant.KeywordConstant;
 import autotest.pages.CreateInvoicePage;
+import autotest.pages.HoaDonBanHangPage;
 
 public class CreateInvoicePageTestCase extends CreateInvoicePage {
 
@@ -106,12 +108,12 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 		pause(3);
 	}
 	
-	// @Test(priority=1)
+	//@Test //(priority=1)
 	public void tc4_TaoMoiThanhCong() {
 		this.clearTextFormInvoice();
 		this.clearSelectedHangHoa();
 		
-		NguoiMua nguoiMua = new NguoiMua("0123456", "tendv_2", "dia chi 2", "tenNMH 2", "cccd 2", "", "sdt2", "stk2", "nganHang2", 
+		NguoiMua nguoiMua = new NguoiMua("0123456", "tendv_2", "dia chi 2", "tenNMH 2", "cccd 2", "email@gg.com", "sdt2", "stk2", "nganHang2", 
 				HinhThucThanhToanEnum.CHUYEN_KHOAN.getText(), LoaiTienEnum.EUR.getText(), 0, ChietKhauEnum.KHONG_CHIET_KHAU.getText());
 		
 		this.fillData_All(nguoiMua);
@@ -121,55 +123,101 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 		this.clickTaoMoi();
 		
 		pause(5);
-		String currentUrl = driver.getCurrentUrl();
+		String hoaDonBanHangPageUrl = driver.getCurrentUrl();
 		
-		Assert.assertEquals(currentUrl, KeywordConstant.INVOICE_URL);
+		Assert.assertEquals(hoaDonBanHangPageUrl, KeywordConstant.INVOICE_URL);
+		
+		// Filter data inserted
+		HoaDonBanHangPage hdbhPage = new HoaDonBanHangPage(driver);
+		LocalDate currentDate = LocalDate.now();
+		 hdbhPage.quickSearch(currentDate, nguoiMua.getTenDonVi());
+		// compare date
+		LocalDate fromDate = hdbhPage.getSelectedate("fromDate");
+		LocalDate toDate = hdbhPage.getSelectedate("thruDate");
+		Assert.assertEquals(fromDate.isEqual(currentDate), true);
+		Assert.assertEquals(toDate.isEqual(currentDate), true);
+		
+		hdbhPage.goToActionHoaDon(1, "Chỉnh sửa");
+		
+		// compare
+		NguoiMua nguoiMuaCreated = this.getDataNguoiMua();
+		System.out.println(String.format("1. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getTenNguoiMuaHang(), nguoiMua.getTenNguoiMuaHang()));
+		Assert.assertEquals(nguoiMuaCreated.getTenNguoiMuaHang(), nguoiMua.getTenNguoiMuaHang());
+		System.out.println(String.format("2. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getTenDonVi(), nguoiMua.getTenDonVi()));
+		Assert.assertEquals(nguoiMuaCreated.getTenDonVi(), nguoiMua.getTenDonVi());
+		System.out.println(String.format("3. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getDiaChi(), nguoiMua.getDiaChi()));
+		Assert.assertEquals(nguoiMuaCreated.getDiaChi(), nguoiMua.getDiaChi());
+		System.out.println(String.format("4. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getCccd(), nguoiMua.getCccd()));
+		Assert.assertEquals(nguoiMuaCreated.getCccd(), nguoiMua.getCccd());
+		System.out.println(String.format("5. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getEmailAddress(), nguoiMua.getEmailAddress()));
+		Assert.assertEquals(nguoiMuaCreated.getEmailAddress(), nguoiMua.getEmailAddress());
+		System.out.println(String.format("6. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getSoDienThoai(), nguoiMua.getSoDienThoai()));
+		Assert.assertEquals(nguoiMuaCreated.getSoDienThoai(), nguoiMua.getSoDienThoai());
+		System.out.println(String.format("7. Assert.assertEquals(%s, %s);", nguoiMuaCreated.getSoTaiKhoan(), nguoiMua.getSoTaiKhoan()));
+		Assert.assertEquals(nguoiMuaCreated.getSoTaiKhoan(), nguoiMua.getSoTaiKhoan());
+		
+		// remove data inserted
+		this.goToMenu(KeywordConstant.MENUBAR_INVOICE, KeywordConstant.MENUBAR_INVOICE_SUB_HDBH);
+		hdbhPage.quickSearch(currentDate, nguoiMua.getTenDonVi());
+		hdbhPage.goToActionHoaDon(1, "Xóa");
+		hdbhPage.clickYesConfirm();
+		// compare
+		
+		pause(5);
 		
 	}
 	
-	private void tcThemSPMoi(int index, HangHoa hangHoa) {
-		this.themSPMoi(index, hangHoa);
-		
-		String actualThanhTien = this.getDataFromTableHangHoa(index, 7);
-		Assert.assertEquals(actualThanhTien, CommonFuncs.formatLongToString(hangHoa.getThanhTien()));
-		
-		String actualTienThue = this.getDataFromTableHangHoa(index, 10);
-		Assert.assertEquals(actualTienThue, CommonFuncs.formatLongToString(hangHoa.getTienThue()));
-	}
-	
-	// Compare with Loai Tien khac VND
-	//@Test
+	@Test
 	public void tc_themSPMoi() {
 		this.fillData_LoaiTien("EUR");
+		long tyGia = this.getTyGia();
 		
-		this.tcThemSPMoi(1, new HangHoa("Ten hang 1", "Cai", 2, 200, 5));
-		this.tcThemSPMoi(2, new HangHoa("Ten hang 2", "Cai", 3, 300, 8));
-		this.tcThemSPMoi(3, new HangHoa("Ten hang 3", "Cai", 4, 400, 10));
+		ArrayList<HangHoa> lstHangHoa = new ArrayList<HangHoa>();
+		lstHangHoa.add(new HangHoa("Ten hang 1", "Cai", 2, 200, 5));
+		lstHangHoa.add(new HangHoa("Ten hang 2", "Cai", 3, 500, 8));
+		lstHangHoa.add(new HangHoa("Ten hang 3", "Cai", 4, 600, 10));
+		for (int i = 0; i < lstHangHoa.size(); i ++) {
+			HangHoa hangHoa = lstHangHoa.get(i);
+			int index = i + 1;
+			this.themSPMoi(index, hangHoa);
+			
+			Assert.assertEquals(this.getDataFromTableHangHoa(index, 7), CommonFuncs.formatLongToString(hangHoa.getThanhTien())); // compare thanh tien
+			Assert.assertEquals(this.getDataFromTableHangHoa(index, 8), CommonFuncs.formatLongToString(hangHoa.getThanhTienQD(tyGia))); // compare thanh tien quy doi
+			Assert.assertEquals(this.getDataFromTableHangHoa(index, 10), CommonFuncs.formatLongToString(hangHoa.getTienThue())); // compare tien thue
+		}
 		
-		this.themHangHoa(3);
+		HangHoa hh = this.selectHangHoaByMSP("VAY_HOA");
+		lstHangHoa.add(hh);
 		
-		ArrayList<HangHoa> lstHangHoa = this.getDanhSachHangHoa();
 		System.out.println(CommonFuncs.getJson(lstHangHoa));
 		
 		// compare total value
-		long totalThanhTien = lstHangHoa.stream().mapToLong(x -> x.ThanhTien).sum();
-		long totalTienThue = lstHangHoa.stream().mapToLong(x -> x.TienThue).sum();
+		long totalThanhTien = lstHangHoa.stream().mapToLong(x -> x.getThanhTien()).sum();
+		long totalTienThue = lstHangHoa.stream().mapToLong(x -> x.getTienThue()).sum();
 		long totalThanhToan = (totalThanhTien + totalTienThue);
-		
-		 String actualTongThanhTien = this.getDataTotal("grandTotal");
-		 String actualTongTienThue = this.getDataTotal("taxAmount");
-		 String actualTongTienThanhToan = this.getDataTotal("invoiceTotal");
+				 
+		// compare tien goc
+		Assert.assertEquals(this.getDataTotal("grandTotal"), CommonFuncs.formatLongToString(totalThanhTien));
+		Assert.assertEquals(this.getDataTotal("taxAmount"), CommonFuncs.formatLongToString(totalTienThue));
+		Assert.assertEquals(this.getDataTotal("invoiceTotal"), CommonFuncs.formatLongToString(totalThanhToan));
+		// compare tien quy doi
+		Assert.assertEquals(this.getDataTotal("exchangeGrandTotal"), CommonFuncs.formatLongToString(totalThanhTien * tyGia));
+		Assert.assertEquals(this.getDataTotal("exchangeTaxAmount"), CommonFuncs.formatLongToString(totalTienThue * tyGia));
+		Assert.assertEquals(this.getDataTotal("exchangeInvoiceTotal"), CommonFuncs.formatLongToString(totalThanhToan * tyGia));
+			
+		// compare number to string
+		String convertValue = CommonFuncs.convertNumberToTextVND(totalThanhToan, "euro");
+		String actualValue = driver.findElement(By.xpath("//input[@id='amountInWords']")).getAttribute("value").trim();
+		Assert.assertEquals(actualValue, convertValue);
 		 
-		 Assert.assertEquals(actualTongThanhTien, CommonFuncs.formatLongToString(totalThanhTien));
-		 Assert.assertEquals(actualTongTienThue, CommonFuncs.formatLongToString(totalTienThue));
-		 Assert.assertEquals(actualTongTienThanhToan, CommonFuncs.formatLongToString(totalThanhToan));
-		 
-		 // compare number to string
-		 String convertValue = CommonFuncs.convertNumberToTextVND(totalThanhToan, "euro");
-		 String actualValue = driver.findElement(By.xpath("//input[@id='amountInWords']")).getAttribute("value").trim();
-		 Assert.assertEquals(actualValue, convertValue);
-		
 		pause(5);
+	}
+	
+	//@Test
+	public void tc_themHangHoaInPopup() {
+		//ArrayList<>
+		HangHoa hh = this.selectHangHoaByMSP("VAY_HOA");
+		System.out.println(CommonFuncs.getJson(hh));
 	}
 	
 }
