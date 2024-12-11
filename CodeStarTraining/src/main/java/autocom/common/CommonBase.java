@@ -1,15 +1,22 @@
 package autocom.common;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
+import java.time.Duration;
 
 public class CommonBase {
 	public WebDriver driver;
@@ -20,6 +27,8 @@ public class CommonBase {
 
 	public WebDriver startBrower(String url, String browser) {
 		System.out.println(System.getProperty("user.dir"));
+		WebDriver driver = null;
+
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -105,5 +114,18 @@ public class CommonBase {
 				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='';");
 		pause(200);
 		driver.findElement(By.xpath(xPath)).sendKeys(content);
+	}
+
+	public void goToPage(String[] menuXpaths) {
+		WebDriver driver = new ChromeDriver();
+		for (String xpath : menuXpaths) {
+			try {
+				new WebDriverWait(driver, 1).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
+				Thread.sleep(500);
+			} catch (Exception e) {
+				System.out.println("Error click xPath :::: " + xpath);
+				e.printStackTrace();
+			}
+		}
 	}
 }
