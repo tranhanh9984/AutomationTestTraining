@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
 
-public class TaoHoaDon extends CommonPage {
+public class TaoHoaDonSample extends CommonPage {
 
 	String mst = "//input[@name = 'customerTaxCode']";
 	//chọn gia trị mst da ton tai
@@ -29,7 +29,7 @@ public class TaoHoaDon extends CommonPage {
 	
 	WebDriver driver;
 	
-	public TaoHoaDon(WebDriver dr) {
+	public TaoHoaDonSample(WebDriver dr) {
 		// TODO Auto-generated constructor stub
 		driver = dr;
 	}

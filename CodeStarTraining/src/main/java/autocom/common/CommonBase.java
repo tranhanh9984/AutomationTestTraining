@@ -16,25 +16,61 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+
 import java.time.Duration;
 
 public class CommonBase {
 	public WebDriver driver;
+	private static final String LOGIN_EMAIL = "0312303803-999";
+	private static final String LOGIN_PASSWORD = "0312303803-999";
+	private static final String XPATH_EMAIL = "//input[@id='email']";
+	private static final String XPATH_PASSWORD = "//input[@id='password']";
+	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
 
 	public CommonBase() {
 		// TODO Auto-generated constructor stub
+
 	}
 
 	public WebDriver startBrower(String url, String browser) {
-		System.out.println(System.getProperty("user.dir"));
-		WebDriver driver = null;
+//		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+//		driver = new ChromeDriver();
+//		driver.manage().window().maximize();
+//		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//		driver.navigate().to(url);
+		switch (browser.toLowerCase()) {
+		case "chrome":
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			driver = new ChromeDriver();
+			break;
+		default:
+			System.out.println("Unsupported browser: " + browser);
+			break;
+		}
 
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-		driver = new ChromeDriver();
+		if (driver != null) {
+
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.navigate().to(url);
+		}
+
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.navigate().to(url);
 		return driver;
+	}
+
+	public void commonLoginSuccess() {
+		inputText(LOGIN_EMAIL, XPATH_EMAIL);
+		inputText(LOGIN_PASSWORD, XPATH_PASSWORD);
+		driver.findElement(By.xpath(XPATH_BTN_LOGIN_SUBMIT)).click();
+		pause(1000);
+		String currentUrl = driver.getCurrentUrl();
+		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/dashboard",
+				"User should be redirected to the dashboard after successful login.");
+
 	}
 
 	public void closeBrowser() {
@@ -116,14 +152,16 @@ public class CommonBase {
 		driver.findElement(By.xpath(xPath)).sendKeys(content);
 	}
 
-	public void goToPage(String[] menuXpaths) {
-		WebDriver driver = new ChromeDriver();
-		for (String xpath : menuXpaths) {
+	public void goToPage(String menuStep) {
+		String[] menuItems = menuStep.split("/");
+		String MenuXPath = "//ul[contains(@role,'menubar')]";
+		for (String menuItem : menuItems) {
+			String xPath = MenuXPath + "//a[contains(.,'" + menuItem + "')]";
 			try {
-				new WebDriverWait(driver, 1).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
-				Thread.sleep(500);
+				new WebDriverWait(driver, 1).until(ExpectedConditions.elementToBeClickable(By.xpath(xPath))).click();
+				Thread.sleep(1000);
 			} catch (Exception e) {
-				System.out.println("Error click xPath :::: " + xpath);
+				System.out.println("Error click xPath :::: " + xPath);
 				e.printStackTrace();
 			}
 		}

@@ -24,7 +24,9 @@ public class LoginPage extends CommonBase {
 	private static final String LOGIN_PASSWORD = "0312303803-999";
 	private static final String XPATH_EMAIL = "//input[@id='email']";
 	private static final String XPATH_PASSWORD = "//input[@id='password']";
-	private static final String XPATH_BTN_LOGIN_SUBMIT = "//input[@id='password']";
+	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
+	private HoaDonBanHang hoaDonBanHang;
+
 
 	@Test
 	public void tc_01() {
@@ -202,13 +204,15 @@ public class LoginPage extends CommonBase {
 
 	public void checkTongTienThanhToan() {
 		// Tổng tiền thanh toán= Tổng tiền hàng + Tiền Thuế GTGT
-		String getTongTienHang = driver.findElement(By.xpath("//p-inputnumber[@id='grandTotal']//input")).getText();
+		getAttribute("//p-inputnumber[@id='invoiceTotal']//input","value");
+		String getTongTienHang = getAttribute("//p-inputnumber[@id='grandTotal']//input","value");
 		double numberTongTienHang = Double.parseDouble(getTongTienHang.replace(",", ""));
-		String getTongTienThueGTGT = driver.findElement(By.xpath("//p-inputnumber[@id='taxAmount']//input")).getText();
+		String getTongTienThueGTGT = getAttribute("//p-inputnumber[@id='taxAmount']//input","value");
 		double numberTongTienThueGTGT = Double.parseDouble(getTongTienThueGTGT.replace(",", ""));
 		double tongTienThanhToan = numberTongTienHang + numberTongTienThueGTGT;
-		String getTongTienThanhToan = driver.findElement(By.xpath("//p-inputnumber[@id='invoiceTotal']//input")).getText();
-		Assert.assertEquals(tongTienThanhToan, getTongTienThanhToan, "Failed: Tinh sai Tong Tien Thanh Toan");
+		String getTongTienThanhToan = getAttribute("//p-inputnumber[@id='invoiceTotal']//input","value");
+		int intGetTongTienThanhToan=Integer.parseInt((getTongTienThanhToan).replace(",", ""));
+		Assert.assertEquals(tongTienThanhToan, intGetTongTienThanhToan, "Failed: Tinh sai Tong Tien Thanh Toan");
 	}
 
 	public void checkTienTungMatHang() {
@@ -255,33 +259,36 @@ public class LoginPage extends CommonBase {
 //Tổng tiền hàng = Tổng các hàng Thành Tiền
 		int soLuongMatHang = driver.findElements(By.xpath("//form//p-table//tbody/tr")).size();
 		double tongTienHang = 0;
-		
+
 		for (int i = 1; i < soLuongMatHang; i++) {
 			String thanhTien = driver.findElement(By.xpath("//form//p-table//tbody/tr[" + i + "]//td[7]")).getText();
 			double numberThanhTien = Double.parseDouble(thanhTien.replace(",", ""));
 			tongTienHang = tongTienHang + numberThanhTien;
 		}
-		
-		String getTongTienHang = driver.findElement(By.xpath("//p-inputnumber[@id='grandTotal']//input")).getAttribute("value");
+
+		String getTongTienHang = driver.findElement(By.xpath("//p-inputnumber[@id='grandTotal']//input"))
+				.getAttribute("value");
 		double numberTongTienHang = Double.parseDouble(getTongTienHang.replace(",", ""));
 		Assert.assertEquals(tongTienHang, numberTongTienHang, "Failed: Tinh sai Tong Tien Hang");
-				
+
 	}
+
 	public void checkTienThueGTGT() {
-		//Tổng tiền thuế GTGT = tổng các dòng Tiền thuế
-				int soLuongMatHang = driver.findElements(By.xpath("//form//p-table//tbody/tr")).size();
-				double tongTienThueGTGT = 0;
-				
-				for (int i =1; i < soLuongMatHang; i++) {
-					String tienThue = driver.findElement(By.xpath("//form//p-table//tbody/tr[" + i + "]//td[9]")).getText();
-					double numberTienThue = Double.parseDouble(tienThue.replace(",", ""));
-					tongTienThueGTGT = tongTienThueGTGT + numberTienThue;
-				}
-				String getTongTienThueGTGT = driver.findElement(By.xpath("//p-inputnumber[@id='taxAmount']//input")).getAttribute("value");
-				double numberTongTienThueGTGT = Double.parseDouble(getTongTienThueGTGT.replace(",", ""));
-				Assert.assertEquals(tongTienThueGTGT, numberTongTienThueGTGT, "Failed: Tinh sai Tong Tien Hang");
-						
-			}
+		// Tổng tiền thuế GTGT = tổng các dòng Tiền thuế
+		int soLuongMatHang = driver.findElements(By.xpath("//form//p-table//tbody/tr")).size();
+		double tongTienThueGTGT = 0;
+
+		for (int i = 1; i < soLuongMatHang; i++) {
+			String tienThue = driver.findElement(By.xpath("//form//p-table//tbody/tr[" + i + "]//td[9]")).getText();
+			double numberTienThue = Double.parseDouble(tienThue.replace(",", ""));
+			tongTienThueGTGT = tongTienThueGTGT + numberTienThue;
+		}
+		String getTongTienThueGTGT = driver.findElement(By.xpath("//p-inputnumber[@id='taxAmount']//input"))
+				.getAttribute("value");
+		double numberTongTienThueGTGT = Double.parseDouble(getTongTienThueGTGT.replace(",", ""));
+		Assert.assertEquals(tongTienThueGTGT, numberTongTienThueGTGT, "Failed: Tinh sai Tong Tien Hang");
+
+	}
 
 	public void taoMoiHoaDon_Success() {
 		clickMenus();
@@ -291,25 +298,21 @@ public class LoginPage extends CommonBase {
 		checkTongTienHang();
 		checkTienThueGTGT();
 		checkTongTienThanhToan();
-		
+
 		click("//p-button[@type='submit']//span[text()='Tạo mới']", NO_SCROLL);
-		int successMessage = driver.findElements(By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Thành công!")).size();
-		
+		int successMessage = driver
+				.findElements(By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Thành công!"))
+				.size();
+
 		String currentURL = "";
-		String expectURL ="https://uat-invoice.kaike.vn/customer/invoice/hdbh";
-		
-		Assert.assertTrue (successMessage > 0 ,"TC Failed: Success Mess hiển thị không đúng expect");	
+		String expectURL = "https://uat-invoice.kaike.vn/customer/invoice/hdbh";
+
+		Assert.assertTrue(successMessage > 0, "TC Failed: Success Mess hiển thị không đúng expect");
 	}
 
 	@BeforeClass
 	public void startBrowser() {
 		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
-
-	}
-
-	@AfterClass
-	public void close() {
-		this.closeBrowser();
 	}
 
 }
