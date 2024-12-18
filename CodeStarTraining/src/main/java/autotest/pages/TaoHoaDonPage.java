@@ -39,10 +39,6 @@ public class TaoHoaDonPage extends CommonPage {
 	@FindBy(xpath = "//p-button[@icon='pi pi-plus']/button[@type='button']") WebElement btnThemHangHoa;
 	@FindBy(xpath = "//p-inputnumber[@id='exchangeRate']//input") WebElement txtTyGia;
 
-	
-	String xpathListItem = "//p-autocomplete[@id='%s']//ul[contains(@class,'p-autocomplete-items')]/li";
-	String idMSTNguoiMua = "toPartyTaxId";
-	
 	String xpathDropDownItem = "//p-dropdown[@id='%s']//ul//li//span[text()='%s']";
 	String idHinhThucThanhToan = "paymentInstrumentEnumId";
 	String idLoaiTien = "currencyUomId";
@@ -64,7 +60,6 @@ public class TaoHoaDonPage extends CommonPage {
 	public void selectMSTNguoiMua(String value) {
 		btnDropdownMSTNguoiMua.click();
 		
-		//List<WebElement> items = driver.findElements(By.xpath(String.format(xpathListItem, idMSTNguoiMua)));
 		boolean find = false;
 		for (WebElement item : listMSTNguoiMua) {
 			List<String> divItems = item.findElements(By.xpath("./div[contains(@class,'p-grid')]/child::div"))
