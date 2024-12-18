@@ -13,24 +13,34 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
+import autotest.pages.LoginPage;
+
 import java.time.Duration;
 
 public class CommonBase {
 	public WebDriver driver;
+	public static final boolean SCROLL = true;
+	public static final boolean NO_SCROLL = false;
 	private static final String LOGIN_EMAIL = "0312303803-999";
 	private static final String LOGIN_PASSWORD = "0312303803-999";
 	private static final String XPATH_EMAIL = "//input[@id='email']";
 	private static final String XPATH_PASSWORD = "//input[@id='password']";
 	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
+	public LoginPage loginPage;
 
 	public CommonBase() {
-		// TODO Auto-generated constructor stub
+	}
 
+	public CommonBase(WebDriver driver) {
+		if (this.driver == null) {
+			this.driver = driver;
+		}
 	}
 
 	public WebDriver startBrower(String url, String browser) {
@@ -48,17 +58,11 @@ public class CommonBase {
 			System.out.println("Unsupported browser: " + browser);
 			break;
 		}
-
 		if (driver != null) {
-
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			driver.navigate().to(url);
 		}
-
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.navigate().to(url);
 		return driver;
 	}
 
@@ -105,6 +109,7 @@ public class CommonBase {
 		}
 		pause(300);
 		driver.findElement(By.xpath(xPath)).click();
+		pause(200);
 	}
 
 	public Object runJS(String script, Object... args) {

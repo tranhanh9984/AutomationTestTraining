@@ -12,8 +12,10 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HoaDonBanHang extends CommonBase {
 	String datePickerCalendarXPATH = "//p-calendar[@id='%sDate']";
@@ -23,9 +25,33 @@ public class HoaDonBanHang extends CommonBase {
 	String datePickerYearXPATH = "//span[contains(@class,'datepicker-year')]";
 	String datePickerPrev = "//button[contains(@class,'datepicker-prev')]";
 	String datePickerNext = "//button[contains(@class,'datepicker-next')]";
+	public String editButtonXpath = "//p-button[@title='Chỉnh sửa']//button";
+	public String parentEditXpath = "//table//tbody//tr[contains(.,'%s') and contains(.,'%s') and contains(.,'%s')]//td[contains(@class,'table-actions')]";
+	JavascriptExecutor js;
+	public String ngayHD = "";
+	public String khachHang = "";
+	public String tongTien = "";
 
-	@Test
+	
+	@FindBy(xpath = "email")
+	private WebElement txtEmail;
+
+	public HoaDonBanHang() {
+
+	}
+
+	public HoaDonBanHang(WebDriver driver) {
+		if (this.driver == null) {
+			this.driver = driver;
+		}
+		// PageFactory.initElements(driver, this);
+	}
+
 	public void testFunction() {
+		loginPage.testLoginSuccess();
+	}
+
+	public void testPickDate() {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime oneDayBefore = now.minusDays(1);
 		LocalDateTime oneDayAfter = now.plusDays(1);
@@ -33,6 +59,34 @@ public class HoaDonBanHang extends CommonBase {
 		String formattedOneDayAfter = oneDayAfter.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		pickDate("from", formattedOneDayBefore);
 		pickDate("to", formattedOneDayAfter);
+	}
+
+	@Test
+	public void testEditHoaDonBanHang() {
+		ngayHD = "11/12/2024";
+		khachHang = "to chuc a";
+		tongTien = "935,000";
+
+		clickEditButtonXpath();
+		pause(500);
+		String currentUrl = driver.getCurrentUrl();
+		Assert.assertTrue(currentUrl.contains("https://uat-invoice.kaike.vn/customer/invoice/hdbh/update"),
+				"Test failed: fail go to Edit Hoa Don Ban hang");
+	}
+
+	public void clickEditButtonXpath() {
+//		document.evaluate(
+//				"//table//tbody//tr[contains(/,'11/12/2024') and contains(.,'to chuc a') and contains(.,'935,000')]//td[contains(@class,'table-actions')]",
+//				document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();
+
+		String finalParentEditButton = String.format(parentEditXpath, ngayHD, khachHang, tongTien);
+		js.executeScript("document.evaluate(\"" + finalParentEditButton
+				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+
+		click(finalParentEditButton + editButtonXpath, NO_SCROLL);
+		System.out.println("edit clicked ::::");
+		// return "//table//tbody//tr[contains(/,'11/12/2024') and contains(.,'to chuc
+		// a') and contains(.,'935,000')]" + editXpath;
 	}
 
 	public void checkDataHoaDon() {
@@ -51,21 +105,8 @@ public class HoaDonBanHang extends CommonBase {
 
 	}
 
-	@BeforeClass
 	public void openPage() {
-		startBrower("https://uat-invoice.kaike.vn/login", "chrome");
-		commonLoginSuccess();
-		pause(5000);
 
-		String currentUrl = driver.getCurrentUrl();
-		Assert.assertNotEquals(currentUrl, "https://uat-invoice.kaike.vn/login",
-				"Test failed: User is still on the login page.");
-
-		goToPage("Hóa đơn/Hóa đơn bán hàng");
-		pause(2000);
-		currentUrl = driver.getCurrentUrl();
-		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/customer/invoice/hdbh",
-				"Test failed: fail go to Hoa Don Ban hang");
 	}
 
 	public void inputDate(String type, String selectedTime) {
@@ -116,5 +157,24 @@ public class HoaDonBanHang extends CommonBase {
 		pause(200);
 		driver.findElement(By.xpath(dayXPath)).click();
 		// int index = Arrays.asList(months).indexOf(targetMonth);
+	}
+
+	@BeforeClass
+	public void startBrowser() {
+		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
+		loginPage = new LoginPage(driver);
+		js = (JavascriptExecutor) driver;
+		loginPage.testLoginSuccess();
+		pause(2000);
+
+		String currentUrl = driver.getCurrentUrl();
+		Assert.assertNotEquals(currentUrl, "https://uat-invoice.kaike.vn/login",
+				"Test failed: User is still on the login page.");
+
+		goToPage("Hóa đơn/Hóa đơn bán hàng");
+		pause(1000);
+		currentUrl = driver.getCurrentUrl();
+		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/customer/invoice/hdbh",
+				"Test failed: fail go to Hoa Don Ban hang");
 	}
 }
