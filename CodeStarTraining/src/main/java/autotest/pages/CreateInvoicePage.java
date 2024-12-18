@@ -10,11 +10,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import autocom.common.CommonFuncs;
+import autocom.common.CommonPage;
 import autocom.common.HangHoa;
 import autocom.common.NguoiMua;
 import autocom.constant.KeywordConstant;
 
-public class CreateInvoicePage extends LoginPage {
+public class CreateInvoicePage extends CommonPage {
 	
 	String xpathBtnTaoMoi = "//button[@type='submit']";
 	
@@ -64,16 +65,6 @@ public class CreateInvoicePage extends LoginPage {
 	
 	public CreateInvoicePage() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	public void gotoCreateInvoicePage() {
-		this.login(KeywordConstant.USER_NAME, KeywordConstant.PASS_WORD);
-		
-		MenuBar menuBar = new MenuBar(driver);
-		menuBar.getMenuItemByText(KeywordConstant.MENUBAR_INVOICE).click();
-		menuBar.getSubMenuItemByText(KeywordConstant.MENUBAR_INVOICE_SUB_LHD).click();
-		
-		pause(2);
 	}
 	
 	public void clickTaoMoi() {

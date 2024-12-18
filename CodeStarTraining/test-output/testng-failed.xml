@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcases.HoaDonBanHangPageTestCase">
+      <class name="autotest.testcases.TaoHoaDonPageTestCase">
         <methods>
-          <include name="tc_downloadHoaDon_validate"/>
           <include name="init"/>
+          <include name="tc_taoHoaDon_thanhCong"/>
           <include name="close"/>
         </methods>
-      </class> <!-- autotest.testcases.HoaDonBanHangPageTestCase -->
+      </class> <!-- autotest.testcases.TaoHoaDonPageTestCase -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

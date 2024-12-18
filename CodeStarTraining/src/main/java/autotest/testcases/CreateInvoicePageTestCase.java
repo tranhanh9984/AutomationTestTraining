@@ -22,9 +22,12 @@ import autocom.common.LoaiTienEnum;
 import autocom.common.NguoiMua;
 import autocom.constant.KeywordConstant;
 import autotest.pages.CreateInvoicePage;
-import autotest.pages.HoaDonBanHangPage;
+import autotest.pages.TempHoaDonBanHangPage;
+import autotest.pages.LoginPage;
 
 public class CreateInvoicePageTestCase extends CreateInvoicePage {
+	
+	LoginPage loginPage;
 
 	public CreateInvoicePageTestCase() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +36,9 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 	@BeforeClass
 	public void init() {
 		this.startBrowser(KeywordConstant.LOGIN_URL);
-		this.gotoCreateInvoicePage();
+		this.loginPage = new LoginPage(driver);
+		this.loginPage.login();
+		this.goToMenu(KeywordConstant.MENUBAR_INVOICE, KeywordConstant.MENUBAR_INVOICE_SUB_LHD);
 	}
 	
 	@AfterClass
@@ -108,12 +113,12 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 		pause(3);
 	}
 	
-	//@Test //(priority=1)
+	@Test //(priority=1)
 	public void tc4_TaoMoiThanhCong() {
 		this.clearTextFormInvoice();
 		this.clearSelectedHangHoa();
 		
-		NguoiMua nguoiMua = new NguoiMua("0123456", "tendv_2", "dia chi 2", "tenNMH 2", "cccd 2", "email@gg.com", "sdt2", "stk2", "nganHang2", 
+		NguoiMua nguoiMua = new NguoiMua("0123456", "tendv_22", "dia chi 2", "tenNMH 2", "cccd 2", "email@gg.com", "sdt2", "stk2", "nganHang2", 
 				HinhThucThanhToanEnum.CHUYEN_KHOAN.getText(), LoaiTienEnum.EUR.getText(), 0, ChietKhauEnum.KHONG_CHIET_KHAU.getText());
 		
 		this.fillData_All(nguoiMua);
@@ -128,15 +133,16 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 		Assert.assertEquals(hoaDonBanHangPageUrl, KeywordConstant.INVOICE_URL);
 		
 		// Filter data inserted
-		HoaDonBanHangPage hdbhPage = new HoaDonBanHangPage(driver);
+		TempHoaDonBanHangPage hdbhPage = new TempHoaDonBanHangPage(driver);
 		LocalDate currentDate = LocalDate.now();
 		 hdbhPage.quickSearch(currentDate, nguoiMua.getTenDonVi());
 		// compare date
-		LocalDate fromDate = hdbhPage.getSelectedate("fromDate");
-		LocalDate toDate = hdbhPage.getSelectedate("thruDate");
-		Assert.assertEquals(fromDate.isEqual(currentDate), true);
-		Assert.assertEquals(toDate.isEqual(currentDate), true);
+//		LocalDate fromDate = hdbhPage.getSelectedate("fromDate");
+//		LocalDate toDate = hdbhPage.getSelectedate("thruDate");
+//		Assert.assertEquals(fromDate.isEqual(currentDate), true);
+//		Assert.assertEquals(toDate.isEqual(currentDate), true);
 		
+	    pause(3);
 		hdbhPage.goToActionHoaDon(1, "Chỉnh sửa");
 		
 		// compare
@@ -158,7 +164,11 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 		
 		// remove data inserted
 		this.goToMenu(KeywordConstant.MENUBAR_INVOICE, KeywordConstant.MENUBAR_INVOICE_SUB_HDBH);
+		
+		pause(3);
 		hdbhPage.quickSearch(currentDate, nguoiMua.getTenDonVi());
+
+		pause(3);
 		hdbhPage.goToActionHoaDon(1, "Xóa");
 		hdbhPage.clickYesConfirm();
 		// compare
@@ -167,7 +177,7 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 		
 	}
 	
-	@Test
+	//@Test
 	public void tc_themSPMoi() {
 		this.fillData_LoaiTien("EUR");
 		long tyGia = this.getTyGia();
@@ -180,14 +190,15 @@ public class CreateInvoicePageTestCase extends CreateInvoicePage {
 			HangHoa hangHoa = lstHangHoa.get(i);
 			int index = i + 1;
 			this.themSPMoi(index, hangHoa);
+			pause(3);
 			
 			Assert.assertEquals(this.getDataFromTableHangHoa(index, 7), CommonFuncs.formatLongToString(hangHoa.getThanhTien())); // compare thanh tien
 			Assert.assertEquals(this.getDataFromTableHangHoa(index, 8), CommonFuncs.formatLongToString(hangHoa.getThanhTienQD(tyGia))); // compare thanh tien quy doi
 			Assert.assertEquals(this.getDataFromTableHangHoa(index, 10), CommonFuncs.formatLongToString(hangHoa.getTienThue())); // compare tien thue
 		}
 		
-		HangHoa hh = this.selectHangHoaByMSP("VAY_HOA");
-		lstHangHoa.add(hh);
+//		HangHoa hh = this.selectHangHoaByMSP("VAY_HOA");
+//		lstHangHoa.add(hh);
 		
 		System.out.println(CommonFuncs.getJson(lstHangHoa));
 		

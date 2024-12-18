@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 
@@ -190,5 +191,9 @@ public class CommonFuncs {
         Date specificDate = calendar.getTime();
         return specificDate;
 	}
+	
+	public static final String generateRandomUUID() {
+        return UUID.randomUUID().toString().replace("-", ""); // Loại bỏ dấu "-"
+    }
 	
 }

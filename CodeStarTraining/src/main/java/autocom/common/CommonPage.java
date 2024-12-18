@@ -27,6 +27,7 @@ public class CommonPage {
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		driver.navigate().to(url);
 		return driver;
 	}
@@ -43,9 +44,12 @@ public class CommonPage {
 		}
 	}
 	
+	public void clearTextByWebElement(WebElement element) {
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].value = '';", element);
+	}
 
 	public void clearText(String xpath) {
-		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
 		((JavascriptExecutor) driver).executeScript(
 	            "arguments[0].value = '';", driver.findElement(By.xpath(xpath)));
 	}
@@ -60,6 +64,10 @@ public class CommonPage {
 	
 	public boolean isShowAlert(String message) {
 		return driver.findElement(By.xpath(String.format(xpathMessage, message))).isDisplayed();
+	}
+	
+	public void scrollBarToWebElement(WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 	
 	public void scrollBarToElement(String xpath) {

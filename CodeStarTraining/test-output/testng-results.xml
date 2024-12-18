@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-06T22:20:14 GMT+07:00" name="Default suite" finished-at="2024-12-06T22:20:56 GMT+07:00" duration-ms="41875">
+  <suite started-at="2024-12-18T17:35:19 GMT+07:00" name="Default suite" finished-at="2024-12-18T17:37:11 GMT+07:00" duration-ms="112592">
     <groups>
     </groups>
-    <test started-at="2024-12-06T22:20:14 GMT+07:00" name="Default test" finished-at="2024-12-06T22:20:56 GMT+07:00" duration-ms="41875">
-      <class name="autotest.testcases.HoaDonBanHangPageTestCase">
-        <test-method is-config="true" signature="init()[pri:0, instance:autotest.testcases.HoaDonBanHangPageTestCase@6c64cb25]" started-at="2024-12-06T22:20:14 GMT+07:00" name="init" finished-at="2024-12-06T22:20:44 GMT+07:00" duration-ms="29478" status="PASS">
+    <test started-at="2024-12-18T17:35:19 GMT+07:00" name="Default test" finished-at="2024-12-18T17:37:11 GMT+07:00" duration-ms="112592">
+      <class name="autotest.testcases.TaoHoaDonPageTestCase">
+        <test-method is-config="true" signature="init()[pri:0, instance:autotest.testcases.TaoHoaDonPageTestCase@6356695f]" started-at="2024-12-18T17:35:19 GMT+07:00" name="init" finished-at="2024-12-18T17:35:50 GMT+07:00" duration-ms="31890" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="tc_downloadHoaDon_validate()[pri:0, instance:autotest.testcases.HoaDonBanHangPageTestCase@6c64cb25]" started-at="2024-12-06T22:20:44 GMT+07:00" name="tc_downloadHoaDon_validate" finished-at="2024-12-06T22:20:56 GMT+07:00" duration-ms="12194" status="PASS">
+        <test-method signature="tc_taoHoaDon_thanhCong()[pri:0, instance:autotest.testcases.TaoHoaDonPageTestCase@6356695f]" started-at="2024-12-18T17:35:50 GMT+07:00" name="tc_taoHoaDon_thanhCong" finished-at="2024-12-18T17:37:11 GMT+07:00" duration-ms="80509" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tc_downloadHoaDon_validate -->
-        <test-method is-config="true" signature="close()[pri:0, instance:autotest.testcases.HoaDonBanHangPageTestCase@6c64cb25]" started-at="2024-12-06T22:20:56 GMT+07:00" name="close" finished-at="2024-12-06T22:20:56 GMT+07:00" duration-ms="136" status="PASS">
+        </test-method> <!-- tc_taoHoaDon_thanhCong -->
+        <test-method is-config="true" signature="close()[pri:0, instance:autotest.testcases.TaoHoaDonPageTestCase@6356695f]" started-at="2024-12-18T17:37:11 GMT+07:00" name="close" finished-at="2024-12-18T17:37:11 GMT+07:00" duration-ms="136" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close -->
-      </class> <!-- autotest.testcases.HoaDonBanHangPageTestCase -->
+      </class> <!-- autotest.testcases.TaoHoaDonPageTestCase -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

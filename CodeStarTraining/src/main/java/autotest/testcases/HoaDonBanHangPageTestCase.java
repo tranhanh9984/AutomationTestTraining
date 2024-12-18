@@ -15,10 +15,12 @@ import org.testng.annotations.Test;
 
 import autocom.common.CommonFuncs;
 import autocom.constant.KeywordConstant;
-import autotest.pages.HoaDonBanHangPage;
+import autotest.pages.TempHoaDonBanHangPage;
+import autotest.pages.LoginPage;
 
-public class HoaDonBanHangPageTestCase extends HoaDonBanHangPage {
+public class HoaDonBanHangPageTestCase extends TempHoaDonBanHangPage {
 
+	LoginPage loginPage;
 	public HoaDonBanHangPageTestCase() {
 		// TODO Auto-generated constructor stub
 	}
@@ -26,7 +28,10 @@ public class HoaDonBanHangPageTestCase extends HoaDonBanHangPage {
 	@BeforeClass
 	public void init() {
 		this.startBrowser(KeywordConstant.LOGIN_URL);
-		this.gotoHoaDonBanHangPage();
+		this.loginPage = new LoginPage(driver);
+		this.loginPage.login();
+		this.goToMenu(KeywordConstant.MENUBAR_INVOICE, KeywordConstant.MENUBAR_INVOICE_SUB_HDBH);
+		// this.gotoHoaDonBanHangPage();
 	}
 	
 	@AfterClass
