@@ -1,6 +1,8 @@
 package autocom.common;
 
+import java.text.NumberFormat;
 import java.time.Duration;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -112,6 +114,17 @@ public class CommonBase {
 		pause(200);
 	}
 
+	public void scrollTo(String xpath) {
+		runJS("document.evaluate(\"" + xpath
+				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+	}
+
+	public void scrollBy(String xpath, int x, int y) {
+		runJS("document.evaluate(\"" + xpath
+				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollBy(" + x + ","
+				+ y + ");");
+	}
+
 	public Object runJS(String script, Object... args) {
 		return ((JavascriptExecutor) driver).executeScript(script, args);
 	}
@@ -155,6 +168,32 @@ public class CommonBase {
 				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='';");
 		pause(200);
 		driver.findElement(By.xpath(xPath)).sendKeys(content);
+	}
+
+	public String getCurrency(String xPath) {
+		String inputValue = driver.findElement(By.xpath(xPath)).getText();
+		int parseIntput = 1;
+		try {
+			parseIntput = Integer.parseInt(inputValue);
+		} catch (NumberFormatException e) {
+			System.out.println("fail parse interger xPath::: " + xPath);
+			System.out.println("fail parse interger value::: " + inputValue);
+		}
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+		String formattedCurrency = numberFormat.format(parseIntput);
+		return formattedCurrency;
+	}
+
+	public String convertCurrencyType(String number) {
+		int parseIntput = 1;
+		try {
+			parseIntput = Integer.parseInt(number);
+		} catch (NumberFormatException e) {
+			System.out.println("fail parse interger value::: " + number);
+		}
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+		String formattedCurrency = numberFormat.format(parseIntput);
+		return formattedCurrency;
 	}
 
 	public void goToPage(String menuStep) {

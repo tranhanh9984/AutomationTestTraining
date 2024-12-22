@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HoaDonBanHang extends CommonBase {
+	JavascriptExecutor js;
 	String datePickerCalendarXPATH = "//p-calendar[@id='%sDate']";
 	String datePickerTriggerXPATH = "//span[contains(@class,'p-calendar')]//input";
 	String datePickerDayXPATH = "//td[not(contains(@class,'other-month'))][contains(.,'%s')]";
@@ -27,14 +29,12 @@ public class HoaDonBanHang extends CommonBase {
 	String datePickerNext = "//button[contains(@class,'datepicker-next')]";
 	public String editButtonXpath = "//p-button[@title='Chỉnh sửa']//button";
 	public String parentEditXpath = "//table//tbody//tr[contains(.,'%s') and contains(.,'%s') and contains(.,'%s')]//td[contains(@class,'table-actions')]";
-	JavascriptExecutor js;
 	public String ngayHD = "";
 	public String khachHang = "";
 	public String tongTien = "";
 
-	
-	@FindBy(xpath = "email")
-	private WebElement txtEmail;
+//	@FindBy(xpath = "email")
+//	private WebElement txtEmail;
 
 	public HoaDonBanHang() {
 
@@ -74,19 +74,31 @@ public class HoaDonBanHang extends CommonBase {
 				"Test failed: fail go to Edit Hoa Don Ban hang");
 	}
 
-	public void clickEditButtonXpath() {
-//		document.evaluate(
-//				"//table//tbody//tr[contains(/,'11/12/2024') and contains(.,'to chuc a') and contains(.,'935,000')]//td[contains(@class,'table-actions')]",
-//				document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();
+	public boolean checkExistHoaDon() {
+		String currencyTongTien = getCurrencyTongTien();
+		return false;
+	}
 
+	public String getCurrencyTongTien() {
+		String result = tongTien;
+		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+		try {
+			Number number = currencyFormat.parse(result);
+			String formattedValue = currencyFormat.format(number);
+			return formattedValue;
+		} catch (ParseException e) {
+			System.out.println("can not convert currency");
+			System.out.println(e);
+			return result;
+		}
+	}
+
+	public void clickEditButtonXpath() {
 		String finalParentEditButton = String.format(parentEditXpath, ngayHD, khachHang, tongTien);
-		js.executeScript("document.evaluate(\"" + finalParentEditButton
-				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+		runJS("document.evaluate('" + finalParentEditButton
+				+ "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
 
 		click(finalParentEditButton + editButtonXpath, NO_SCROLL);
-		System.out.println("edit clicked ::::");
-		// return "//table//tbody//tr[contains(/,'11/12/2024') and contains(.,'to chuc
-		// a') and contains(.,'935,000')]" + editXpath;
 	}
 
 	public void checkDataHoaDon() {
@@ -95,7 +107,7 @@ public class HoaDonBanHang extends CommonBase {
 		// Format number to currency format
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 		String formattedCurrency = numberFormat.format(number);
-
+		getCurrency("1285000");
 		System.out.println("Currency format: " + formattedCurrency);
 
 		String khacHangSearch = "//table//thead//tr[2]//th[4]//input";
@@ -110,7 +122,8 @@ public class HoaDonBanHang extends CommonBase {
 	}
 
 	public void inputDate(String type, String selectedTime) {
-
+		String typeText = (type == "from") ? "from" : "thru";
+		driver.findElement(By.xpath(String.format(datePickerCalendarXPATH + datePickerTriggerXPATH, typeText)));
 	}
 
 	public void pickDate(String type, String selectedTime) {
@@ -140,7 +153,7 @@ public class HoaDonBanHang extends CommonBase {
 			}
 			pause(100);
 		}
-		pause(500);
+		pause(100);
 		String currentMonth = driver.findElement(By.xpath(monthXPath)).getText();
 		int currentMonthIndex = Arrays.asList(months).indexOf(currentMonth);
 		while (currentMonthIndex != (selectedMonth - 1)) {
