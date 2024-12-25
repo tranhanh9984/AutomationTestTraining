@@ -33,9 +33,6 @@ public class HoaDonBanHang extends CommonBase {
 	public String khachHang = "";
 	public String tongTien = "";
 
-//	@FindBy(xpath = "email")
-//	private WebElement txtEmail;
-
 	public HoaDonBanHang() {
 
 	}
@@ -44,7 +41,6 @@ public class HoaDonBanHang extends CommonBase {
 		if (this.driver == null) {
 			this.driver = driver;
 		}
-		// PageFactory.initElements(driver, this);
 	}
 
 	public void testFunction() {
@@ -78,7 +74,8 @@ public class HoaDonBanHang extends CommonBase {
 		this.ngayHD = ngayHD;
 		this.khachHang = khachHang;
 		this.tongTien = tongTien;
-pickDate();
+		pickDate("from", this.ngayHD);
+		pickDate("to", this.ngayHD);
 		clickEditButtonXpath();
 	}
 
@@ -87,22 +84,10 @@ pickDate();
 		return false;
 	}
 
-	public String getCurrencyTongTien() {
-		String result = tongTien;
-		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
-		try {
-			Number number = currencyFormat.parse(result);
-			String formattedValue = currencyFormat.format(number);
-			return formattedValue;
-		} catch (ParseException e) {
-			System.out.println("can not convert currency");
-			System.out.println(e);
-			return result;
-		}
-	}
-
 	public void clickEditButtonXpath() {
 		String finalParentEditButton = String.format(parentEditXpath, ngayHD, khachHang, tongTien);
+		System.out.println("clickEditButtonXpath ::::");
+		System.out.println(finalParentEditButton);
 		runJS("document.evaluate('" + finalParentEditButton
 				+ "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
 
@@ -123,10 +108,6 @@ pickDate();
 		String tongTienSearch = "//table//thead//tr[2]//th[5]//input";
 		String khacHangXpath = "//table//tbody//tr[1]//td[contains(.,'" + khachHang + "')]";
 		String tongTienXpath = "//table//tbody//tr[1]//td[contains(.,'" + tongTien + "')]";
-
-	}
-
-	public void openPage() {
 
 	}
 
@@ -180,7 +161,6 @@ pickDate();
 		driver.findElement(By.xpath(dayXPath)).click();
 		// int index = Arrays.asList(months).indexOf(targetMonth);
 	}
-
 	@BeforeClass
 	public void startBrowser() {
 		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
@@ -198,5 +178,18 @@ pickDate();
 		currentUrl = driver.getCurrentUrl();
 		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/customer/invoice/hdbh",
 				"Test failed: fail go to Hoa Don Ban hang");
+	}
+	public String getCurrencyTongTien() {
+		String result = tongTien;
+		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+		try {
+			Number number = currencyFormat.parse(result);
+			String formattedValue = currencyFormat.format(number);
+			return formattedValue;
+		} catch (ParseException e) {
+			System.out.println("can not convert currency");
+			System.out.println(e);
+			return result;
+		}
 	}
 }
