@@ -74,6 +74,14 @@ public class HoaDonBanHang extends CommonBase {
 				"Test failed: fail go to Edit Hoa Don Ban hang");
 	}
 
+	public void editHoaDon(String ngayHD, String khachHang, String tongTien) {
+		this.ngayHD = ngayHD;
+		this.khachHang = khachHang;
+		this.tongTien = tongTien;
+pickDate();
+		clickEditButtonXpath();
+	}
+
 	public boolean checkExistHoaDon() {
 		String currencyTongTien = getCurrencyTongTien();
 		return false;
@@ -101,9 +109,10 @@ public class HoaDonBanHang extends CommonBase {
 		click(finalParentEditButton + editButtonXpath, NO_SCROLL);
 	}
 
-	public void checkDataHoaDon() {
+	public void checkDataHoaDon(String ngayHD, String khachHang, String tongTien) {
 		int number = 1285000;
-
+		pickDate("from", ngayHD);
+		pickDate("to", ngayHD);
 		// Format number to currency format
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 		String formattedCurrency = numberFormat.format(number);
@@ -112,8 +121,8 @@ public class HoaDonBanHang extends CommonBase {
 
 		String khacHangSearch = "//table//thead//tr[2]//th[4]//input";
 		String tongTienSearch = "//table//thead//tr[2]//th[5]//input";
-		String khacHang = "//table//tbody//tr[1]//td[contains(.,'Do Viet Ha')]";
-		String tongTien = "//table//tbody//tr[1]//td[contains(.,'" + number + "')]";
+		String khacHangXpath = "//table//tbody//tr[1]//td[contains(.,'" + khachHang + "')]";
+		String tongTienXpath = "//table//tbody//tr[1]//td[contains(.,'" + tongTien + "')]";
 
 	}
 
