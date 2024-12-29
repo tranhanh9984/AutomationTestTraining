@@ -22,9 +22,7 @@ public class LapHoaDon extends CommonBase {
 
 	@Test
 	public void testFunction() {
-
 		taoMoiHoaDon_Success();
-
 	}
 
 	public void taoMoiHoaDon_Success() {

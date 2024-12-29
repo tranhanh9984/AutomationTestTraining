@@ -79,8 +79,8 @@ public class HoaDonBanHang extends CommonBase {
 		clickEditButtonXpath();
 	}
 
-	public boolean checkExistHoaDon() {
-		String currencyTongTien = getCurrencyTongTien();
+	public boolean checkExistHoaDon(String ngayHD, String khachHang, String tongTien) {
+		System.out.println("Hoa don khong ton tai");
 		return false;
 	}
 
