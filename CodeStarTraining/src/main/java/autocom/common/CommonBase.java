@@ -3,6 +3,7 @@ package autocom.common;
 import java.text.NumberFormat;
 import java.time.Duration;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -208,6 +209,35 @@ public class CommonBase {
 				System.out.println("Error click xPath :::: " + xPath);
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public WebElement waitForElementPresent(WebDriver driver, By by, int timeoutInSeconds) {
+		driver.manage().timeouts().implicitlyWait(timeoutInSeconds, java.util.concurrent.TimeUnit.SECONDS);
+		try {
+			WebElement element = driver.findElement(by);
+			System.out.println("Element " + by + " is present.");
+			return element;
+		} catch (NoSuchElementException e) {
+			System.out.println("Element " + by + " not found within " + timeoutInSeconds + " seconds.");
+			return null;
+		}
+	}
+
+	public WebElement waitForElementVisible(WebDriver driver, By by, int timeoutInSeconds) {
+		driver.manage().timeouts().implicitlyWait(timeoutInSeconds, java.util.concurrent.TimeUnit.SECONDS);
+		try {
+			WebElement element = driver.findElement(by);
+			if (element.isDisplayed()) {
+				System.out.println("Element " + by + " is visible.");
+				return element;
+			} else {
+				System.out.println("Element " + by + " is present but not visible.");
+				return null;
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Element " + by + " not found within " + timeoutInSeconds + " seconds.");
+			return null;
 		}
 	}
 }
