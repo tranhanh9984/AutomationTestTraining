@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -17,16 +18,17 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
-import autotest.pages.LoginPage;
+import autotest.pages.HaDV_LoginPage;
 
 import java.time.Duration;
 
-public class CommonBase {
+public class HaDV_CommonBase {
 	public WebDriver driver;
 	public static final boolean SCROLL = true;
 	public static final boolean NO_SCROLL = false;
@@ -35,12 +37,12 @@ public class CommonBase {
 	private static final String XPATH_EMAIL = "//input[@id='email']";
 	private static final String XPATH_PASSWORD = "//input[@id='password']";
 	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
-	public LoginPage loginPage;
+	public HaDV_LoginPage loginPage;
 
-	public CommonBase() {
+	public HaDV_CommonBase() {
 	}
 
-	public CommonBase(WebDriver driver) {
+	public HaDV_CommonBase(WebDriver driver) {
 		if (this.driver == null) {
 			this.driver = driver;
 		}
@@ -56,6 +58,14 @@ public class CommonBase {
 		case "chrome":
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 			driver = new ChromeDriver();
+			break;
+		case "edge":
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/msedgedriver.exe");
+			driver = new EdgeDriver();
+			break;
+		case "firefox":
+			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/driver/geckodriver.exe");
+			driver = new FirefoxDriver();
 			break;
 		default:
 			System.out.println("Unsupported browser: " + browser);
@@ -77,7 +87,6 @@ public class CommonBase {
 		String currentUrl = driver.getCurrentUrl();
 		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/dashboard",
 				"User should be redirected to the dashboard after successful login.");
-
 	}
 
 	public void closeBrowser() {
@@ -92,8 +101,28 @@ public class CommonBase {
 		}
 	}
 
+	public void checkURLMatched(String expectedURL, long timeoutInSeconds, String assertMessage) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+			wait.until((ExpectedCondition<Boolean>) wd -> driver.getCurrentUrl().equals(expectedURL));
+			String currentUrl = driver.getCurrentUrl();
+			Assert.assertEquals(currentUrl, expectedURL, assertMessage);
+		} catch (Exception e) {
+			System.out.println("checkURLMatched :::: fail - error occured" + e.getMessage());
+		}
+	}
+	public void checkNOTMatchedURL(String expectedURL, long timeoutInSeconds, String assertMessage) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+			wait.until((ExpectedCondition<Boolean>) wd -> !driver.getCurrentUrl().equals(expectedURL));
+			String currentUrl = driver.getCurrentUrl();
+			Assert.assertNotEquals(currentUrl, expectedURL, assertMessage);
+		} catch (Exception e) {
+			System.out.println("checkURLMatched :::: fail - error occured" + e.getMessage());
+		}
+	}
+
 	public void inputText(String giatri, String locator) {
-		// Now clear the text input field
 		driver.findElement(By.xpath(locator)).clear();
 		driver.findElement(By.xpath(locator)).sendKeys(giatri);
 		driver.findElement(By.xpath(locator)).getAttribute("value");
@@ -206,13 +235,24 @@ public class CommonBase {
 				new WebDriverWait(driver, 1).until(ExpectedConditions.elementToBeClickable(By.xpath(xPath))).click();
 				Thread.sleep(1000);
 			} catch (Exception e) {
-				System.out.println("Error click xPath :::: " + xPath);
+				System.out.println("Error click xPath menu :::: " + xPath);
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public WebElement waitForElementPresent(WebDriver driver, By by, int timeoutInSeconds) {
+	public void checkElementPresent(String xpath, int timeoutSecond, String message) {
+		driver.manage().timeouts().implicitlyWait(timeoutSecond, java.util.concurrent.TimeUnit.SECONDS);
+		try {
+			WebElement element = driver.findElement(By.xpath(xpath));
+			Assert.assertNotNull(element, message);
+			System.out.println("Element " + xpath + " is present.");
+		} catch (NoSuchElementException e) {
+			Assert.fail("fail checkElementPresent :::: " + e.getMessage());
+		}
+	}
+
+	public WebElement waitForElementPresent(By by, int timeoutInSeconds) {
 		driver.manage().timeouts().implicitlyWait(timeoutInSeconds, java.util.concurrent.TimeUnit.SECONDS);
 		try {
 			WebElement element = driver.findElement(by);

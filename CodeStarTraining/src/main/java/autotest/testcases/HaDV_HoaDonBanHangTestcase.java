@@ -5,28 +5,35 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
-import autocom.common.CommonBase;
-import autotest.pages.HoaDonBanHang;
-import autotest.pages.LoginPage;
+import autocom.common.HaDV_CommonBase;
+import autotest.pages.HaDV_HoaDonBanHangPage;
+import autotest.pages.HaDV_LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class TestHoaDonBanHang extends HoaDonBanHang {
+public class HaDV_HoaDonBanHangTestcase extends HaDV_HoaDonBanHangPage {
 	JavascriptExecutor js;
-	public LoginPage loginPage;
+	public HaDV_LoginPage loginPage;
 
-	public TestHoaDonBanHang() {
+	public HaDV_HoaDonBanHangTestcase() {
 
 	}
 
-	public TestHoaDonBanHang(WebDriver driver) {
+	public HaDV_HoaDonBanHangTestcase(WebDriver driver) {
 		if (this.driver == null) {
 			this.driver = driver;
 		}
 	}
+
 	@Test
+	public void testEditHoaDon() {
+		// ngày HĐ = 15/12/2024
+		// Tên đơn vị = Khách hàng = Do Viet Ha
+		// 1,285,000
+		editHoaDon("15/12/2024", "Do Viet Ha", "1,285,000");
+	}
 	public void testFunction() {
-		editHoaDon("11/12/2024","to chuc a","935,000");
+		editHoaDon("11/12/2024", "to chuc a", "935,000");
 		pause(500);
 		String currentUrl = driver.getCurrentUrl();
 		Assert.assertTrue(currentUrl.contains("https://uat-invoice.kaike.vn/customer/invoice/hdbh/update"),
@@ -36,19 +43,12 @@ public class TestHoaDonBanHang extends HoaDonBanHang {
 	@BeforeClass
 	public void startBrowser() {
 		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
-		loginPage = new LoginPage(driver);
+		loginPage = new HaDV_LoginPage(driver);
 		js = (JavascriptExecutor) driver;
-		loginPage.testLoginSuccess();
-		pause(2000);
-
-		String currentUrl = driver.getCurrentUrl();
-		Assert.assertNotEquals(currentUrl, "https://uat-invoice.kaike.vn/login",
-				"Test failed: User is still on the login page.");
-
+		loginPage.loginSuccess();
+		checkNOTMatchedURL("https://uat-invoice.kaike.vn/login", 5, "Test failed: User is still on the login page.");
 		goToPage("Hóa đơn/Hóa đơn bán hàng");
-		pause(1000);
-		currentUrl = driver.getCurrentUrl();
-		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/customer/invoice/hdbh",
+		checkURLMatched("https://uat-invoice.kaike.vn/customer/invoice/hdbh", 5,
 				"Test failed: fail go to Hoa Don Ban hang");
 	}
 }

@@ -1,14 +1,16 @@
 package autotest.pages;
 
-import autocom.common.CommonBase;
-import autotest.pages.LoginPage;
+import autocom.common.HaDV_CommonBase;
+import autotest.pages.HaDV_LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -18,7 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HoaDonBanHang extends CommonBase {
+public class HaDV_HoaDonBanHangPage extends HaDV_CommonBase {
 	JavascriptExecutor js;
 	String datePickerCalendarXPATH = "//p-calendar[@id='%sDate']";
 	String datePickerTriggerXPATH = "//span[contains(@class,'p-calendar')]//input";
@@ -33,18 +35,43 @@ public class HoaDonBanHang extends CommonBase {
 	public String khachHang = "";
 	public String tongTien = "";
 
-	public HoaDonBanHang() {
+	public HaDV_HoaDonBanHangPage() {
 
 	}
 
-	public HoaDonBanHang(WebDriver driver) {
+	public HaDV_HoaDonBanHangPage(WebDriver driver) {
 		if (this.driver == null) {
 			this.driver = driver;
 		}
 	}
 
+	public void editHoaDon(String ngayHD, String khachHang, String tongTien) {
+		this.ngayHD = ngayHD;
+		this.khachHang = khachHang;
+		this.tongTien = tongTien;
+		filterHoaDon(ngayHD, khachHang, tongTien);
+
+		clickEditButtonXpath();
+	}
+
+	public void filterHoaDon(String ngayHD, String khachHang, String tongTien) {
+		pickDate("from", ngayHD);
+		pickDate("to", ngayHD);
+		filterKhachHang(khachHang);
+	}
+
+	public void filterKhachHang(String khachHang) {
+		// //table//thead//tr[2]//th[4]//input
+		inputText(khachHang, "//table//thead//tr[2]//th[4]//input");
+		runJS("const  enterEvent = new KeyboardEvent(\"keydown\", { key: \"Enter\", code: \"Enter \",  keyCode: 13, which: 13,bubbles: true,cancelable: true});document.evaluate(\"//table//thead//tr[2]//th[4]//input\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.dispatchEvent(enterEvent);");
+	}
+
+	public void filterTongTien(String tongTien) {
+
+	}
+
 	public void testFunction() {
-		loginPage.testLoginSuccess();
+		loginPage.loginSuccess();
 	}
 
 	public void testPickDate() {
@@ -57,7 +84,10 @@ public class HoaDonBanHang extends CommonBase {
 		pickDate("to", formattedOneDayAfter);
 	}
 
-	@Test
+	public void testCoutnDays() {
+		countDays("08/12/2024", "07/01/2025");
+	}
+
 	public void testEditHoaDonBanHang() {
 		ngayHD = "11/12/2024";
 		khachHang = "to chuc a";
@@ -70,15 +100,6 @@ public class HoaDonBanHang extends CommonBase {
 				"Test failed: fail go to Edit Hoa Don Ban hang");
 	}
 
-	public void editHoaDon(String ngayHD, String khachHang, String tongTien) {
-		this.ngayHD = ngayHD;
-		this.khachHang = khachHang;
-		this.tongTien = tongTien;
-		pickDate("from", this.ngayHD);
-		pickDate("to", this.ngayHD);
-		clickEditButtonXpath();
-	}
-
 	public boolean checkExistHoaDon(String ngayHD, String khachHang, String tongTien) {
 		System.out.println("Hoa don khong ton tai");
 		return false;
@@ -88,8 +109,8 @@ public class HoaDonBanHang extends CommonBase {
 		String finalParentEditButton = String.format(parentEditXpath, ngayHD, khachHang, tongTien);
 		System.out.println("clickEditButtonXpath ::::");
 		System.out.println(finalParentEditButton);
-		runJS("document.evaluate('" + finalParentEditButton
-				+ "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+		runJS("document.evaluate(\"" + finalParentEditButton
+				+ "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
 
 		click(finalParentEditButton + editButtonXpath, NO_SCROLL);
 	}
@@ -161,24 +182,34 @@ public class HoaDonBanHang extends CommonBase {
 		driver.findElement(By.xpath(dayXPath)).click();
 		// int index = Arrays.asList(months).indexOf(targetMonth);
 	}
+
+	public long countDays(String fromDate, String toDate) {
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate start = LocalDate.parse(fromDate, formatter);
+			LocalDate end = LocalDate.parse(toDate, formatter);
+			long daysDifference = ChronoUnit.DAYS.between(start, end);
+			System.out.println("So ngay cach nhau :::: " + daysDifference);
+			return daysDifference;
+		} catch (Exception e) {
+			System.out.println("Sai date format");
+			return 0;
+		}
+
+	}
+
 	@BeforeClass
 	public void startBrowser() {
 		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
-		loginPage = new LoginPage(driver);
+		loginPage = new HaDV_LoginPage(driver);
 		js = (JavascriptExecutor) driver;
-		loginPage.testLoginSuccess();
-		pause(2000);
-
-		String currentUrl = driver.getCurrentUrl();
-		Assert.assertNotEquals(currentUrl, "https://uat-invoice.kaike.vn/login",
-				"Test failed: User is still on the login page.");
-
+		loginPage.loginSuccess();
+		checkNOTMatchedURL("https://uat-invoice.kaike.vn/login", 5, "Test failed: User is still on the login page.");
 		goToPage("Hóa đơn/Hóa đơn bán hàng");
-		pause(1000);
-		currentUrl = driver.getCurrentUrl();
-		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/customer/invoice/hdbh",
+		checkURLMatched("https://uat-invoice.kaike.vn/customer/invoice/hdbh", 5,
 				"Test failed: fail go to Hoa Don Ban hang");
 	}
+
 	public String getCurrencyTongTien() {
 		String result = tongTien;
 		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
