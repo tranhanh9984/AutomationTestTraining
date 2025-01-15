@@ -111,6 +111,7 @@ public class HaDV_CommonBase {
 			System.out.println("checkURLMatched :::: fail - error occured" + e.getMessage());
 		}
 	}
+
 	public void checkNOTMatchedURL(String expectedURL, long timeoutInSeconds, String assertMessage) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
@@ -212,6 +213,10 @@ public class HaDV_CommonBase {
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 		String formattedCurrency = numberFormat.format(parseIntput);
 		return formattedCurrency;
+	}
+
+	public String getText(String xpath) {
+		return driver.findElement(By.xpath(xpath)).getText();
 	}
 
 	public String convertCurrencyType(String number) {

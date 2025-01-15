@@ -11,11 +11,11 @@ import autotest.pages.HaDV_LoginPage;
 import org.testng.annotations.*;
 
 public class HaDV_LoginTestcase extends HaDV_LoginPage {
-	private static final String LOGIN_EMAIL = "0312303803-999";
-	private static final String LOGIN_PASSWORD = "0312303803-999";
-	private static final String XPATH_EMAIL = "//input[@id='email']";
-	private static final String XPATH_PASSWORD = "//input[@id='password']";
-	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
+//	private static final String LOGIN_EMAIL = "0312303803-999";
+//	private static final String LOGIN_PASSWORD = "0312303803-999";
+//	private static final String XPATH_EMAIL = "//input[@id='email']";
+//	private static final String XPATH_PASSWORD = "//input[@id='password']";
+//	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
 	public HaDV_LoginPage loginPage;
 
 	public HaDV_LoginTestcase() {
@@ -27,25 +27,27 @@ public class HaDV_LoginTestcase extends HaDV_LoginPage {
 		}
 	}
 
+	@Test
 	public void testLoginSuccess() {
 		loginPage.loginSuccess();
-		checkURLMatched("https://uat-invoice.kaike.vn/dashboard", 10,
-				"User should be redirected to the dashboard after successful login.");
+		Assert.assertNotNull(loginPage.loginSuccessStatus(), "Not found login success element");
 	}
 
 	@Test
 	public void testLoginFail() {
-		loginPage.login("0000-0000", "0000-0000");
+		loginPage.loginFail("0000-0000", "0000-0000");
 		checkURLMatched("https://uat-invoice.kaike.vn/login", 10,
 				"User should be redirected to the dashboard after successful login.");
-		waitForElementPresent(
-				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"), 5);
-		WebElement errorMessage = driver.findElement(
-				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"));
-		Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed for invalid username.");
+
+		Assert.assertNotNull(loginPage.loginFailStatus(), "Not found login fail warning element");
+//		waitForElementPresent(
+//				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"), 5);
+//		WebElement errorMessage = driver.findElement(
+//				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"));
+//		Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed for invalid username.");
 	}
 
-	@BeforeClass
+	@Test
 	public void startBrowser() {
 		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
 		loginPage = new HaDV_LoginPage(driver);

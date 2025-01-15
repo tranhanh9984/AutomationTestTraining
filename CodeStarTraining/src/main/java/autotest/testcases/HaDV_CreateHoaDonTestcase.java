@@ -4,16 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
-import autotest.pages.HaDV_LapHoaDonPage;
+import autotest.pages.HaDV_CreateHoaDonPage;
 import autotest.pages.HaDV_LoginPage;
 
-public class HaDV_LapHoaDonTestcase extends HaDV_LapHoaDonPage {
+public class HaDV_CreateHoaDonTestcase extends HaDV_CreateHoaDonPage {
 
-	public HaDV_LapHoaDonTestcase() {
+	public HaDV_CreateHoaDonTestcase() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public HaDV_LapHoaDonTestcase(WebDriver driver) {
+	public HaDV_CreateHoaDonTestcase(WebDriver driver) {
 		if (this.driver == null) {
 			this.driver = driver;
 		}

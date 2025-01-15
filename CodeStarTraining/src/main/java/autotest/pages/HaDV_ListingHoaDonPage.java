@@ -20,7 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HaDV_HoaDonBanHangPage extends HaDV_CommonBase {
+public class HaDV_ListingHoaDonPage extends HaDV_CommonBase {
 	JavascriptExecutor js;
 	String datePickerCalendarXPATH = "//p-calendar[@id='%sDate']";
 	String datePickerTriggerXPATH = "//span[contains(@class,'p-calendar')]//input";
@@ -29,35 +29,55 @@ public class HaDV_HoaDonBanHangPage extends HaDV_CommonBase {
 	String datePickerYearXPATH = "//span[contains(@class,'datepicker-year')]";
 	String datePickerPrev = "//button[contains(@class,'datepicker-prev')]";
 	String datePickerNext = "//button[contains(@class,'datepicker-next')]";
+	String tdKhachHang = "//table//tbody//tr[1]//td[4]";
+	String trFilteredHoaDonResult = "//table//tbody//tr[1]";
+	String breadcrumbListingHoaDon = "//app-breadcrumb[//li[contains(., 'Hóa đơn bán hàng')] and not(//li[contains(., 'Chỉnh sửa')])]";
+	public String oldKhachHang = "";
+	public String newKhachHang = "";
 	public String editButtonXpath = "//p-button[@title='Chỉnh sửa']//button";
 	public String parentEditXpath = "//table//tbody//tr[contains(.,'%s') and contains(.,'%s') and contains(.,'%s')]//td[contains(@class,'table-actions')]";
 	public String ngayHD = "";
 	public String khachHang = "";
 	public String tongTien = "";
+//	String oldKhachHang=getText(tdKhachHang);
 
-	public HaDV_HoaDonBanHangPage() {
+	public HaDV_ListingHoaDonPage() {
 
 	}
 
-	public HaDV_HoaDonBanHangPage(WebDriver driver) {
+	public HaDV_ListingHoaDonPage(WebDriver driver) {
 		if (this.driver == null) {
 			this.driver = driver;
 		}
 	}
 
 	public void editHoaDon(String ngayHD, String khachHang, String tongTien) {
+
+	}
+
+	public void chooseHoaDon(String ngayHD, String khachHang, String tongTien) {
 		this.ngayHD = ngayHD;
 		this.khachHang = khachHang;
 		this.tongTien = tongTien;
-		filterHoaDon(ngayHD, khachHang, tongTien);
 
-		clickEditButtonXpath();
+		filterHoaDon(ngayHD, khachHang, tongTien);
+		oldKhachHang = getText(tdKhachHang);
+		System.out.println("chooseHoaDon oldKhachHang ::::" + oldKhachHang);
+//		clickEditButtonXpath();
 	}
 
 	public void filterHoaDon(String ngayHD, String khachHang, String tongTien) {
 		pickDate("from", ngayHD);
 		pickDate("to", ngayHD);
 		filterKhachHang(khachHang);
+	}
+
+	public WebElement onListingHoaDonPage() {
+		return waitForElementPresent(By.xpath(breadcrumbListingHoaDon), 5);
+	}
+
+	public WebElement filteredHoaDonResultStatus() {
+		return waitForElementPresent(By.xpath(trFilteredHoaDonResult), 5);
 	}
 
 	public void filterKhachHang(String khachHang) {
@@ -101,7 +121,8 @@ public class HaDV_HoaDonBanHangPage extends HaDV_CommonBase {
 	}
 
 	public boolean checkExistHoaDon(String ngayHD, String khachHang, String tongTien) {
-		System.out.println("Hoa don khong ton tai");
+		filterHoaDon(ngayHD, khachHang, tongTien);
+//		System.out.println("Hoa don khong ton tai");
 		return false;
 	}
 
@@ -129,7 +150,6 @@ public class HaDV_HoaDonBanHangPage extends HaDV_CommonBase {
 		String tongTienSearch = "//table//thead//tr[2]//th[5]//input";
 		String khacHangXpath = "//table//tbody//tr[1]//td[contains(.,'" + khachHang + "')]";
 		String tongTienXpath = "//table//tbody//tr[1]//td[contains(.,'" + tongTien + "')]";
-
 	}
 
 	public void inputDate(String type, String selectedTime) {

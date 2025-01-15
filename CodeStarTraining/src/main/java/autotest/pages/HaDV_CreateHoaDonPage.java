@@ -2,19 +2,25 @@ package autotest.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import autocom.common.HaDV_CommonBase;
 
-public class HaDV_LapHoaDonPage extends HaDV_CommonBase {
+public class HaDV_CreateHoaDonPage extends HaDV_CommonBase {
+	public HaDV_ListingHoaDonPage listingHoaDon;
+	String txtTenDonVi = "//p-autocomplete[@id='toPartyName']//input";
+	String btnCapNhat = "//p-autocomplete[@id='toPartyName']//input";
+	String breadcrumbSuaHoaDon = "//app-breadcrumb[//li[contains(., 'Hóa đơn bán hàng')] and //li[contains(., 'Chỉnh sửa')]]";
+	String breadcrumbLapHoaDon = "//app-breadcrumb[.//li[contains(., 'Lập hoá đơn')]]";
 
-	public HaDV_LapHoaDonPage() {
+	public HaDV_CreateHoaDonPage() {
 
 	}
 
-	public HaDV_LapHoaDonPage(WebDriver driver) {
+	public HaDV_CreateHoaDonPage(WebDriver driver) {
 		if (this.driver == null) {
 			this.driver = driver;
 		}
@@ -48,20 +54,19 @@ public class HaDV_LapHoaDonPage extends HaDV_CommonBase {
 		Assert.assertTrue(successMessage > 0, "TC Failed: Success Mess hiển thị không đúng expect");
 	}
 
-	public void taoMoiHoaDon_Error1() {
-		tc_dienThongtin();
-		themHangHoaDichVu();
-		// Bỏ trống Người mua hàng và Tên Đơn Vị
+	public void editHoaDon(String ngayHD, String khachHang, String tongTien) {
+		setText(txtTenDonVi, khachHang, true);
+		listingHoaDon.newKhachHang = khachHang;
+		click(btnCapNhat, NO_SCROLL);
+		System.out.println("editing Hoa Don ::::");
+	}
 
-		setText("//input[@id='toName']", "", true);
+	public WebElement onSuaHoaDonPage() {
+		return waitForElementPresent(By.xpath(breadcrumbSuaHoaDon), 5);
+	}
 
-		setText("//p-autocomplete[@id='toPartyName']//input", "", true);
-
-		click("//p-button[@type='submit']//span[text()='Tạo mới']", NO_SCROLL);
-		int errorMessage = driver.findElements(By.xpath(
-				"//div[contains(@class,'p-toast-message-error')]//div[text()='Tên đơn vị hoặc người mua hàng không được bỏ trống']"))
-				.size();
-		Assert.assertTrue(errorMessage > 0, "TC Failed: Error Mess hiển thị không đúng expect");
+	public WebElement onLapHoaDonPage() {
+		return waitForElementPresent(By.xpath(breadcrumbLapHoaDon), 5);
 	}
 
 	public void taoMoiHoaDon_Error2() {
@@ -249,6 +254,7 @@ public class HaDV_LapHoaDonPage extends HaDV_CommonBase {
 		loginPage = new HaDV_LoginPage(driver);
 		loginPage.loginSuccess();
 		pause(2000);
+		listingHoaDon = new HaDV_ListingHoaDonPage();
 
 		String currentUrl = driver.getCurrentUrl();
 		Assert.assertNotEquals(currentUrl, "https://uat-invoice.kaike.vn/login",
@@ -261,5 +267,20 @@ public class HaDV_LapHoaDonPage extends HaDV_CommonBase {
 		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/customer/invoice/hdbh/create",
 				"Test failed: fail go to Hoa Don Ban hang");
 	}
+//	public void taoMoiHoaDon_Error1() {
+//	tc_dienThongtin();
+//	themHangHoaDichVu();
+//	// Bỏ trống Người mua hàng và Tên Đơn Vị
+//
+//	setText("//input[@id='toName']", "", true);
+//
+//	setText("//p-autocomplete[@id='toPartyName']//input", "", true);
+//
+//	click("//p-button[@type='submit']//span[text()='Tạo mới']", NO_SCROLL);
+//	int errorMessage = driver.findElements(By.xpath(
+//			"//div[contains(@class,'p-toast-message-error')]//div[text()='Tên đơn vị hoặc người mua hàng không được bỏ trống']"))
+//			.size();
+//	Assert.assertTrue(errorMessage > 0, "TC Failed: Error Mess hiển thị không đúng expect");
+//}
 
 }

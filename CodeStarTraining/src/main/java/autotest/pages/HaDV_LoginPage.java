@@ -21,9 +21,13 @@ import org.openqa.selenium.support.PageFactory;
 public class HaDV_LoginPage extends HaDV_CommonBase {
 	public String LOGIN_EMAIL = "0312303803-999";
 	public String LOGIN_PASSWORD = "0312303803-999";
-	private static final String XPATH_EMAIL = "//input[@id='email']";
-	private static final String XPATH_PASSWORD = "//input[@id='password']";
-	private static final String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
+
+	private String XPATH_EMAIL = "//input[@id='email']";
+	private String XPATH_PASSWORD = "//input[@id='password']";
+	private String XPATH_BTN_LOGIN_SUBMIT = "//button[@type='submit']";
+	private String XPATH_LOGIN_FAIL = "//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']";
+	private String XPATH_LOGIN_SUCCESS = "//a[@title='Thông tin cá nhân']";
+	//
 
 	public HaDV_LoginPage() {
 	}
@@ -32,24 +36,8 @@ public class HaDV_LoginPage extends HaDV_CommonBase {
 		this.driver = driver;
 	}
 
-	public void tc_01() {
-//		testLoginSuccess();
-//		pause(2000);
-
-		// clickMenus(); // tạo hóa đơn
-		// taoMoiHoaDon_Error1(); // tạo hóa đơn failed do blank field
-		// taoMoiHoaDon_Error2(); // Nhập sai MST và click vào Lấy Thông Tin ->
-		// Expected: Hiển thị Error Mess
-
-		// testWrongUser();
-		// testWrongPass();
-		// testLimitedLoginFail();
-	}
-
 	public void loginSuccess() {
-		inputText(LOGIN_EMAIL, XPATH_EMAIL);
-		inputText(LOGIN_PASSWORD, XPATH_PASSWORD);
-		driver.findElement(By.xpath(XPATH_BTN_LOGIN_SUBMIT)).click();
+		login(LOGIN_EMAIL, LOGIN_PASSWORD);
 	}
 
 	public void login(String email, String password) {
@@ -58,37 +46,16 @@ public class HaDV_LoginPage extends HaDV_CommonBase {
 		driver.findElement(By.xpath(XPATH_BTN_LOGIN_SUBMIT)).click();
 	}
 
-//	public void testLoginSuccess() {
-//		inputText(LOGIN_EMAIL, XPATH_EMAIL);
-//		inputText(LOGIN_PASSWORD, XPATH_PASSWORD);
-//		driver.findElement(By.xpath(XPATH_BTN_LOGIN_SUBMIT)).click();
-//		pause(1000);
-//		String currentUrl = driver.getCurrentUrl();
-//		Assert.assertEquals(currentUrl, "https://uat-invoice.kaike.vn/dashboard",
-//				"User should be redirected to the dashboard after successful login.");
-//	}
-
-	public void testWrongUser() {
-		inputText("1", "//input[@id='email']");
-		inputText("0312303803-999", "//input[@id='password']");
-		driver.findElement(By.xpath("//button")).click();
-		WebElement errorMessage = driver.findElement(
-				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"));
-		Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed for invalid username.");
+	public void loginFail(String email, String password) {
+		login(email, password);
 	}
 
-	public void testWrongPass() {
-		inputText("0312303803-999", "//input[@id='email']");
-		inputText("1", "//input[@id='password']");
-		driver.findElement(By.xpath("//button")).click();
-		WebElement errorMessage = driver.findElement(
-				By.xpath("//div[contains(@class,'p-toast-message-error')]//div[text()='Có lỗi xảy ra...']"));
-		Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed for invalid password.");
+	public WebElement loginFailStatus() {
+		return waitForElementPresent(By.xpath(XPATH_LOGIN_FAIL), 5);
 	}
 
-	@BeforeClass
-	public void startBrowser() {
-		this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
+	public WebElement loginSuccessStatus() {
+		return waitForElementPresent(By.xpath(XPATH_LOGIN_SUCCESS), 5);
 	}
 
 }
