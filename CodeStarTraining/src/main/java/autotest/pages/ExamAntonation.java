@@ -24,6 +24,8 @@ public class ExamAntonation {
 //        System.out.println("After Suite");
 //    }
 //
+	
+	boolean isFailCase = false;
     @BeforeTest
     public void beforeTest() {
         System.out.println("Before Test");
@@ -42,6 +44,16 @@ public class ExamAntonation {
     @AfterClass
     public void afterClass() {
         System.out.println("After Class");
+    }
+    
+    @BeforeSuite
+    public void beforeSuite() {
+        System.out.println("Before Suite");
+    }
+
+    @AfterSuite
+    public void afterSuite() {
+        System.out.println("After Suite");
     }
 
     @BeforeGroups(groups = { "testOne" })
@@ -71,12 +83,17 @@ public class ExamAntonation {
 
     @AfterMethod
     public void afterMethod() {
+    	if(isFailCase == true) {
+    		//chụp ảnh tại thời điểm fail
+    		//ghi lại các lỗi xảy ra khi thực case này
+    	}
         System.out.println("After Method");
     }
 
    @Test(groups = { "testOne" })
     public void testOneMethod() {
         System.out.println("Test method One");
+        isFailCase = true;
     }
 //
 //    @Test(groups = { "testTwo" })

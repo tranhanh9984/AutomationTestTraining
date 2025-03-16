@@ -1,18 +1,14 @@
 package autocom.common;
 
-import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class CommonPage {
@@ -68,22 +64,30 @@ public class CommonPage {
 	public WebDriver startBrower(String url, String browser) {
 		if ("chrome".equals(browser)) {
 			System.out.println(System.getProperty("user.dir"));
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 			driver = new ChromeDriver();
-		} else if ("iexplorer".equals(browser)) {
-			driver = new InternetExplorerDriver();
-		} else if ("safari".equals(browser)) {
-			driver = new SafariDriver();
-		} else {
+		} else if ("firefox".equals(browser)) {			
+			System.out.println(System.getProperty("user.dir"));
+			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/driver/geckodriver.exe");
 			driver = new FirefoxDriver();
-		}
+	
+		} else if ("edge".equals(browser)) {
+			System.out.println(System.getProperty("user.dir"));
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/msedgedriver.exe");
+			driver = new EdgeDriver();
 
+		} 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(url);
 		return driver;
 	}
 	
+	public void clearText(String xpath) {
+		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].value = '';", driver.findElement(By.xpath(xpath)));
+	}
 	
 	//Truyền vào string = "Hóa đơn\Tạo hoá đơn"
 	public void clickMenu(String strSelected) {	
@@ -91,6 +95,7 @@ public class CommonPage {
 		String[] menus = new String[2];
 		menus = strSelected.split("/");	
 		pause(1000);
+		
 		
 		for(int i = 0; i < menus.length; i++) {
 			if(!driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).isDisplayed()) {
@@ -111,7 +116,7 @@ public class CommonPage {
 	 */
 	public void pause(long timeInMillis) {
 		try {
-			Thread.sleep(timeInMillis);
+			Thread.sleep(timeInMillis*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

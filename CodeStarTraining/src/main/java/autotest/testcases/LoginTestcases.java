@@ -18,20 +18,26 @@ public class LoginTestcases extends CommonPage{
 	LoginPage loginPage;// = new LoginPage(driver);;
 
 	@Test
+	public void login1() {
+		
+		//loginPage.login_at();
+	}
+	
+	
+//	@Test
 	public void loginFail() {
 		//fail email sia
 		//loginPage = new LoginPage(driver);
 		//gọi ham dang nhap tu class Login Pas
-		loginPage.login("hanhtm", "1234", "33333");
+//		??loginPage.login("hanhtm", "1234", "33333");
 		//get messasge lỗi
 		//assert expected ...
 	}
-	
-	@Test
+		@Test
 	public void loginFail1() {
 		//fail email sia
 		//gọi ham dang nhap tu class Login Pas
-//		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(driver);
 		loginPage.login("hanhtm", "1234", "4444");
 		assert 1 == 2;
 		//get messasge lỗi
@@ -41,8 +47,8 @@ public class LoginTestcases extends CommonPage{
 
 	@BeforeTest
 	public void startPage() {
-		driver = this.startBrower("https://v2.vietinvoice.vn/dang-nhap", "chrome");
-		loginPage = new LoginPage(driver);;
+		driver = this.startBrower("https://uat-invoice.kaike.vn/login", "chrome");
+		loginPage = new LoginPage(driver);
 		System.out.print("Khoi tao");
 	}
 

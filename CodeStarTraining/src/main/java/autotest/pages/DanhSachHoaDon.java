@@ -18,7 +18,7 @@ public class DanhSachHoaDon extends CommonPage {
 	public void getDSHoaDon() {
 		//...
 		System.out.print("Kiểm tra danh sách có chứa hóa đơn trên thành công");
-	}
+	}mfd,mc,dmfd,fmd,fmd,fm
 	
 
 }

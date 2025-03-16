@@ -5,7 +5,7 @@
     <classes>
       <class name="autotest.testcases.LoginTestcases">
         <methods>
-          <include name="loginFail1"/>
+          <include name="login1"/>
           <include name="closePage"/>
           <include name="startPage"/>
         </methods>
