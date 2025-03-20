@@ -117,9 +117,9 @@ public class CommonPage {
 	 * 
 	 * @param timeInMillis
 	 */
-	public void pause(long timeInMillis) {
+	public void pause(long secondS) {
 		try {
-			Thread.sleep(timeInMillis);
+			Thread.sleep(secondS*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

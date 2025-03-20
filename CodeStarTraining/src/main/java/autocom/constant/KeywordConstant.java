@@ -1,23 +1,27 @@
 package autocom.constant;
 
 public class KeywordConstant {
-//	public static final String DB = "10.58.71.214";
-//	public static final String SID = "dbora";
-//	public static final String USERNAME = "BCCS_SALE";
-//	public static final String PASSWORD = "sale";
-//	public static final String DBIM = "10.58.71.167";
-//	public static final String SIDIM = "bccs";
-//	public static final String USERNAMEIM = "BCCS_IM";
-//	public static final String PASSIM = "bccs_im";
-//	public static final String USER_ADMIN = "automation_admin";
-//	public static final String PASS_ADMIN = "654321a@";
-//	public static final String STAFF_ADMIN_ID = "437725";
-//	public static final String SHOP_ADMIN_ID = "204901";
-//	public static final String SHOP_CODE_ADMIN = "CH_VTT";
+
+
+//	public static final int DEFAULT_TIMEOUT = 30;
+//	public static final int WAIT_INTERVAL = 10;
+//	public static final int LOOPCOUNT = 5;
 	
-	public static final String EMAIL = "caonv174@gmail.com";
-	public static final String PASSWORD = "123456";	
-	public static final String MST = "0312303803-999";
+	//trang admin
+	public static final String urlAd = "https://f-class.site/";
+	public static final String usernameAd = "superadmin@gmail.com";
+	public static final String passwordAd = "superadmin";
 	
-	public static final String HO_TEN = "Nguyễn Văn Cao";	
+	//trang giáo viên
+	public static final String urlTea = "https://main.f-class.site/login";
+	public static final String usernameTea = "bri4n0.t@gmail.com";
+	public static final String passwordTea = "0979008320";
+	
+	//trang học sinh
+	public static final String urlStu = "https://student.f-class.site/";
+	public static final String usernameStu = "20240101";
+	public static final String passwordStu = "01082020";
+	public static final String schoolStu = "SCH20241";
+	
+	public static final String BROWSER = "chrome";
 }

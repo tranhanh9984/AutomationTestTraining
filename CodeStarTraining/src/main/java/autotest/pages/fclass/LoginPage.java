@@ -14,8 +14,6 @@ public class LoginPage extends CommonPage {
  	public String btnLogin = "//button[@type='submit']";
  	
  	
- 	
- 	
  	public void clearText(String xpath) {
  		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
  		((JavascriptExecutor) driver).executeScript(
@@ -29,7 +27,7 @@ public class LoginPage extends CommonPage {
  		driver.findElement(By.xpath(txtUserName)).sendKeys(userName);
  		driver.findElement(By.xpath(txtPassword)).sendKeys(password);
  		driver.findElement(By.xpath(schoolCode)).sendKeys(school_code);
- 		pause(2000);
+ 		
  		driver.findElement(By.xpath(btnLogin)).click();
  	}
  	
