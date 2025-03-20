@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -67,7 +68,7 @@ public class CommonPage {
 	 */
 	public WebDriver startBrower(String url, String browser) {
 		if ("chrome".equals(browser)) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if ("iexplorer".equals(browser)) {
 			driver = new InternetExplorerDriver();
@@ -98,6 +99,14 @@ public class CommonPage {
 			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();			
 		}
 	}	
+	
+	public void scrollToElement(String xpath) {
+		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(xpath)));
+	}
+	
+	
 	
 	public void closeBrowser(WebDriver dr) {
 		dr.close();

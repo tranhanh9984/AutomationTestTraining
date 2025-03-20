@@ -1,4 +1,4 @@
-package autotest.testcases;
+package autotest.testcases.fclass;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
-import autotest.pages.LoginPage;
+import autotest.pages.fclass.LoginPage;
 
 public class LoginTestcases extends CommonPage {
 	

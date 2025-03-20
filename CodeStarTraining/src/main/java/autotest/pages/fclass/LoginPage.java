@@ -1,4 +1,4 @@
-package autotest.pages;
+package autotest.pages.fclass;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
