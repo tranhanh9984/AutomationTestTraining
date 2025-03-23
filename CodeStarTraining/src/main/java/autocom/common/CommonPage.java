@@ -253,52 +253,52 @@ public class CommonPage {
 	 * 
 	 * @param locator @ return
 	 */
-	public WebElement getDisplayedElement(Object locator, WebDriver dr) {
-		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());	
-		WebElement e = null;
-		try {
-			if (by != null)
-				e = dr.findElement(by);
-			if (e != null) {
-				if (isDisplay(by, dr))
-					return e;
-			}
-		} catch (NoSuchElementException ex) {
-		
-			pause(WAIT_INTERVAL);
-//			getDisplayedElement(locator);
-		} catch (StaleElementReferenceException ex) {
-			pause(WAIT_INTERVAL);
-//			getDisplayedElement(locator);
-		} catch (WebDriverException ex) {
-			pause(WAIT_INTERVAL);
-//			getDisplayedElement(locator);
-		} finally {
-			loopCount = 0;
-		}
-		return null;
-	}
+//	public WebElement getDisplayedElement(Object locator, WebDriver dr) {
+//		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());	
+//		WebElement e = null;
+//		try {
+//			if (by != null)
+//				e = dr.findElement(by);
+//			if (e != null) {
+//				if (isDisplay(by, dr))
+//					return e;
+//			}
+//		} catch (NoSuchElementException ex) {
+//		
+//			pause(WAIT_INTERVAL);
+////			getDisplayedElement(locator);
+//		} catch (StaleElementReferenceException ex) {
+//			pause(WAIT_INTERVAL);
+////			getDisplayedElement(locator);
+//		} catch (WebDriverException ex) {
+//			pause(WAIT_INTERVAL);
+////			getDisplayedElement(locator);
+//		} finally {
+//			loopCount = 0;
+//		}
+//		return null;
+//	}
 
 	/**
 	 * checking an element is displayed in web page
 	 * 
 	 * @param locator
 	 * @return
-	 */
-	public boolean isDisplay(Object locator, WebDriver dr) {
-		boolean bool = false;
-		WebElement e = getElement(locator, dr);
-		try {
-			if (e != null)
-				bool = e.isDisplayed();
-		} catch (StaleElementReferenceException ex) {
-			pause(WAIT_INTERVAL);
-			isDisplay(locator, dr);
-		} finally {
-			loopCount = 0;
-		}
-		return bool;
-	}
+//	 */
+//	public boolean isDisplay(Object locator, WebDriver dr) {
+//		boolean bool = false;
+//		WebElement e = getElement(locator, dr);
+//		try {
+//			if (e != null)
+//				bool = e.isDisplayed();
+//		} catch (StaleElementReferenceException ex) {
+//			pause(WAIT_INTERVAL);
+//			isDisplay(locator, dr);
+//		} finally {
+//			loopCount = 0;
+//		}
+//		return bool;
+//	}
 
 	
 
