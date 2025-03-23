@@ -7,16 +7,20 @@ import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
-import autotest.pages.fclass.LoginPage;
+import autotest.pages.fclass.*;
 
 public class LoginTestcases extends CommonPage {
 	
-	LoginPage login;
 	WebDriver driver; 
+	LoginPage login;
+	HomePage homepage;
+	
 	@Test
 	public void tcs01() {
 		//kiem tra logiin thanh cong
 		login.login_enterValue(KeywordConstant.usernameStu,KeywordConstant.passwordStu, KeywordConstant.schoolStu);
+	//	homepage.driver = driver;
+		homepage.clickMenu();
 		pause(10);		
 	}
 	
@@ -26,6 +30,9 @@ public class LoginTestcases extends CommonPage {
 		driver = this.startBrower(KeywordConstant.urlStu, KeywordConstant.BROWSER);
 		login = new LoginPage();
 		login.driver = driver;
+		homepage = new HomePage();
+		homepage.driver = driver;
+		
 	}
 	
 	@AfterTest
