@@ -17,6 +17,8 @@ public class LoginPageAdmin extends CommonPage{
 		driver.findElement(By.id("password")).sendKeys(password);			
 	}
 	
+	
+	
 	public void clickLogin() {
 		driver.findElement(By.id("login_btn")).click();
 	}

@@ -1,5 +1,7 @@
 package autocom.constant;
 
+import java.nio.file.Paths;
+
 public class KeywordConstant {
 
 
@@ -11,6 +13,8 @@ public class KeywordConstant {
 	public static final String urlAd = "https://f-class.site/";
 	public static final String usernameAd = "superadmin@gmail.com";
 	public static final String passwordAd = "superadmin";
+	public static final String schoollogoAd = Paths.get("C:\\Users\\PC\\Downloads\\Logo_TH Hat Lot.jpg").toAbsolutePath().toString();
+	public static final String logoAd= Paths.get("C:\\Users\\PC\\Downloads\\pb192415_500.jpg").toAbsolutePath().toString();
 	
 	//trang giáo viên
 	public static final String urlTea = "https://main.f-class.site/login";
