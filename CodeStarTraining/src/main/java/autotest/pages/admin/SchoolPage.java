@@ -60,14 +60,11 @@ public class SchoolPage extends CommonPage {
 
 	}
 	public void update(String tag) {
-	    WebDriverWait waitt = new WebDriverWait(driver, 10);
-
- 	    WebElement taglineInput = waitt.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit_school_tagline")));
+ 
+ 	    WebElement taglineInput = driver.findElement(By.id("edit_school_tagline"));
 	    taglineInput.clear();
 	    taglineInput.sendKeys(tag);
-//	    WebElement submitButton = driver.findElement(By.xpath("//input[@type='submit' and @value='Gửi']"));
-//
-//	    submitButton.click();
+	    driver.findElement(By.xpath("//input[@class='btn btn-theme']")).click();
 
 		 
  	}

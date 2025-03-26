@@ -1,6 +1,5 @@
 package autotest.testcases.admin;
 import org.testng.annotations.AfterTest;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,10 +27,8 @@ public class TestSchoolEdit  extends CommonPage {
 		school.clickMenu();
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 1000);");
 		school.edit("Haba@gmail.com");
- 		school.update("Phát ");
- 		 WebElement submitButton = driver.findElement(By.xpath("//input[@type='submit' and @value='Gửi']"));
-
- 	    submitButton.click();
+ 		school.update("Phát");
+ 		
 		}
 	@BeforeTest
 	public void startBrowser() {
