@@ -10,11 +10,11 @@ public class Homepage extends CommonPage {
 	public Homepage() {
 		super();
  	}
-	public void clickMenu() {
-		driver.findElement(By.partialLinkText("Gói")).click();
+	public void clickMenu(String Menuname) {
+		driver.findElement(By.partialLinkText(Menuname)).click();
 	}
- 	public void click_tao() {    
-	    driver.findElement(By.partialLinkText("Tạo mới Gói")).click();
+ 	public void click_tao(String menu) {    
+	    driver.findElement(By.partialLinkText(menu)).click();
 	}
 }
 

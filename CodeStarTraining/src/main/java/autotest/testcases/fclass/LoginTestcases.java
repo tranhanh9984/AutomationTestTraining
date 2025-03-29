@@ -21,7 +21,7 @@ public class LoginTestcases extends CommonPage {
 	public void tcs01() {
 		//kiem tra logiin thanh cong
 		login.login_enterValue(KeywordConstant.usernameStu,KeywordConstant.passwordStu, KeywordConstant.schoolStu);
-		homepage.clickMenu();
+		homepage.clickMenu("//span[text()='Đăng ký']");
 		pause(10);		
 	}
 	

@@ -28,8 +28,8 @@ public class LoginTestcases extends CommonPage{
 	public void loginadmin() {
 		login.LoginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
 		login.clickLogin();
-		homepage.clickMenu();
-		homepage.click_tao();
+		homepage.clickMenu("Gói");
+		homepage.click_tao("Tạo gói");
 		pause(10);
 	}
 	

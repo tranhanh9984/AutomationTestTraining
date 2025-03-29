@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-26T18:35:30 GMT+07:00" name="Default suite" finished-at="2025-03-26T18:35:41 GMT+07:00" duration-ms="10232">
+  <suite started-at="2025-03-29T21:25:07 GMT+07:00" name="Default suite" finished-at="2025-03-29T21:25:26 GMT+07:00" duration-ms="19400">
     <groups>
     </groups>
-    <test started-at="2025-03-26T18:35:30 GMT+07:00" name="Default test" finished-at="2025-03-26T18:35:41 GMT+07:00" duration-ms="10232">
-      <class name="autotest.testcases.admin.TestSchoolEdit">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.testcases.admin.TestSchoolEdit@77847718]" started-at="2025-03-26T18:35:30 GMT+07:00" name="startBrowser" finished-at="2025-03-26T18:35:33 GMT+07:00" duration-ms="3145" status="PASS">
+    <test started-at="2025-03-29T21:25:07 GMT+07:00" name="Default test" finished-at="2025-03-29T21:25:26 GMT+07:00" duration-ms="19400">
+      <class name="autotest.testcases.admin.SchoolTest">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.testcases.admin.SchoolTest@2a3b5b47]" started-at="2025-03-29T21:25:07 GMT+07:00" name="startBrowser" finished-at="2025-03-29T21:25:09 GMT+07:00" duration-ms="2106" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="loginadmin()[pri:0, instance:autotest.testcases.admin.TestSchoolEdit@77847718]" started-at="2025-03-26T18:35:33 GMT+07:00" name="loginadmin" finished-at="2025-03-26T18:35:41 GMT+07:00" duration-ms="7068" status="PASS">
+        <test-method signature="loginadmin()[pri:0, instance:autotest.testcases.admin.SchoolTest@2a3b5b47]" started-at="2025-03-29T21:25:09 GMT+07:00" name="loginadmin" finished-at="2025-03-29T21:25:26 GMT+07:00" duration-ms="17253" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginadmin -->
-      </class> <!-- autotest.testcases.admin.TestSchoolEdit -->
+      </class> <!-- autotest.testcases.admin.SchoolTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

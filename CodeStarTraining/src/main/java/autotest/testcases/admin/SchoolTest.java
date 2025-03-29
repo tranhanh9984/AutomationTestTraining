@@ -1,4 +1,5 @@
 package autotest.testcases.admin;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,12 +23,17 @@ public class SchoolTest extends CommonPage {
 	public void loginadmin() {
 		login.LoginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
 		login.clickLogin();
-		school.clickMenu();
-		school.creat_School("Trường Tiểu học Võ Chí Công", "VoChiCong22@gmail.com", "0123456789", "Sáng tạo - Phát triển", "Hà Nội", "CC56"
-				);
-		school.create_Admin("Nguyễn", "Ha Bac", "0987654321", "Haba@gmail.com"); 
-		school.submit();
- 		pause(10);
+//		school.clickMenu("//span[text()='Trường học']");
+//		school.creat_School("Trường Tiểu học Võ Chí Công", "VoChiCong22@gmail.com", "0123456789",
+//				"Sáng tạo - Phát triển", "Hà Nội", "CC56");
+//		school.create_Admin("Nguyễn", "Ha Bac", "0987654321", "Haba@gmail.com"); 
+//		school.submit();
+		
+
+		school.create_Nhan_vien( "My", "Nguyễn", "0987654321", "My.nguyen@example.com", "C:\\Users\\Admin\\123.png");
+//		school.Vaitro("Nguyen Van Binh", "//input[@type='checkbox' and @value='20']", "//input[@type='checkbox' and @value='9']",
+//				"//input[@type='checkbox' and @value='11']", "//input[@type='checkbox' and @value='6']");
+//  		pause(10);
 
 	}
 	

@@ -10,8 +10,8 @@ public class HomePage extends CommonPage {
  	        super();
 	    }
 
-	    public void clickMenu() {
-	        driver.findElement(By.partialLinkText("Bài kiểm tra trực tuyến")).click();
+	    public void clickMenu(String name) {
+	        driver.findElement(By.xpath(name)).click();
 	    }
 
 }

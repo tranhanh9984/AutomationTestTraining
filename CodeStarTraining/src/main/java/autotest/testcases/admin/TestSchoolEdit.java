@@ -24,7 +24,7 @@ public class TestSchoolEdit  extends CommonPage {
 	public void loginadmin() {
 		login.LoginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
 		login.clickLogin();
-		school.clickMenu();
+		school.clickMenu("");
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 1000);");
 		school.edit("Haba@gmail.com");
  		school.update("Phát");

@@ -33,8 +33,8 @@ public class PackageTest extends CommonPage {
         login.LoginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
         login.clickLogin();
         
-        homepage.clickMenu();
-        homepage.click_tao();
+        homepage.clickMenu("Gói");
+        homepage.click_tao("Tạo gói");
         
         packagePage.createPackage("Gói chuyên môn", "Gói chuyên môn dành cho chuyên Toán", "25", "3000000", "2500000");
 		pause(5);
