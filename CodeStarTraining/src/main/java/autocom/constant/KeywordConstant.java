@@ -23,5 +23,10 @@ public class KeywordConstant {
 	public static final String passwordStu = "01082020";
 	public static final String schoolStu = "SCH20241";
 	
+	
+	public static final String usernameHD = "0312303803-999";
+	public static final String passwordHD = "0312303803-999";
+	public static final String urlHD = "https://uat-invoice.kaike.vn/login";
+	
 	public static final String BROWSER = "chrome";
 }

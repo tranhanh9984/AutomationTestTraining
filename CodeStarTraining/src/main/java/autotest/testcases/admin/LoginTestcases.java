@@ -18,9 +18,12 @@ public class LoginTestcases extends CommonPage{
 	
 	@Test
 	public void loginadmin() {
+		//step testcases
 		login.LoginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
 		login.clickLogin();
 		pause(10);
+		//verify nó đã login thành công
+		
 	}
 	
 	@BeforeTest
