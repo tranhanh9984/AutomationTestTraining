@@ -23,5 +23,10 @@ public class KeywordConstant {
 	public static final String passwordStu = "01082020";
 	public static final String schoolStu = "SCH20241";
 	
+	public static final String xPathPage = "https://selectorshub.com/xpath-practice-page/";
+
+	
 	public static final String BROWSER = "chrome";
+	
+	
 }

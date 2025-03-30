@@ -1,15 +1,15 @@
-package autotest.pages.admin;
+package autotest.pages.teacher;
 
 import org.openqa.selenium.By;
 
 import autocom.common.CommonPage;
 
-public class LoginPageAdmin extends CommonPage{
+public class LoginPageTeacher extends CommonPage {
 
-	public LoginPageAdmin() {
+	public LoginPageTeacher() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void LoginPage(String email, String password) {
 		driver.findElement(By.name("email")).clear();
 		driver.findElement(By.name("email")).sendKeys(email);
