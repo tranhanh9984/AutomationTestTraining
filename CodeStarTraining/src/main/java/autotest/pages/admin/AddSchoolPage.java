@@ -6,17 +6,17 @@ import org.openqa.selenium.WebElement;
 import autocom.common.CommonPage;
 
 public class AddSchoolPage extends CommonPage {
-	public static String school_name = "Trường học ANHPTM";
-	public static String school_support_email = "anhptm@gmail.com";
-	public static String school_support_phone = "097653227";
+	public static String school_name = "Trường học ANHPTM2";
+	public static String school_support_email = "anhptm@gmail21.com";
+	public static String school_support_phone = "0976532272";
 	public static String school_tagline = "Slogan school";
 	public static String school_address = "Hà Nội";
-	public static String domain = "Bắc";
+	public static String domain = "Bắc1";
 	public static String school_code_prefix = "MAC01";
-	public static String admin_first_name = "Mai Anh";
+	public static String admin_first_name = "Mai Anh1";
 	public static String admin_last_name = "Phạm";
 	public static String admin_contact = "09837664432";
-	public static String admin_email = "anhptm1@gmail.com";
+	public static String admin_email = "anhptm2@gmail.com";
 
 	public AddSchoolPage() {
 	}
@@ -34,12 +34,7 @@ public class AddSchoolPage extends CommonPage {
 		WebElement fileInput = driver.findElement(By.xpath("//input[@id='school_image']"));
 		String filePath = "C:\\Users\\Admin\\Pictures\\Camera Roll\\images.jpg"; // Gửi đường dẫn file vào thẻ input
 		fileInput.sendKeys(filePath);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} // Đợi vài giây để tải lên hoàn tất
-
+		
 		driver.findElement(By.id("school_support_email")).clear();
 		driver.findElement(By.id("school_support_email")).sendKeys(email);
 		driver.findElement(By.id("school_support_phone")).clear();
@@ -65,12 +60,7 @@ public class AddSchoolPage extends CommonPage {
 				.findElement(By.xpath("//input[@class='file-upload-default form-control-danger']"));
 		String filePath2 = "C:\\Users\\Admin\\Pictures\\Camera Roll\\images.jpg";
 		fileInput2.sendKeys(filePath2);
-		try {
-			Thread.sleep(200);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
+		
 	}
 
 	public void clickCreat() {

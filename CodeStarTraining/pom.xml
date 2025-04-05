@@ -24,5 +24,23 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>testing</groupId>
+			<artifactId>Buoi2</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.3.30</version> <!-- Đảm bảo dùng phiên bản phù hợp -->
+		</dependency>
+
 	</dependencies>
 </project>

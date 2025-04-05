@@ -21,6 +21,7 @@ public class LoginTestcases extends CommonPage {
 
 	@Test
 	public void loginadmin() {
+//		step của tesstcase
 		login.loginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
 		login.clickLogin();
 		addSchool.clickMenu();
