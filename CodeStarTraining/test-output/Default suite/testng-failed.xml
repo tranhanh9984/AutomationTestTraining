@@ -3,6 +3,7 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="autotest.testcases.admin.LoginTestcases">
         <methods>
           <include name="startBrowser"/>
@@ -10,6 +11,15 @@
           <include name="closeBrowser"/>
         </methods>
       </class> <!-- autotest.testcases.admin.LoginTestcases -->
+=======
+      <class name="testcases.page.Rise.ClientTestcases">
+        <methods>
+          <include name="taoSpaceName"/>
+          <include name="startBrowser"/>
+          <include name="closeBrowser"/>
+        </methods>
+      </class> <!-- testcases.page.Rise.ClientTestcases -->
+>>>>>>> 3d88af4 (BTVN buoi 15)
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

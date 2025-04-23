@@ -16,4 +16,5 @@ public class CommonFuncs {
 		String dateTime = dateFormat.format(cal.getTime());
 		return dateTime;
 	}
+	
 }

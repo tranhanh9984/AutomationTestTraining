@@ -1,18 +1,16 @@
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonFuncs.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonPage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\JDBCConnection.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestLogger.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestReport.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\constant\KeywordConstant.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\DanhSachHoaDon.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Exam1.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Exam2.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\ExamAntonation.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Hanh_BaiTap.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\HomePage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\LoginPage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\TaoHoaDon.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Thuy_BaiTap.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\HomePageTestCases.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\LoginTestcases.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\TaoHoaDonTestcases.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonFuncs.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonPage.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\JDBCConnection.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestLogger.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestReport.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\constant\KeywordConstant.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\AdminPage\LoginPageGiaoVien.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\admin\LoginPageAdmin.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\admin\TruonghocPage.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\fclass\LoginPage.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\admin\LoginTestcases.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\admin\package-info.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\fclass\AnnotationTestcases.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\fclass\LoginTestcases.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\GiaoVien\HomePage.java
+C:\Auto\Test\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\GiaoVien\LoginTestCases.java

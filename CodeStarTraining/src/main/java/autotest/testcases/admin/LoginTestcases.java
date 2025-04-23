@@ -6,15 +6,24 @@ import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
+<<<<<<< HEAD
 import autotest.pages.admin.*;
+=======
+import autotest.pages.admin.LoginPageAdmin;
+import autotest.pages.admin.TruonghocPage;
+>>>>>>> 3d88af4 (BTVN buoi 15)
 
 public class LoginTestcases extends CommonPage{
 
 	
 	LoginPageAdmin login;
+<<<<<<< HEAD
 	PageTruongHoc truongHoc;
 	EditTruongHoc editTruongHoc;
 	PageGoiHoc taoGoiHoc;
+=======
+	TruonghocPage truonghocpage;
+>>>>>>> 3d88af4 (BTVN buoi 15)
 	public LoginTestcases() {
 		// TODO Auto-generated constructor stub
 	}
@@ -23,6 +32,7 @@ public class LoginTestcases extends CommonPage{
 	public void loginadmin() {
 		login.LoginPage(KeywordConstant.usernameAd, KeywordConstant.passwordAd);
 		login.clickLogin();
+<<<<<<< HEAD
 	
 		truongHoc.ClickTruongHoc();
 		truongHoc.TaoMoiTruongHoc(KeywordConstant.schoollogoAd, KeywordConstant.logoAd);
@@ -33,6 +43,13 @@ public class LoginTestcases extends CommonPage{
 		//taoGoiHoc.chonTinhNang(); đang lỗi chưa chạy được
 		taoGoiHoc.nhanTaoGoi();
 		
+=======
+		truonghocpage.clickTruonghoc();
+		truonghocpage.dientttruonghoc();
+		truonghocpage.dienttquantrivien();
+		truonghocpage.clickGui();
+		pause(10);
+>>>>>>> 3d88af4 (BTVN buoi 15)
 	}
 	
 	
@@ -42,6 +59,7 @@ public class LoginTestcases extends CommonPage{
 		driver = this.startBrower(KeywordConstant.urlAd+"login", KeywordConstant.BROWSER);
 		login = new LoginPageAdmin();
 		login.driver = driver;
+<<<<<<< HEAD
 		
 		truongHoc = new PageTruongHoc();
 		truongHoc.driver = driver;
@@ -49,6 +67,10 @@ public class LoginTestcases extends CommonPage{
 		editTruongHoc.driver = driver;
 		taoGoiHoc = new PageGoiHoc();
 		taoGoiHoc.driver = driver;
+=======
+		truonghocpage = new TruonghocPage();
+		truonghocpage.driver = driver;
+>>>>>>> 3d88af4 (BTVN buoi 15)
 	}
 	
 	@AfterTest
