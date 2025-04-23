@@ -2,10 +2,13 @@ package autotest.pages.fclass;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import autocom.common.CommonPage;
 
 public class LoginPage extends CommonPage {
+	
+ 	
 	//textInut - txt, lable: lbl, combobox - cbb, button - btn
 	private String txtUserName = "//input[@placeholder = 'Mã số học sinh']";
 	private String txtPassword = "//input[@type = 'password']";

@@ -33,7 +33,7 @@ public class SchoolTest extends CommonPage {
 		school.create_Nhan_vien( "My", "Nguyễn", "0987654321", "My.nguyen@example.com", "C:\\Users\\Admin\\123.png");
 //		school.Vaitro("Nguyen Van Binh", "//input[@type='checkbox' and @value='20']", "//input[@type='checkbox' and @value='9']",
 //				"//input[@type='checkbox' and @value='11']", "//input[@type='checkbox' and @value='6']");
-//  		pause(10);
+		pause(5);
 
 	}
 	
@@ -47,4 +47,11 @@ public class SchoolTest extends CommonPage {
 
 		
 	}
+	@AfterTest
+	 
+	public void closeBrowser() {
+		this.closeBrowser(driver);
+		
+	} 
+	
 }

@@ -25,6 +25,17 @@ public class KeywordConstant {
 	//
 	public static final String urlPra = "https://selectorshub.com/xpath-practice-page/";
 
+	//trang hoá đơn
+		public static final String urlHD = "https://uat-invoice.kaike.vn/login";
+		public static final String usernameHD = "0312303803-999";
+		public static final String passwordHD = "0312303803-999";
+	
+		
+//	Tang Rise
+		public static final String urlRise = "https://rise.fairsketch.com/signin?redirect=https://rise.fairsketch.com/events";
+		public static final String usernameRise = "admin@demo.com";
+		public static final String passwordRise = "riseDemo";
+		
 	public static final String BROWSER = "chrome";
 
 	

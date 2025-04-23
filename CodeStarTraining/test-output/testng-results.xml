@@ -1,21 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-29T21:25:07 GMT+07:00" name="Default suite" finished-at="2025-03-29T21:25:26 GMT+07:00" duration-ms="19400">
+  <suite started-at="2025-04-23T19:23:08 GMT+07:00" name="Default suite" finished-at="2025-04-23T19:23:42 GMT+07:00" duration-ms="33991">
     <groups>
     </groups>
-    <test started-at="2025-03-29T21:25:07 GMT+07:00" name="Default test" finished-at="2025-03-29T21:25:26 GMT+07:00" duration-ms="19400">
-      <class name="autotest.testcases.admin.SchoolTest">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.testcases.admin.SchoolTest@2a3b5b47]" started-at="2025-03-29T21:25:07 GMT+07:00" name="startBrowser" finished-at="2025-03-29T21:25:09 GMT+07:00" duration-ms="2106" status="PASS">
+    <test started-at="2025-04-23T19:23:08 GMT+07:00" name="Default test" finished-at="2025-04-23T19:23:42 GMT+07:00" duration-ms="33991">
+      <class name="autotest.testcasepage.Rise.CreatTaskTest">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.testcasepage.Rise.CreatTaskTest@128d2484]" started-at="2025-04-23T19:23:08 GMT+07:00" name="startBrowser" finished-at="2025-04-23T19:23:16 GMT+07:00" duration-ms="7648" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="loginadmin()[pri:0, instance:autotest.testcases.admin.SchoolTest@2a3b5b47]" started-at="2025-03-29T21:25:09 GMT+07:00" name="loginadmin" finished-at="2025-03-29T21:25:26 GMT+07:00" duration-ms="17253" status="PASS">
+        <test-method signature="addtaskSucsess()[pri:1, instance:autotest.testcasepage.Rise.CreatTaskTest@128d2484]" started-at="2025-04-23T19:23:16 GMT+07:00" name="addtaskSucsess" description="Kiểm tra tạo task thành công" finished-at="2025-04-23T19:23:42 GMT+07:00" duration-ms="26246" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Tên không đúng expected [Create task dashboards and reports] but found [null]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Tên không đúng expected [Create task dashboards and reports] but found [null]
+at org.testng.Assert.fail(Assert.java:99)
+at org.testng.Assert.failNotEquals(Assert.java:1037)
+at org.testng.Assert.assertEqualsImpl(Assert.java:140)
+at org.testng.Assert.assertEquals(Assert.java:122)
+at org.testng.Assert.assertEquals(Assert.java:629)
+at autotest.testcasepage.Rise.CreatTaskTest.addtaskSucsess(CreatTaskTest.java:141)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginadmin -->
-      </class> <!-- autotest.testcases.admin.SchoolTest -->
+        </test-method> <!-- addtaskSucsess -->
+      </class> <!-- autotest.testcasepage.Rise.CreatTaskTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

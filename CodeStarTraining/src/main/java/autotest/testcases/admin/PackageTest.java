@@ -35,8 +35,8 @@ public class PackageTest extends CommonPage {
         
         homepage.clickMenu("Gói");
         homepage.click_tao("Tạo gói");
-        
-        packagePage.createPackage("Gói chuyên môn", "Gói chuyên môn dành cho chuyên Toán", "25", "3000000", "2500000");
+ 
+        packagePage.createPackage("Gói chuyên môn Toán", "Gói chuyên môn dành cho chuyên Toán", "25", "3000000", "2500000");
 		pause(5);
 
         driver.get("https://f-class.site/package/");

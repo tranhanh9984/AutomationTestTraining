@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcases.admin.SchoolTest">
+      <class name="autotest.testcasepage.Rise.CreatTaskTest">
         <methods>
-          <include name="loginadmin"/>
+          <include name="addtaskSucsess"/>
           <include name="startBrowser"/>
         </methods>
-      </class> <!-- autotest.testcases.admin.SchoolTest -->
+      </class> <!-- autotest.testcasepage.Rise.CreatTaskTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
