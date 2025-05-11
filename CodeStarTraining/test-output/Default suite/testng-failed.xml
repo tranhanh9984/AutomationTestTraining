@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcasesHD.LoginTestcases">
+      <class name="autotest.thuchanh.Buoi17TH2">
         <methods>
-          <include name="loginsuccess"/>
-          <include name="startBrowser"/>
+          <include name="getWindowHandles"/>
           <include name="closeBrowser"/>
+          <include name="startBrowser"/>
         </methods>
-      </class> <!-- autotest.testcasesHD.LoginTestcases -->
+      </class> <!-- autotest.thuchanh.Buoi17TH2 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

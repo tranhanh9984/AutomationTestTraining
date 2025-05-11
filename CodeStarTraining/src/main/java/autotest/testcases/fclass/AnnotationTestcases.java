@@ -2,10 +2,9 @@ package autotest.testcases.fclass;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
-import autocom.constant.KeywordConstant;
-import autotest.pages.fclass.LoginPage;
 
 public class AnnotationTestcases extends CommonPage{
 
@@ -15,9 +14,16 @@ public class AnnotationTestcases extends CommonPage{
 
 	
 	
+	@Test
+	public void testCases() {
+		System.out.print("Test	");
+	}
+	
+	
+	
 	@BeforeTest
 	public void startBrowser() {
-		driver = this.startBrower(KeywordConstant.urlStu, KeywordConstant.BROWSER);
+		System.out.print("@BeforeTest");
 	//	login = new LoginPage();
 	//	login.driver = driver;
 	}

@@ -1,5 +1,6 @@
 package autotest.testcasesHD;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -12,10 +13,8 @@ import autotest.pagesHD.LoginPage;
 
 public class LoginTestcases extends CommonPage{
 
-	public LoginTestcases() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
+	WebDriver dr;
 	LoginPage loginPage;
 	HomePage homePage;
 	
@@ -37,17 +36,17 @@ public class LoginTestcases extends CommonPage{
 	
 	@Test
 	public void loginWrongUser() {
-		loginPage.login(KeywordConstant.usernameHD, "123456789");
+		loginPage.login(KeywordConstant.usernameHD+'1', KeywordConstant.passwordHD);
 		pause(2);
 		String text = loginPage.getErrorMsg();
-		Assert.assertEquals(text, "Password incorrect for username "+KeywordConstant.usernameHD);
+		Assert.assertEquals(text, "No account found for username "+KeywordConstant.usernameHD+'1');
 	}
 	
 	@BeforeTest
 	public void startBrowser() {
 		driver = this.startBrower(KeywordConstant.urlHD, KeywordConstant.BROWSER);
-		loginPage = new LoginPage();
-		loginPage.driver = driver;
+		loginPage = new LoginPage(driver);
+		//loginPage.driver = driver;
 		homePage = new HomePage();
 		homePage.driver = driver;
 	}
