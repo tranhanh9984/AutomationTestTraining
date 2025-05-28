@@ -32,9 +32,9 @@ public class Buoi9TH extends CommonPage {
 		
 	}
 	
-	@AfterTest
-	public void closeBrowser() {
-	//	this.closeBrowser(driver);
-		
-	}
+//	@AfterTest
+//	public void closeBrowser() {
+//	//	this.closeBrowser(driver);
+//		
+//	}
 }
