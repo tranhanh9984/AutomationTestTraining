@@ -1,18 +1,23 @@
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonFuncs.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonPage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\JDBCConnection.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestLogger.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestReport.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\constant\KeywordConstant.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\DanhSachHoaDon.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Exam1.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Exam2.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\ExamAntonation.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Hanh_BaiTap.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\HomePage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\LoginPage.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\TaoHoaDon.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\Thuy_BaiTap.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\HomePageTestCases.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\LoginTestcases.java
-E:\2024\Self Study\AutomationTesting\Invoice\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\TaoHoaDonTestcases.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonFuncs.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\CommonPage.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\JDBCConnection.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestLogger.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\common\TestReport.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autocom\constant\KeywordConstant.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\admin\LoginPageAdmin.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\fclass\HomePage.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\fclass\LoginPage.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pages\teacher\LoginPage.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pagesHD\EditHoaDon.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pagesHD\HomePage.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\pagesHD\LoginPage.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\admin\LoginTestcases.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\admin\package-info.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\fclass\AnnotationTestcases.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\fclass\LoginTestcases.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcases\teacher\LoginTestcases.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\testcasesHD\LoginTestcases.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\thuchanh\Buoi12TH.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\thuchanh\Buoi17TH.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\thuchanh\Buoi17TH2.java
+F:\Khoa5\AutomationTestTraining\CodeStarTraining\src\main\java\autotest\thuchanh\Buoi9TH.java
