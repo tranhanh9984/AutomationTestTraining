@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
@@ -34,7 +36,7 @@ public class LoginTestcases extends CommonPage{
 		Assert.assertEquals(text, "Password incorrect for username "+KeywordConstant.usernameHD);
 	}
 	
-	@Test
+	@Test 
 	public void loginWrongUser() {
 		loginPage.login(KeywordConstant.usernameHD+'1', KeywordConstant.passwordHD);
 		pause(2);
@@ -43,8 +45,9 @@ public class LoginTestcases extends CommonPage{
 	}
 	
 	@BeforeTest
-	public void startBrowser() {
-		driver = this.startBrower(KeywordConstant.urlHD, KeywordConstant.BROWSER);
+	@Parameters("browser")
+	public void startBrowser(@Optional("firefox")String browser) {
+		driver = this.startBrower(KeywordConstant.urlHD, browser);
 		loginPage = new LoginPage(driver);
 		//loginPage.driver = driver;
 		homePage = new HomePage();

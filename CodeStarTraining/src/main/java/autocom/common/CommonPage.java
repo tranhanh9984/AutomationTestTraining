@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -70,11 +71,13 @@ public class CommonPage {
 		if ("chrome".equals(browser)) {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 			driver = new ChromeDriver();
-		} else if ("iexplorer".equals(browser)) {
-			driver = new InternetExplorerDriver();
+		} else if ("edge".equals(browser)) {
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			driver = new EdgeDriver();
 		} else if ("safari".equals(browser)) {
 			driver = new SafariDriver();
 		} else {
+			System.setProperty("webdriver.gecko.driver",  System.getProperty("user.dir") + "/driver/geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 
