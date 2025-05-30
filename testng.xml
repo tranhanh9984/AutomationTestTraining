@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="AutoRiseSuite" verbose="1" parallel="tests">
+    
+    <test name="autoRise_Chrome">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="TCRise.autoRise" />
+        </classes>
+    </test>
+
+    <test name="autoRise_Firefox">
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <class name="TCRise.autoRise" />
+        </classes>
+    </test>
+
+</suite>
