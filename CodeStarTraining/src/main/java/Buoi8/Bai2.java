@@ -2,6 +2,7 @@ package Buoi8;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,6 +25,11 @@ public class Bai2 extends CommonPage {
 		driver.findElement(By.id("deadline")).sendKeys("20-02-2020");
 		driver.findElement(By.id("price")).sendKeys("20000");
 
+		driver.findElement(By.xpath("//label[text() = 'Labels']/following-sibling::input")).click();
+		driver.findElement(By.xpath("//label[text() = 'Labels']/following-sibling::input")).sendKeys("Perfect");
+		driver.findElement(By.xpath("//label[text() = 'Labels']/following-sibling::input")).sendKeys(Keys.ENTER);
+		
+		
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		pause(10);
 		
