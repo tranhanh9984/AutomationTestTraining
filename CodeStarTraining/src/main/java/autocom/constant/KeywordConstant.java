@@ -28,5 +28,8 @@ public class KeywordConstant {
 	public static final String passwordHD = "0312303803-999";
 	public static final String urlHD = "https://uat-invoice.kaike.vn/login";
 	
+
+	public static final String urlRise = "https://rise.fairsketch.com/index.php/signin";
+	
 	public static final String BROWSER = "chrome";
 }
