@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcasesHD.LoginTestcases">
+      <class name="autotest.buoi8.deleteProject">
         <methods>
-          <include name="loginWrongUser"/>
-          <include name="loginWrongpass"/>
-          <include name="loginsuccess"/>
-          <include name="startBrowser"/>
           <include name="closeBrowser"/>
+          <include name="startBrowser"/>
+          <include name="testLogin"/>
         </methods>
-      </class> <!-- autotest.testcasesHD.LoginTestcases -->
+      </class> <!-- autotest.buoi8.deleteProject -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

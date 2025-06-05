@@ -80,7 +80,7 @@ public class CommonPage {
 			System.setProperty("webdriver.gecko.driver",  System.getProperty("user.dir") + "/driver/geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
-
+	
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(url);
