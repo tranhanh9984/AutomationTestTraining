@@ -1,0 +1,11 @@
+autotest\pages\teacher\LoginPage.class
+autocom\common\CommonFuncs.class
+autotest\pagesHD\LoginPage.class
+autotest\testcases\admin\package-info.class
+autotest\pages\fclass\HomePage.class
+autotest\pagesHD\HomePage.class
+autocom\common\CommonPage.class
+autotest\pages\fclass\LoginPage.class
+autotest\pages\admin\LoginPageAdmin.class
+autotest\pagesHD\EditHoaDon.class
+autocom\constant\KeywordConstant.class
