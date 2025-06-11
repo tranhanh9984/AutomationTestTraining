@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-06-06T17:22:16 ICT" name="Default suite" finished-at="2025-06-06T17:22:48 ICT" duration-ms="32065">
+  <suite started-at="2025-06-11T18:36:10 ICT" name="Default suite" finished-at="2025-06-11T18:36:39 ICT" duration-ms="29481">
     <groups>
     </groups>
-    <test started-at="2025-06-06T17:22:16 ICT" name="Default test" finished-at="2025-06-06T17:22:48 ICT" duration-ms="32065">
-      <class name="autotest.buoi8.Bai1">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.buoi8.Bai1@54d9d12d]" started-at="2025-06-06T17:22:16 ICT" name="startBrowser" finished-at="2025-06-06T17:22:25 ICT" duration-ms="8895" status="PASS">
+    <test started-at="2025-06-11T18:36:10 ICT" name="Default test" finished-at="2025-06-11T18:36:39 ICT" duration-ms="29481">
+      <class name="autotest_buoi9.Tasks">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest_buoi9.Tasks@34e9fd99]" started-at="2025-06-11T18:36:10 ICT" name="startBrowser" finished-at="2025-06-11T18:36:19 ICT" duration-ms="8559" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="testDeleteProject()[pri:0, instance:autotest.buoi8.Bai1@54d9d12d]" started-at="2025-06-06T17:22:25 ICT" name="testDeleteProject" finished-at="2025-06-06T17:22:48 ICT" duration-ms="23094" status="PASS">
+        <test-method signature="testDeleteTask()[pri:0, instance:autotest_buoi9.Tasks@34e9fd99]" started-at="2025-06-11T18:36:19 ICT" name="testDeleteTask" finished-at="2025-06-11T18:36:39 ICT" duration-ms="20832" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testDeleteProject -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:autotest.buoi8.Bai1@54d9d12d]" started-at="2025-06-06T17:22:48 ICT" name="closeBrowser" finished-at="2025-06-06T17:22:48 ICT" duration-ms="0" status="PASS">
+        </test-method> <!-- testDeleteTask -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:autotest_buoi9.Tasks@34e9fd99]" started-at="2025-06-11T18:36:39 ICT" name="closeBrowser" finished-at="2025-06-11T18:36:39 ICT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
-      </class> <!-- autotest.buoi8.Bai1 -->
+      </class> <!-- autotest_buoi9.Tasks -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

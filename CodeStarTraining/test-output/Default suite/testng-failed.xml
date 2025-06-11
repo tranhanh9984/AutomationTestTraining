@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.buoi8.Bai1">
+      <class name="autotest_buoi9.Tasks">
         <methods>
-          <include name="testDeleteProject"/>
           <include name="startBrowser"/>
           <include name="closeBrowser"/>
+          <include name="testDeleteTask"/>
         </methods>
-      </class> <!-- autotest.buoi8.Bai1 -->
+      </class> <!-- autotest_buoi9.Tasks -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
