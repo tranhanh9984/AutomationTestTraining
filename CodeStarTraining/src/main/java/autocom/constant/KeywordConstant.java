@@ -31,5 +31,7 @@ public class KeywordConstant {
 
 	public static final String urlRise = "https://rise.fairsketch.com/index.php/signin";
 	
+	public static final String urlTestXpath = "https://selectorshub.com/xpath-practice-page/";
+	
 	public static final String BROWSER = "chrome";
 }

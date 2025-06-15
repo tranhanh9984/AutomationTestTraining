@@ -14,6 +14,9 @@ public class Bai2 extends CommonPage {
 	
 	@Test
     public void testAddProject() {
+		addCookies();
+		clearAll();
+		this.Login("admin@demo.com", "riseDemo");
 		clickMenu("Projects");
 		driver.findElement(By.linkText("Add project")).click();
 		
@@ -38,12 +41,7 @@ public class Bai2 extends CommonPage {
     }
 	
 	public void clickMenu(String menu) {
-		addCookies();
-		clearAll();
-		this.Login("admin@demo.com", "riseDemo");
-		
 		driver.findElement(By.xpath("//span[@class='menu-text ' and text()='" + menu + "']")).click();
-
 	}
 	
 	public void Login(String name, String password) {

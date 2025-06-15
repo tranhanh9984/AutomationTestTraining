@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Buoi8.BTVN">
+      <class name="autotest.testcase.rise.ClientTestcases">
         <methods>
+          <include name="testAddClient"/>
           <include name="closeBrowser"/>
-          <include name="deleteProject"/>
           <include name="startBrowser"/>
+          <include name="testEditClient"/>
+          <include name="testDeleteClient"/>
         </methods>
-      </class> <!-- Buoi8.BTVN -->
+      </class> <!-- autotest.testcase.rise.ClientTestcases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

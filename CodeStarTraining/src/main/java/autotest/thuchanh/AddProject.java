@@ -1,6 +1,4 @@
-package Buoi8;
-
-import java.awt.RenderingHints.Key;
+package autotest.thuchanh;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -12,46 +10,13 @@ import org.testng.annotations.Test;
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
 
-public class BTVN extends CommonPage {
+public class AddProject extends CommonPage {
 	
 	@Test
-	public void deleteProject() {
-		testAddProject();
-
-		searchProject("Ha Anh");
-		
-		editProject();
-		
-		driver.findElement(By.xpath("//*[@id=\"project-table\"]/tbody/tr/td[9]/a[2]")).click();
-		
-		pause(5);
-		driver.findElement(By.xpath("//*[@id=\"confirmDeleteButton\"]")).click();
-
-		searchProject("Ha Anh");
-	
-	}
-	
-	
-	public void editProject() {
-		driver.findElement(By.xpath("//*[@id=\"project-table\"]/tbody/tr/td[9]/a[1]")).click();
-		driver.findElement(By.id("price")).clear();
-		driver.findElement(By.id("price")).sendKeys("50000");
-		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		pause(5);
-	}
-	
-	
-	public void searchProject(String str) {
-//		testAddProject();
-//		clickMenu("Projects");
-		driver.findElement(By.xpath("//*[@id=\"project-table_filter\"]/label/input")).clear();
-		driver.findElement(By.xpath("//*[@id=\"project-table_filter\"]/label/input")).sendKeys(str, Keys.ENTER);
-		pause(5);
-		
-	}
-	
-
     public void testAddProject() {
+		addCookies();
+		clearAll();
+		this.Login("admin@demo.com", "riseDemo");
 		clickMenu("Projects");
 		driver.findElement(By.linkText("Add project")).click();
 		
@@ -69,18 +34,14 @@ public class BTVN extends CommonPage {
 		
 		
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		pause(5);
-
+		pause(10);
+		
+		
 	
     }
 	
 	public void clickMenu(String menu) {
-		addCookies();
-		clearAll();
-		this.Login("admin@demo.com", "riseDemo");
-		
 		driver.findElement(By.xpath("//span[@class='menu-text ' and text()='" + menu + "']")).click();
-
 	}
 	
 	public void Login(String name, String password) {
