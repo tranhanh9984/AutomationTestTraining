@@ -18,38 +18,42 @@ public class Tasks extends CommonPage{
 	
 	private LoginPage loginPage;
 	
-//	@Test
-//	public void testAddTask() {
+	@Test
+	public void testAddTask() {
 //		loginPage.login("admin@demo.com", "riseDemo");
-//		clickTasksMenu();
-//		clickAddTask();
-//		addTask("Learning Selenium", "Reliable quarterly releases and critical updates, delivered on time for over two decades.", "Client", "Blaze Rohan", "Ram Kumar", "29-06-2025", "29-08-2025");
-//		pause(2);
-//		verifyAddedTask("Learning Selenium");
-//	}
+		clickTasksMenu();
+		clickAddTask();
+		addTask("Learning Selenium", "Reliable quarterly releases and critical updates, delivered on time for over two decades.", "Client", "Blaze Rohan", "Mark Thomas", "29-06-2025", "29-08-2025");
+		pause(2);
+		verifyAddedTask("Learning Selenium");
+	}
 	
-//	@Test
-//	public void testEditTask() {
+	@Test
+	public void testEditTask() {
 //		loginPage.login("admin@demo.com", "riseDemo");
-//		clickTasksMenu();
-//		clickAddTask();
-//		addTask("Learning Selenium", "Reliable quarterly releases and critical updates, delivered on time for over two decades.", "Client", "Blaze Rohan", "Ram Kumar", "29-06-2025", "29-08-2025");
-//		pause(2);
-//		
-//		clickEditButton("Learning Selenium");
-//		pause(2);
-//		editTask("Done", "Major", "Bug");
-//	}
+		clickTasksMenu();
+		clickAddTask();
+		addTask("Learning Selenium", "Reliable quarterly releases and critical updates, delivered on time for over two decades.", "Client", "Blaze Rohan", "Mark Thomas", "29-06-2025", "29-08-2025");
+		pause(2);
+		searchTask("Learning Selenium");
+		
+		clickEditButton("Learning Selenium");
+		pause(2);
+		editTask("Done", "Major", "Bug");
+		pause(2);
+//		deleteTask();
+	}
 	
 	@Test
 	public void testDeleteTask() {
-		loginPage.login("admin@demo.com", "riseDemo");
+//		loginPage.login("admin@demo.com", "riseDemo");
 		clickTasksMenu();
 		clickAddTask();
-		addTask("Learning Selenium", "Reliable quarterly releases and critical updates, delivered on time for over two decades.", "Client", "Blaze Rohan", "Ram Kumar", "29-06-2025", "29-08-2025");
+		addTask("Learning Selenium", "Reliable quarterly releases and critical updates, delivered on time for over two decades.", "Client", "Blaze Rohan", "Mark Thomas", "29-06-2025", "29-08-2025");
 		pause(2);
 		
-		deleteTask("Learning Selenium");
+		searchTask("Learning Selenium");
+		deleteTask();
 		
 		verifyMessage("The record has been deleted.");
 	}
@@ -68,9 +72,6 @@ public class Tasks extends CommonPage{
 	}
 	
 	private void clickEditButton(String name) {
-		driver.findElement(By.xpath("//div[@id='task-table_filter']//input")).sendKeys(name);
-		driver.findElement(By.xpath("//div[@id='task-table_filter']//input")).sendKeys(Keys.ENTER);
-		pause(2);
 		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='task-table']/tbody/tr"));
 		
 		rows.get(0).findElement(By.xpath("./td[2]/a")).click();
@@ -140,10 +141,13 @@ public class Tasks extends CommonPage{
 		clickSubmit();
 	}
 	
-	private void deleteTask(String name) {
+	private void searchTask(String name) {
 		driver.findElement(By.xpath("//div[@id='task-table_filter']//input")).sendKeys(name);
 		driver.findElement(By.xpath("//div[@id='task-table_filter']//input")).sendKeys(Keys.ENTER);
 		pause(2);
+	}
+	
+	private void deleteTask() {
 		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='task-table']/tbody/tr"));
 		
 		rows.get(0).findElement(By.cssSelector("[title='Delete task'")).click();
@@ -156,12 +160,13 @@ public class Tasks extends CommonPage{
 	public void startBrowser() {
 		driver = this.startBrower(KeywordConstant.urlRise, "chrome");
 		loginPage = new LoginPage(driver);
+		loginPage.login("admin@demo.com", "riseDemo");
 		
 	}
 	
 	@AfterTest
 	public void closeBrowser() {
-		this.closeBrowser(driver);
+//		this.closeBrowser(driver);
 		
 	}
 }

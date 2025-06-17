@@ -17,37 +17,39 @@ import autotest.pages.login.LoginPage;
 public class Clients extends CommonPage {
 
 	 private LoginPage loginPage;
-	
-//	@Test
-//	public void testAddClients() {
+	 
+	@Test
+	public void testAddClients() {
 //		loginPage.login("admin@demo.com", "riseDemo");
-//		clickProjectMenu();
-//		clickAddClient();
-//		addClients("person", "Bich Lien", "Michael Wood", "Nam Tu Liem", "Ha Noi", "Khong", "10000", "Viet Nam", "Silver", "AMD");
-//		pause(2);
-//		clickTabClients();
-//		verifyAddedClient("Bich Lien");
-//	}
+		clickProjectMenu();
+		clickAddClient();
+		addClients("person", "Bich Lien", "Michael Wood", "Nam Tu Liem", "Ha Noi", "Khong", "10000", "Viet Nam", "Silver", "AMD");
+		pause(2);
+		clickTabClients();
+		verifyAddedClient("Bich Lien");
+	}
 	
-//	@Test
-//	public void testEditClients() {
+	@Test
+	public void testEditClients() {
 //		loginPage.login("admin@demo.com", "riseDemo");
-//		clickProjectMenu();
-//		clickTabClients();
-//		
-//		clickAddClient();
-//		addClients("person", "Bich Lien", "Michael Wood", "Nam Tu Liem", "Ha Noi", "Khong", "10000", "Viet Nam", "Silver", "AMD");
-//		pause(5);
-//		
-//		clickEditButton("Bich Lien");
-//		pause(2);
-//		
-//		editClients("Đồng", "Potential");
-//	}
+		clickProjectMenu();
+		clickTabClients();
+		
+		clickAddClient();
+		addClients("person", "Bich Lien", "Michael Wood", "Nam Tu Liem", "Ha Noi", "Khong", "10000", "Viet Nam", "Silver", "AMD");
+		pause(5);
+		
+		clickEditButton("Bich Lien");
+		pause(2);
+		
+		editClients("Đồng", "Potential");
+		
+		
+	}
 	
 	@Test
 	public void testDeleteClients() {
-		loginPage.login("admin@demo.com", "riseDemo");
+//		loginPage.login("admin@demo.com", "riseDemo");
 		clickProjectMenu();
 		clickTabClients();
 		
@@ -56,24 +58,24 @@ public class Clients extends CommonPage {
 		verifyMessage("The record has been deleted.");
 	}
 	
-	private void clickProjectMenu() {
+	public void clickProjectMenu() {
 		driver.findElement(By.linkText("Clients")).click();
 		
 	}
 	
-	private void clickAddClient() {
+	public void clickAddClient() {
 		driver.findElement(By.xpath("//a[@title='Add client']")).click();
 	}
 	
-	private void clickSubmit() {
+	public void clickSubmit() {
 		driver.findElement(By.cssSelector("button[type='submit']")).click();
 	}
 	
-	private void clickTabClients() {
+	public void clickTabClients() {
 		driver.findElement(By.xpath("//ul[@id='client-tabs']//a[contains(text(), 'Clients')]")).click();
 	}
 	
-	private void clickEditButton(String name) {
+	public void clickEditButton(String name) {
 		driver.findElement(By.xpath("//div[@id='client-table_filter']//input")).sendKeys(name);
 		driver.findElement(By.xpath("//div[@id='client-table_filter']//input")).sendKeys(Keys.ENTER);
 		pause(2);
@@ -82,7 +84,7 @@ public class Clients extends CommonPage {
 		rows.get(0).findElement(By.cssSelector("[title='Edit client'")).click();
 	}
 	
-	private void verifyAddedClient(String name) {
+	public void verifyAddedClient(String name) {
 		driver.findElement(By.xpath("//div[@id='client-table_filter']//input")).sendKeys(name);
 		driver.findElement(By.xpath("//div[@id='client-table_filter']//input")).sendKeys(Keys.ENTER);
 		pause(2);
@@ -94,13 +96,13 @@ public class Clients extends CommonPage {
 		Assert.assertTrue(actualText.contains(name), "Không tìm thấy nội dung mong muốn!");
 	}
 	
-	private void verifyMessage(String message) {
+	public void verifyMessage(String message) {
 		WebElement element = driver.findElement(By.className("app-alert"));
 		Assert.assertTrue(element.isDisplayed(), "Element should be visible on the page");
 		Assert.assertTrue(driver.findElement(By.className("app-alert-message")).getText().contentEquals(message),  "Message text does not match");
 	}
 	
-	private void addClients(String type, String name, String owner, String address, String city, String state, String zip, String country, String clientGroups, String currency) {
+	public void addClients(String type, String name, String owner, String address, String city, String state, String zip, String country, String clientGroups, String currency) {
 		if (type.equals("person")) {			
 			driver.findElement(By.xpath("//input[@id='type_person']")).click();
 		}
@@ -126,7 +128,7 @@ public class Clients extends CommonPage {
 		clickSubmit();
 	}
 	
-	private void editClients(String currencySymbol, String label) {
+	public void editClients(String currencySymbol, String label) {
 		driver.findElement(By.id("currency_symbol")).sendKeys(currencySymbol);
 		driver.findElement(By.xpath("//label[@for='client_labels']//following::div[1]/div")).click();
 		driver.findElement(By.xpath("//ul[@class='select2-choices']//label[contains(text(),'Labels')]//following::input")).sendKeys(label);
@@ -134,7 +136,7 @@ public class Clients extends CommonPage {
 		clickSubmit();
 	}
 	
-	private void deleteClient(String name) {
+	public void deleteClient(String name) {
 		driver.findElement(By.xpath("//div[@id='client-table_filter']//input")).sendKeys(name);
 		driver.findElement(By.xpath("//div[@id='client-table_filter']//input")).sendKeys(Keys.ENTER);
 		pause(2);
@@ -150,6 +152,7 @@ public class Clients extends CommonPage {
 	public void startBrowser() {
 		driver = this.startBrower(KeywordConstant.urlRise, "chrome");
 		loginPage = new LoginPage(driver);
+		loginPage.login("admin@demo.com", "riseDemo");
 		
 	}
 	

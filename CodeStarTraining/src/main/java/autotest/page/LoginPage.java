@@ -1,4 +1,4 @@
-package autotest.pages.login;
+package autotest.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
