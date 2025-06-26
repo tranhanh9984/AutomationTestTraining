@@ -19,7 +19,7 @@
 //	public void handleCheckbox() {
 //		boolean isChecked = driver.findElement(By.xpath("//label[@for = 'tree-node-home']/input")).isSelected();
 //		if(!isChecked) {
-//			driver.findElement(By.xpath("//label[@for = 'tree-node-home']/input")).click();
+//			driver.findElement(By.xpath("//label[@for = 'tree-node-home']")).click();
 //		}
 //		isChecked = driver.findElement(By.xpath("//label[@for = 'tree-node-home']/input")).isSelected();
 //		System.out.println(isChecked);

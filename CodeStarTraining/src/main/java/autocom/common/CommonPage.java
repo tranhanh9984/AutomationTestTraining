@@ -1,11 +1,14 @@
 package autocom.common;
 
+import static autocom.common.Locator.*;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -13,9 +16,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.Assert;
 
 public class CommonPage {
 
@@ -82,7 +85,7 @@ public class CommonPage {
 		}
 
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // set timout, thoi gian cho cac phan tu duoc khoi tao
 		driver.navigate().to(url);
 		return driver;
 	}
@@ -102,6 +105,138 @@ public class CommonPage {
 			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();			
 		}
 	}	
+	
+	public void clickMenuLink(String strSelected) {
+		driver.findElement(By.linkText(strSelected)).click();
+	}
+	
+	public void clickAdd(String title) {
+	    driver.findElement(btnAdd(title)).click();
+	}
+	// click submit (save)
+	public void clickSubmit() {
+		driver.findElement(btnSubmit).click();
+	}
+	
+	//
+	public void search(String page, String title) {
+		By inputSearch = tableSearchInput(page);
+		WebElement searchInput = driver.findElement(inputSearch);
+		searchInput.clear();
+		searchInput.sendKeys(title);
+		searchInput.sendKeys(Keys.ENTER);
+		pause(2);
+	}
+	
+	
+	// enter description
+	public void enterDescription(String value) {
+		driver.findElement(descriptionBox).click();
+		driver.findElement(descriptionEditor).sendKeys(value);
+	}
+	
+	// Dropdown
+	public void clickDropdown(String label) {
+		By byLocator = clickDropdownNearLabel(label);
+		WebElement el = driver.findElement(byLocator);
+		el.click();
+	}
+	
+	public void sendKeysAndEnterDropdown(String label, String value) {
+		By byLocator = inputDropdownNearLabel(label);
+		WebElement el = driver.findElement(byLocator);
+
+		el.sendKeys(value);
+		el.sendKeys(Keys.ENTER);
+	}
+	
+	public void selectOption(String label, String value) {
+        By byLocator = optionDropdown(value);
+        driver.findElement(byLocator).click();
+    }
+	
+	public void selectOptionByInput(String label, String value) {
+		clickDropdown(label);
+		pause(1);
+		sendKeysAndEnterDropdown(label, value);
+		pause(1);
+	}
+	
+	public void selectOptionByClick(String label, String value) {
+		clickDropdown(label);
+		pause(1);
+		selectOption(label, value);
+		pause(1);
+	}
+	
+	// action
+	
+	public void clickEditButton(String page, String name) {
+		
+		List<WebElement> rows = driver.findElements(tableRows(page));
+		
+		rows.get(0).findElement(colTitle).click();
+		pause(1);
+		
+		driver.findElement(btnEdit).click();
+	}
+	
+	public void deleteTask(String page, String title) {
+		List<WebElement> rows = driver.findElements(tableRows(page));
+		
+		 for (WebElement row : rows) {
+	        if (row.getText().contains(title)) {
+	            row.findElement(btnDelete).click();
+	            pause(1);
+	            driver.findElement(btnConfirmDelete).click();
+	            return;
+	        }
+	    }
+		 
+		 System.out.println("No records found with title: " + title);
+	}
+	
+	public void deleteAllTask(String page, String title) {
+		search(page, title);
+		
+	    List<WebElement> rows = driver.findElements(tableRows(page));
+	    if (isTableEmpty()) {
+	    	return;
+	    }
+	    while (rows.size() > 0) {
+	        rows.get(0).findElement(btnDelete).click();
+	        pause(1);
+	        driver.findElement(btnConfirmDelete).click();
+	        pause(1);
+
+	        if (isTableEmpty()) {
+	        	break;
+		    }
+	        
+	        rows = driver.findElements(tableRows(page));
+	    }
+	}
+	
+	public boolean isTableEmpty() {
+		By tableEmpty = xPathTableEmpty("task");
+	    List<WebElement> emptyElements = driver.findElements(tableEmpty);
+	    if (!emptyElements.isEmpty()) {
+	        System.out.println("No records found");
+	        return true; 
+	    }
+	    return false;
+	}
+	
+	// verify
+	public void verifyAddedTask(String page, String title) {
+		search(page, title);
+		
+		List<WebElement> rows = driver.findElements(tableRows(page));
+		Assert.assertTrue(rows.size() > 0, "Không tìm thấy nội dung mong muốn!");
+		
+		String actualText = rows.get(0).findElement(colTitle).getText();
+		Assert.assertTrue(actualText.contains(title), "Không tìm thấy nội dung mong muốn!");
+	}
 	
 	public void scrollToElement(String xpath) {
 		JavascriptExecutor jse6 = (JavascriptExecutor) driver;

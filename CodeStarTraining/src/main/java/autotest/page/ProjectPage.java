@@ -51,6 +51,7 @@ public class ProjectPage extends CommonPage {
 
     public void addProject(HashMap<String, String> project) {
     	driver.findElement(inputTitle).sendKeys(project.get("title"));
+    	
         driver.findElement(descriptionBox).click();
         driver.findElement(descriptionEditor).sendKeys(project.get("description"));
         driver.findElement(inputStartDate).sendKeys(project.get("startDate"));

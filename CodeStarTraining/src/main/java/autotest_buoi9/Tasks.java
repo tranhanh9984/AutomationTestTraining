@@ -58,9 +58,9 @@ public class Tasks extends CommonPage{
 		verifyMessage("The record has been deleted.");
 	}
 	
-	private void clickSubmit() {
-		driver.findElement(By.cssSelector("button[type='submit']")).click();
-	}
+//	private void clickSubmit() {
+//		driver.findElement(By.cssSelector("button[type='submit']")).click();
+//	}
 	
 	private void clickTasksMenu() {
 		driver.findElement(By.linkText("Tasks")).click();

@@ -8,7 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
+import static autocom.common.Locator.*;
 import autocom.common.CommonPage;
 
 public class ClientPage extends CommonPage {
@@ -65,10 +65,6 @@ public class ClientPage extends CommonPage {
 
 	public void clickAddClient() {
 	    driver.findElement(btnAddClient).click();
-	}
-
-	private void clickSubmit() {
-	    driver.findElement(btnSubmit).click();
 	}
 
 	public void clickTabClients() {

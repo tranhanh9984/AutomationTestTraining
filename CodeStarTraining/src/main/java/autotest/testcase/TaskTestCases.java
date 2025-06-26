@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
 import autotest.page.TaskPage;
-import autotest.pages.login.LoginPage;
+import autotest.page.LoginPage;
 
 public class TaskTestCases extends CommonPage {
 
@@ -21,25 +21,25 @@ public class TaskTestCases extends CommonPage {
 	@Test(priority=1)
 	public void testAddTask() {
 		taskPage.clickTasksMenu();
-		taskPage.deleteAllTask(task.get("title"));
+		taskPage.deleteAllTask("task", task.get("title"));
 		pause(2);
 		
-		taskPage.clickAddTask();
+		taskPage.clickAdd("Add task");
 		taskPage.addTask(task);
 		pause(2);
-		taskPage.verifyAddedTask(task.get("title"));
+		taskPage.verifyAddedTask("task", task.get("title"));
 	}
 	
 	@Test(priority=2, dependsOnMethods = "testAddTask")
 	public void testEditTask() {
-		taskPage.clickEditButton(task.get("title"));
+		taskPage.clickEditButton("task", task.get("title"));
 		taskPage.editTask(task);
 		pause(2);
 	}
 	
 	@Test(priority=3, dependsOnMethods = "testEditTask")
 	public void testDeleteTask() {
-		taskPage.deleteTask(task.get("title"));
+		taskPage.deleteTask("task", task.get("title"));
 		pause(2);
 //		taskPage.verifyMessage("The record has been deleted.");
 	}

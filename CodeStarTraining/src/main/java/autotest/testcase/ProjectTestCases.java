@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
 import autotest.page.ProjectPage;
-import autotest.pages.login.LoginPage;
+import autotest.page.LoginPage;
 
 public class ProjectTestCases extends CommonPage {
 	LoginPage loginPage;
@@ -59,7 +59,12 @@ public class ProjectTestCases extends CommonPage {
 	public void startBrowser() {
 		driver = this.startBrower(KeywordConstant.urlRise, "chrome");
 		loginPage = new LoginPage(driver);
-		loginPage.login("admin@demo.com", "riseDemo");
+		
+		loginPage.loginWithCookie();
+		
+		if (!loginPage.isLoggedIn()) {
+			loginPage.login("admin@demo.com", "riseDemo");
+		}
 		projectPage = new ProjectPage(driver);
 		setTestProject();
 	}

@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
 import autotest.page.ClientPage;
-import autotest.pages.login.LoginPage;
+import autotest.page.LoginPage;
 
 public class ClientTestCases extends CommonPage {
 
