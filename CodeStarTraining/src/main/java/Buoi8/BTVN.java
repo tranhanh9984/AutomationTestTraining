@@ -24,7 +24,6 @@ public class BTVN extends CommonPage {
 		
 		driver.findElement(By.xpath("//*[@id=\"project-table\"]/tbody/tr/td[9]/a[2]")).click();
 		
-		pause(5);
 		driver.findElement(By.xpath("//*[@id=\"confirmDeleteButton\"]")).click();
 
 		searchProject("Ha Anh");
@@ -37,7 +36,7 @@ public class BTVN extends CommonPage {
 		driver.findElement(By.id("price")).clear();
 		driver.findElement(By.id("price")).sendKeys("50000");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		pause(5);
+	
 	}
 	
 	
@@ -46,7 +45,7 @@ public class BTVN extends CommonPage {
 //		clickMenu("Projects");
 		driver.findElement(By.xpath("//*[@id=\"project-table_filter\"]/label/input")).clear();
 		driver.findElement(By.xpath("//*[@id=\"project-table_filter\"]/label/input")).sendKeys(str, Keys.ENTER);
-		pause(5);
+	
 		
 	}
 	
@@ -69,7 +68,7 @@ public class BTVN extends CommonPage {
 		
 		
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		pause(5);
+	
 
 	
     }

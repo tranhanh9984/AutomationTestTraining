@@ -34,7 +34,7 @@ public class Bai2 extends CommonPage {
 		
 		
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		pause(10);
+	
 		
 		
 	

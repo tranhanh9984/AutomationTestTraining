@@ -20,7 +20,7 @@ public class Buoi9TH extends CommonPage {
 	
 	@Test
 	public void Test1() {
-		this.scrollToElement(btnCheckOutHere);
+//		this.scrollToElement(btnCheckOutHere);
 		driver.findElement(By.xpath(btnCheckOutHere)).click();
 		driver.findElement(By.linkText("Join Training")).click();		
 	}

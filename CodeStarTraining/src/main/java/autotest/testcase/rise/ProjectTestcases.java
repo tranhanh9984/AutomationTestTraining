@@ -30,9 +30,9 @@ public class ProjectTestcases extends CommonPage {
 
     @Test(priority = 1)
     public void testAddProject() {
-        project.deleteAllProjectsByName(projectData.get("title"));
-        project.clickMenu("Projects");
-        project.clickAddProject();
+    	project.clickMenu("Projects");
+        project.deleteAllByName(projectData.get("title"));
+        project.clickAdd("Add project");
         project.fillProjectForm(projectData);
         project.submitForm();
         pause(3);
@@ -41,7 +41,7 @@ public class ProjectTestcases extends CommonPage {
     @Test(priority = 2, dependsOnMethods = "testAddProject")
     public void testEditProject() {
         project.clickMenu("Projects");
-        project.searchProject(projectData.get("title"));
+        project.search(projectData.get("title"));
         project.editProject("50000");
         pause(3);
     }
@@ -49,9 +49,9 @@ public class ProjectTestcases extends CommonPage {
     @Test(priority = 3, dependsOnMethods = "testEditProject")
     public void testDeleteProject() {
         project.clickMenu("Projects");
-        project.searchProject(projectData.get("title"));
-        project.deleteProject();
-        project.searchProject(projectData.get("title"));
+        project.search(projectData.get("title"));
+        project.delete();
+        project.search(projectData.get("title"));
         pause(3);
     }
 

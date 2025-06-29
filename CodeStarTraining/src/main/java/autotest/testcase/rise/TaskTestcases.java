@@ -31,10 +31,10 @@ public class TaskTestcases extends CommonPage {
 
     @Test
     public void testAddTask() {
-        task.deleteAllTasksByName(taskData.get("title")); 
+        task.deleteAllByName(taskData.get("title")); 
         task.clickMenu("Tasks");
         
-        task.clickAddTask();
+        task.clickAdd("Add task");
         task.fillTaskForm(taskData);
         task.submitForm();
         pause(5);
@@ -43,21 +43,16 @@ public class TaskTestcases extends CommonPage {
 
     @Test(dependsOnMethods = "testAddTask")
     public void testEditTask() {
-        task.searchTask(taskData.get("title"));
+        task.search(taskData.get("title"));
         task.editTask("Ha Anh da sua description");
     }
 
     @Test(dependsOnMethods = "testEditTask")
     public void testDeleteClient() {
-    	task.clickMenu("Clients");
-    	task.searchTask(taskData.get("title"));
-    	task.deleteTask();
-    	task.searchTask(taskData.get("title"));
+    	task.search(taskData.get("title"));
+    	task.delete();
+    	task.search(taskData.get("title"));
         pause(3);
-    }
-
-    public void testDeleteTask() {
-        task.deleteAllTasksByName(taskData.get("title"));
     }
 
     @BeforeTest

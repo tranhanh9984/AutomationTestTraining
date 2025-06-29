@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -16,10 +17,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CommonPage {
 
 	public WebDriver driver;
+	
+	public CommonPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	public CommonPage() {
+	}
 
 	protected int DEFAULT_TIMEOUT = 20000;
 	protected int WAIT_INTERVAL = 1000;
@@ -35,12 +47,170 @@ public class CommonPage {
 	public String UDID = "B596E6B8-8776-4E89-AD92-BFE7974A835A";
 	public String baseUrl = "http://10.60.108.62:9750/SALE_WEB";
 
+	public WebDriver startBrower(String url, String browser) {
+		if ("chrome".equals(browser)) {
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			driver = new ChromeDriver();
+		} else if ("edge".equals(browser)) {
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			driver = new EdgeDriver();
+		} else if ("safari".equals(browser)) {
+			driver = new SafariDriver();
+		} else {
+			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/driver/geckodriver.exe");
+			driver = new FirefoxDriver();
+		}
+
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.navigate().to(url);
+		return driver;
+	}
+
+	public void closeBrowser(WebDriver dr) {
+		dr.close();
+	}
+
+	public void pause(int secondS) {
+		try {
+			Thread.sleep(secondS * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void shortPause() {
+		pause(2);
+	}
+
+	public void longPause() {
+		pause(10);
+	}
+
+
+	@FindBy(xpath = "//button[@type='submit']")
+	@CacheLookup
+	protected WebElement submitBtn;
+
+	@FindBy(xpath = "//input[@type='search']")
+	@CacheLookup
+	protected WebElement searchBox;
+
+	@FindBy(xpath = "//a[@class='edit']")
+	@CacheLookup
+	protected WebElement editBtn;
+
+	@FindBy(xpath = "//a[@class='delete']")
+	@CacheLookup
+	protected WebElement deleteBtn;
+
+	@FindBy(id = "confirmDeleteButton")
+	@CacheLookup
+	protected WebElement confirmDeleteBtn;
+
+	@FindBy(xpath = "//td[contains(@class, 'dataTables_empty')]")
+	protected WebElement emptyRow;
+
+	@FindBy(xpath = "//div[@id='select2-drop']/div/input")
+	protected WebElement dropdownSearch;
+
+	@FindBy(id = "description")
+	protected WebElement descriptionClick;
+
+	@FindBy(className = "note-editable")
+	protected WebElement descriptionArea;
+
+	@FindBy(id = "start_date")
+	protected WebElement startDateInput;
+
+	@FindBy(id = "end_date")
+	protected WebElement endDateInput;
+
+	protected By menuText(String text) {
+		return By.xpath(String.format("//span[@class='menu-text ' and text()='%s']", text));
+	}
+
+	protected By addLink(String text) {
+		System.out.println(String.format("By.linkText(%s);", text));
+		return By.linkText(text);
+	}
+
+
+	public void fillDroplist(WebElement dropdownElement, String key) {
+		dropdownElement.click();
+		dropdownSearch.sendKeys(key, Keys.ENTER);
+	}
+
+	public void fillMultiDroplist(WebElement input, String key) {
+		input.click();
+		input.sendKeys(key);
+		input.sendKeys(Keys.ENTER);
+	}
+
+	public void fillDescription(String key) {
+		descriptionClick.click();
+		descriptionArea.sendKeys(key);
+	}
+
+	public void fillStartDate(String key) {
+		startDateInput.clear();
+		startDateInput.sendKeys(key);
+	}
+
+	public void fillEndDate(String key) {
+		endDateInput.clear();
+		endDateInput.sendKeys(key);
+	}
+
+	public void submitForm() {
+		submitBtn.click();
+	}
+
+	public void search(String key) {
+		searchBox.clear();
+		System.out.println(key);
+		searchBox.sendKeys(key, Keys.ENTER);
+		shortPause();
+	}
+
+	public void clickMenu(String menu) {
+		driver.findElement(menuText(menu)).click();
+	}
+
+	public void clickAdd(String text) {
+		driver.findElement(addLink(text)).click();
+	}
+
+	public void clickEditBtn() {
+		editBtn.click();
+	}
+
+	public void delete() {
+		deleteBtn.click();
+		shortPause();
+		confirmDeleteBtn.click();
+		shortPause();
+	}
+
+	public void deleteAllByName(String name) {
+		shortPause();
+		search(name);
+
+		while (true) {
+			if (driver.findElements(By.xpath("//td[contains(@class, 'dataTables_empty')]")).size() > 0)
+				break;
+			delete();
+			search(name);
+			shortPause();
+		}
+	}
+
 	/**
 	 * switch to a frame
 	 * 
 	 * @param locator
-	 * @param opParams
-//	 */
+	 * @param opParams //
+	 */
 //	public void switchToFrame(Object locator, Object... opParams) {
 ////        info("Switch to frame " + locator);
 //		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
@@ -67,66 +237,28 @@ public class CommonPage {
 	 * 
 	 * @param URL
 	 */
-	public WebDriver startBrower(String url, String browser) {
-		if ("chrome".equals(browser)) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-			driver = new ChromeDriver();
-		} else if ("edge".equals(browser)) {
-			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-			driver = new EdgeDriver();
-		} else if ("safari".equals(browser)) {
-			driver = new SafariDriver();
-		} else {
-			System.setProperty("webdriver.gecko.driver",  System.getProperty("user.dir") + "/driver/geckodriver.exe");
-			driver = new FirefoxDriver();
-		}
 
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.navigate().to(url);
-		return driver;
-	}
-	
-	
-	//Truyền vào string = "Hóa đơn\Tạo hoá đơn"
-	public void clickMenu(String strSelected) {	
-		String txtMenu = "//span[text() = '%s']/ancestor::a";
-		String[] menus = new String[2];
-		menus = strSelected.split("/");	
-		pause(1000);
-		
-		for(int i = 0; i < menus.length; i++) {
-			if(!driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).isDisplayed()) {
-				pause(1000);
-			}
-			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();			
-		}
-	}	
-	
-	public void scrollToElement(String xpath) {
-		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
-		((JavascriptExecutor) driver).executeScript(
-	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(xpath)));
-	}
-	
-	
-	
-	public void closeBrowser(WebDriver dr) {
-		dr.close();
-	}
-
-	/**
-	 * pause driver in timeInMillis
-	 * 
-	 * @param timeInMillis
-	 */
-	public void pause(long secondS) {
-		try {
-			Thread.sleep(secondS*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+	// Truyền vào string = "Hóa đơn\Tạo hoá đơn"
+//	public void clickMenu(String strSelected) {	
+//		String txtMenu = "//span[text() = '%s']/ancestor::a";
+//		String[] menus = new String[2];
+//		menus = strSelected.split("/");	
+//		pause(1000);
+//		
+//		for(int i = 0; i < menus.length; i++) {
+//			if(!driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).isDisplayed()) {
+//				pause(1000);
+//			}
+//			driver.findElement(By.xpath(String.format(txtMenu, menus[i]))).click();			
+//		}
+//	}	
+//	
+//	public void scrollToElement(String xpath) {
+//		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+//		((JavascriptExecutor) driver).executeScript(
+//	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(xpath)));
+//	}
+//	
 
 	/**
 	 * 
@@ -161,51 +293,51 @@ public class CommonPage {
 	 * @param locator
 	 * @return
 	 */
-	public WebElement getElement(Object locator, WebDriver dr) {
-		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
-		WebElement elem = null;
-		try {
-			elem = dr.findElement(by);
-		} catch (NoSuchElementException e) {
-		
-			pause(WAIT_INTERVAL);
-			getElement(locator, dr);
-		} catch (StaleElementReferenceException e) {
-		
-			pause(WAIT_INTERVAL);
-			getElement(locator, dr);
-		} catch (WebDriverException e) {
-		
-			pause(WAIT_INTERVAL);
-			getElement(locator, dr);
-		}
-
-		return elem;
-	}
+//	public WebElement getElement(Object locator, WebDriver dr) {
+//		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
+//		WebElement elem = null;
+//		try {
+//			elem = dr.findElement(by);
+//		} catch (NoSuchElementException e) {
+//		
+//			pause(WAIT_INTERVAL);
+//			getElement(locator, dr);
+//		} catch (StaleElementReferenceException e) {
+//		
+//			pause(WAIT_INTERVAL);
+//			getElement(locator, dr);
+//		} catch (WebDriverException e) {
+//		
+//			pause(WAIT_INTERVAL);
+//			getElement(locator, dr);
+//		}
+//
+//		return elem;
+//	}
 
 	/**
 	 * 
 	 * @param locator
 	 * @return
 	 */
-	public List<WebElement> getListElement(Object locator) {
-		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
-		List<WebElement> elementOptions;
-		try {
-			elementOptions = driver.findElements(by);
-			return elementOptions;
-		} catch (NoSuchElementException ex) {
-			pause(WAIT_INTERVAL);
-			getListElement(locator);
-		} catch (StaleElementReferenceException ex) {
-			pause(WAIT_INTERVAL);
-			getListElement(locator);
-		} finally {
-			loopCount = 0;
-		}
-		return null;
+//	public List<WebElement> getListElement(Object locator) {
+//		By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
+//		List<WebElement> elementOptions;
+//		try {
+//			elementOptions = driver.findElements(by);
+//			return elementOptions;
+//		} catch (NoSuchElementException ex) {
+//			pause(WAIT_INTERVAL);
+//			getListElement(locator);
+//		} catch (StaleElementReferenceException ex) {
+//			pause(WAIT_INTERVAL);
+//			getListElement(locator);
+//		} finally {
+//			loopCount = 0;
+//		}
+//		return null;
 
-	}
+//	}
 
 //	public WebElement getElementPresent(Object locator) {
 //		WebElement elem = null;
@@ -286,8 +418,8 @@ public class CommonPage {
 	 * checking an element is displayed in web page
 	 * 
 	 * @param locator
-	 * @return
-//	 */
+	 * @return //
+	 */
 //	public boolean isDisplay(Object locator, WebDriver dr) {
 //		boolean bool = false;
 //		WebElement e = getElement(locator, dr);
@@ -302,8 +434,6 @@ public class CommonPage {
 //		}
 //		return bool;
 //	}
-
-	
 
 	/**
 	 * click on an element

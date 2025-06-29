@@ -2,6 +2,7 @@ package autotest.testcase.rise;
 
 import java.util.HashMap;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ import autotest.pages.rise.LoginPage;
 
 public class ClientTestcases extends CommonPage {
 
-    ClientPage client;
+	ClientPage client;
     LoginPage login;
 
     private HashMap<String, String> clientData = new HashMap<>();
@@ -38,29 +39,28 @@ public class ClientTestcases extends CommonPage {
 
     @Test
     public void testAddClient() {
-        client.deleteAllClientsByName(clientData.get("company"));
+        client.clickClient();
+        client.deleteAllByName(clientData.get("company"));
         client.clickMenu("Clients");
-
-        client.clickAddClient();
+        client.clickAdd("Add client");
         client.fillClientForm(clientData);
         client.submitForm();
-        pause(5);
+        shortPause();
     }
 
     @Test(dependsOnMethods = "testAddClient")
     public void testEditClient() {
-        client.searchClient(clientData.get("company"));
+        client.search(clientData.get("company"));
         client.editClient("456 Changed Address");
-        pause(3);
+        shortPause();
     }
 
     @Test(dependsOnMethods = "testEditClient")
     public void testDeleteClient() {
-    	client.clickMenu("Clients");
-    	client.searchClient(clientData.get("company"));
-    	client.deleteClient();
-    	client.searchClient(clientData.get("company"));
-        pause(3);
+    	client.search(clientData.get("company"));
+    	client.delete();
+    	client.search(clientData.get("company"));
+    	shortPause();
     }
 
     @BeforeTest
