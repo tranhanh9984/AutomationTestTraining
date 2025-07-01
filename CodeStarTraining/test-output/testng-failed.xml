@@ -5,8 +5,8 @@
     <classes>
       <class name="autotest.testcase.LoginTestCases">
         <methods>
-          <include name="LoginTestCases"/>
           <include name="startBrowser"/>
+          <include name="LoginTestCases"/>
           <include name="closeBrowser"/>
         </methods>
       </class> <!-- autotest.testcase.LoginTestCases -->

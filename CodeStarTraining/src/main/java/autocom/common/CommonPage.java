@@ -110,12 +110,22 @@ public class CommonPage {
 		driver.findElement(By.linkText(strSelected)).click();
 	}
 	
+	public void clickLinkByTitle(String title) {
+		By selector = getLinkByTitle(title);
+		driver.findElement(selector).click();
+	}
+	
+	
 	public void clickAdd(String title) {
 	    driver.findElement(btnAdd(title)).click();
 	}
 	// click submit (save)
 	public void clickSubmit() {
-		driver.findElement(btnSubmit).click();
+			driver.findElement(btnSubmit).click();
+	}
+	
+	public void clickSubmitModal() {
+		driver.findElement(btnSubmitModal).click();
 	}
 	
 	//
@@ -150,7 +160,7 @@ public class CommonPage {
 		el.sendKeys(Keys.ENTER);
 	}
 	
-	public void selectOption(String label, String value) {
+	public void selectOption(String value) {
         By byLocator = optionDropdown(value);
         driver.findElement(byLocator).click();
     }
@@ -165,8 +175,19 @@ public class CommonPage {
 	public void selectOptionByClick(String label, String value) {
 		clickDropdown(label);
 		pause(1);
-		selectOption(label, value);
+		selectOption(value);
 		pause(1);
+	}
+	
+	public void handleDropdownPagination(String value) {
+		driver.findElement(dropdownPagination).click();
+		pause(1);
+		selectOption(value);
+		pause(1);
+	}
+	
+	public void handleNumberPagination() {
+		
 	}
 	
 	// action
@@ -200,7 +221,7 @@ public class CommonPage {
 		search(page, title);
 		
 	    List<WebElement> rows = driver.findElements(tableRows(page));
-	    if (isTableEmpty()) {
+	    if (isTableEmpty(page)) {
 	    	return;
 	    }
 	    while (rows.size() > 0) {
@@ -209,7 +230,7 @@ public class CommonPage {
 	        driver.findElement(btnConfirmDelete).click();
 	        pause(1);
 
-	        if (isTableEmpty()) {
+	        if (isTableEmpty(page)) {
 	        	break;
 		    }
 	        
@@ -217,8 +238,8 @@ public class CommonPage {
 	    }
 	}
 	
-	public boolean isTableEmpty() {
-		By tableEmpty = xPathTableEmpty("task");
+	public boolean isTableEmpty(String page) {
+		By tableEmpty = xPathTableEmpty(page);
 	    List<WebElement> emptyElements = driver.findElements(tableEmpty);
 	    if (!emptyElements.isEmpty()) {
 	        System.out.println("No records found");
@@ -226,6 +247,17 @@ public class CommonPage {
 	    }
 	    return false;
 	}
+	
+	// check
+	public boolean elementVisible(By locator) {
+		try {
+//			return driver.findElement(locator).isDisplayed();
+			return driver.findElement(locator).isDisplayed();
+		} catch(NoSuchElementException e) {			
+			return false;
+		}
+	}
+	
 	
 	// verify
 	public void verifyAddedTask(String page, String title) {
@@ -244,6 +276,15 @@ public class CommonPage {
 	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(xpath)));
 	}
 	
+	public void verifyTextVisible(WebElement selector, String textExpected) {
+		boolean textVisible = selector.getText().contains(textExpected);
+		Assert.assertEquals(textVisible, true);
+	}
+	
+	// handle String
+	public static String removeHtmlTags(String html) {
+	    return html.replaceAll("<[^>]+>", "").trim();
+	}
 	
 	
 	public void closeBrowser(WebDriver dr) {

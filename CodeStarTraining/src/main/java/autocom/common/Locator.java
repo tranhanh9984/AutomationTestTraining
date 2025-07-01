@@ -1,10 +1,14 @@
 package autocom.common;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 
 public class Locator {
 //	public static final By btnAdd = By.cssSelector("a[title^='Add']");
 	public static final By btnSubmit = By.xpath("//button[@type='submit' and normalize-space()='Save']");
+	public static final By btnSubmitModal = By.xpath("//div[@class='modal-footer']//button[@type='submit' and normalize-space()='Save']");
     public static final By btnConfirmDelete = By.id("confirmDeleteButton");
     
     public static final By appAlert = By.className("app-alert");
@@ -18,12 +22,18 @@ public class Locator {
 	
     public static final By colTitle = By.xpath("./td[2]/a");
     
+    public static final By dropdownPagination = By.xpath("//div[@class='dataTables_length']//div[contains(@class,'select2-container')]");
+    
     public static By btnAdd(String labelText) {
         return By.xpath(String.format("//div[contains(@class,'tab-title')]//a[@title='%s']", labelText));
     }
     
 	public static By inputByLabelText(String labelText) {
         return By.xpath(String.format("//label[normalize-space()='%s']/following::input[1]", labelText));
+    }
+	
+	public static By getLinkByTitle(String title) {
+        return By.xpath(String.format("//a[@title='%s']", title));
     }
 
     public static By select2Option(String value) {
@@ -84,5 +94,26 @@ public class Locator {
             "//ul[contains(@class, 'select2-results')]//div[contains(@class, 'select2-result-label') and contains(.,'%s')]",
             value
         ));
+    }
+    
+    public static By dashboardColum(String value) {
+    	return By.xpath(String.format(
+    		"//span[contains(text(),'%s')]/ancestor::div[2]",
+    		value
+    	));
+    }
+    
+    public static By dashboardColumValue(String value) {
+    	return By.xpath(String.format(
+    		"//span[contains(text(),'%s')]/preceding-sibling::h1",
+    		value
+    	));
+    }
+    
+    public static By dashboardProjectValue(String value) {
+    	return By.xpath(String.format(
+    		"//span[contains(text(),'%s')]/preceding-sibling::h4",
+    		value
+    	));
     }
 }

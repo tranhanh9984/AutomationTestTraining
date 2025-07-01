@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
-import autotest.pages.login.LoginPage;
+import autotest.page.LoginPage;
 
 public class LoginTestCases extends CommonPage {
 
@@ -14,7 +14,8 @@ public class LoginTestCases extends CommonPage {
 	
 	@Test
 	public void LoginTestCases() {
-		loginPage.login("admin@demo.com", "riseDemo");
+//		loginPage.login("admin@demo.com", "riseDemo");
+		loginPage.loginExecuteScript("admin@demo.com", "riseDemo");
 	}
 	
 	public void init() {

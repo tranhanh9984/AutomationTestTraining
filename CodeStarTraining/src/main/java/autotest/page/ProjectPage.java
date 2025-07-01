@@ -39,7 +39,7 @@ public class ProjectPage extends CommonPage {
     private By inputSearch = By.xpath("//div[@id='project-table_filter']//input");
     private By tableRows = By.xpath("//table[@id='project-table']/tbody/tr");
     private By tableEmpty = By.xpath("//td[@class='dataTables_empty' and text()='No record found.']");
-    
+
     // ---------- Actions ----------
     public void clickProjectMenu() {
         driver.findElement(menuProject).click();
@@ -149,5 +149,10 @@ public class ProjectPage extends CommonPage {
 	        return true; 
 	    }
 	    return false;
+	}
+	
+	public int getProjectCount() {
+		List<WebElement> rows = driver.findElements(tableRows);
+	    return rows.size();
 	}
 }

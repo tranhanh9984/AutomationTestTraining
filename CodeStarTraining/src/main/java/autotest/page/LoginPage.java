@@ -2,6 +2,7 @@ package autotest.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -14,6 +15,8 @@ import autotest.utils.CookieUtil;
 
 public class LoginPage extends CommonPage {
 	
+	
+	
 	@FindBy(xpath="//input[@id='email']") @CacheLookup WebElement emailField;
 	@FindBy(id="password") @CacheLookup WebElement passwordField;
 	@FindBy(css="button[type='submit']") @CacheLookup WebElement btnSubmit;
@@ -25,6 +28,22 @@ public class LoginPage extends CommonPage {
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+	}
+	
+	public void loginExecuteScript(String username, String password) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		clearAll();
+		
+//		js.executeScript("document.getElementById('email').setAttribute('value','admin@demo.com');"); 
+//		js.executeScript("document.getElementById('password').setAttribute('value','riseDemo');");
+//	    js.executeScript("document.querySelector('button[type=\"submit\"]').click()");
+	    
+//		js.executeScript("arguments[0].setAttribute('value','admin@demo.com');", emailField); 
+//		js.executeScript("arguments[0].setAttribute('value','riseDemo');", passwordField);
+		
+	    js.executeScript("arguments[0].value = arguments[1];", emailField, username);
+	    js.executeScript("arguments[0].value = arguments[1];", passwordField, password);
+	    js.executeScript("arguments[0].click();", btnSubmit);
 	}
 	
 	public void login(String username, String password) {
@@ -52,7 +71,7 @@ public class LoginPage extends CommonPage {
 	}
 	
 	private void addCookies() {		 
-		 Cookie cookie = new Cookie.Builder("myCookie", "cb86cd7a6a91c4e281fdeb3aa669f41f")
+		 Cookie cookie = new Cookie.Builder("myCookie", "92e64bd0035827871b012ac2d36c18fd")
 	                .isHttpOnly(true)
 	                .isSecure(false)
 	                .build();
