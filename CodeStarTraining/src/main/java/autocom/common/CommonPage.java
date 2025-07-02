@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -51,11 +52,21 @@ public class CommonPage {
 		if ("chrome".equals(browser)) {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 			driver = new ChromeDriver();
+			
+		} else if ("chrome-headless".equals(browser)) {
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("--headless");
+			driver = new ChromeDriver(options);
+			
 		} else if ("edge".equals(browser)) {
-			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/msedgedriver.exe");
 			driver = new EdgeDriver();
+			
 		} else if ("safari".equals(browser)) {
 			driver = new SafariDriver();
+			
 		} else {
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/driver/geckodriver.exe");
 			driver = new FirefoxDriver();

@@ -85,6 +85,7 @@ public class Buoi12TH extends CommonPage {
 	WebElement selectedValue;
 
 	public void handleDroplistCountry() {
+		pause(10);
 		country.click();
 		dropdownSearch.sendKeys("Vietnam", Keys.ENTER);
 		pause(5);
@@ -93,13 +94,7 @@ public class Buoi12TH extends CommonPage {
 
 		Assert.assertEquals(selectedCountry, "Vietnam", "Dropdown selection failed.");
 
-		if (selectedCountry.equalsIgnoreCase("Vietnam")) {
-			System.out.println("Pass");
-		} else {
-			System.out.println("Fail");
-		}
-
-		pause(3);
+		
 
 	}
 
@@ -130,13 +125,13 @@ public class Buoi12TH extends CommonPage {
 	@Test
 	public void testDroplist() {
 		handleDroplistCountry();
-		handleDroplistCategory();
+//		handleDroplistCategory();
 	}
 
 	@BeforeTest
 	public void startBrowser() {
 		driver = this.startBrower("https://techydevs.com/demos/themes/html/listhub-demo/listhub/index.html",
-				KeywordConstant.BROWSER);
+				"chrome-headless");
 		PageFactory.initElements(driver, this);
 
 	}

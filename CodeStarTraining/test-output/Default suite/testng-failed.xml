@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="autotest.testcase.rise.ClientTestcases">
+      <class name="autotest.testcase.rise.DashboardTestcases">
         <methods>
-          <include name="testAddClient"/>
-          <include name="closeBrowser"/>
           <include name="startBrowser"/>
-          <include name="testEditClient"/>
-          <include name="testDeleteClient"/>
+          <include name="testInvoiceFullyPaid"/>
+          <include name="closeBrowser"/>
         </methods>
-      </class> <!-- autotest.testcase.rise.ClientTestcases -->
+      </class> <!-- autotest.testcase.rise.DashboardTestcases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
