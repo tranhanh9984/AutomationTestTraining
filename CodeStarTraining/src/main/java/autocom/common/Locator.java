@@ -20,12 +20,17 @@ public class Locator {
     public static final By descriptionBox = By.id("description");
     public static final By descriptionEditor = By.className("note-editable");
 	
+    public static final By inputStartDate = By.xpath("//input[@name='start_date']");
     public static final By colTitle = By.xpath("./td[2]/a");
     
     public static final By dropdownPagination = By.xpath("//div[@class='dataTables_length']//div[contains(@class,'select2-container')]");
     
     public static By btnAdd(String labelText) {
         return By.xpath(String.format("//div[contains(@class,'tab-title')]//a[@title='%s']", labelText));
+    }
+    
+    public static By getPageTitle(String title) {
+        return By.xpath(String.format("//h1[text()='%s']", title));
     }
     
 	public static By inputByLabelText(String labelText) {
@@ -64,6 +69,20 @@ public class Locator {
     public static By dropdownNearLabel(String labelText) {
         return By.xpath(String.format(
             "//label[normalize-space()='%s']/following::div[1]//div[contains(@class,'select2-container')]",
+            labelText
+        ));
+    }
+    
+    public static By inputDropdownPrecedingName(String labelText) {
+    	return By.xpath(String.format(
+            "//input[@name='%s']/preceding-sibling::div[contains(@class,'select2-container')]",
+            labelText
+        ));
+    }
+    
+    public static By selectDropdownPrecedingName(String labelText) {
+    	return By.xpath(String.format(
+            "//select[@name='%s']/preceding-sibling::div[contains(@class,'select2-container')]",
             labelText
         ));
     }
@@ -113,6 +132,13 @@ public class Locator {
     public static By dashboardProjectValue(String value) {
     	return By.xpath(String.format(
     		"//span[contains(text(),'%s')]/preceding-sibling::h4",
+    		value
+    	));
+    }
+    
+    public static By dashboardInvoiceFilter(String value) {
+    	return By.xpath(String.format(
+    		"//div[@id='invoice-overview-container']//a[@data-filter='%s']",
     		value
     	));
     }

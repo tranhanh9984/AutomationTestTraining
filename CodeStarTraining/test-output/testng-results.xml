@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-06-29T21:18:14 ICT" name="Default suite" finished-at="2025-06-29T21:18:25 ICT" duration-ms="11271">
+  <suite started-at="2025-07-08T23:55:49 ICT" name="Default suite" finished-at="2025-07-08T23:56:32 ICT" duration-ms="43515">
     <groups>
     </groups>
-    <test started-at="2025-06-29T21:18:14 ICT" name="Default test" finished-at="2025-06-29T21:18:25 ICT" duration-ms="11271">
-      <class name="autotest.testcase.LoginTestCases">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.testcase.LoginTestCases@1f2586d6]" started-at="2025-06-29T21:18:14 ICT" name="startBrowser" finished-at="2025-06-29T21:18:19 ICT" duration-ms="5200" status="PASS">
+    <test started-at="2025-07-08T23:55:49 ICT" name="Default test" finished-at="2025-07-08T23:56:32 ICT" duration-ms="43515">
+      <class name="autotest.testcase.DashboardTestCases">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:autotest.testcase.DashboardTestCases@3eb738bb]" started-at="2025-07-08T23:55:49 ICT" name="startBrowser" finished-at="2025-07-08T23:56:01 ICT" duration-ms="12367" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="LoginTestCases()[pri:0, instance:autotest.testcase.LoginTestCases@1f2586d6]" started-at="2025-06-29T21:18:19 ICT" name="LoginTestCases" finished-at="2025-06-29T21:18:25 ICT" duration-ms="5654" status="PASS">
+        <test-method signature="widgetInvoiceOverview()[pri:0, instance:autotest.testcase.DashboardTestCases@3eb738bb]" started-at="2025-07-08T23:56:01 ICT" name="widgetInvoiceOverview" finished-at="2025-07-08T23:56:32 ICT" duration-ms="31026" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- LoginTestCases -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:autotest.testcase.LoginTestCases@1f2586d6]" started-at="2025-06-29T21:18:25 ICT" name="closeBrowser" finished-at="2025-06-29T21:18:25 ICT" duration-ms="1" status="PASS">
+        </test-method> <!-- widgetInvoiceOverview -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:autotest.testcase.DashboardTestCases@3eb738bb]" started-at="2025-07-08T23:56:32 ICT" name="closeBrowser" finished-at="2025-07-08T23:56:32 ICT" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
-      </class> <!-- autotest.testcase.LoginTestCases -->
+      </class> <!-- autotest.testcase.DashboardTestCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

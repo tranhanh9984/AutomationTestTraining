@@ -135,7 +135,7 @@ public class Bai1 extends CommonPage {
 		driver.findElement(By.id("confirmDeleteButton")).click();
 	}
 	
-	private void verifyMessage(String message) {
+	public void verifyMessage(String message) {
 		WebElement element = driver.findElement(By.className("app-alert"));
 		Assert.assertTrue(element.isDisplayed(), "Element should be visible on the page");
 		Assert.assertTrue(driver.findElement(By.className("app-alert-message")).getText().contentEquals(message),  "Message text does not match");

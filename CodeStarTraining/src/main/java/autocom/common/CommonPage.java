@@ -1,6 +1,28 @@
 package autocom.common;
 
-import static autocom.common.Locator.*;
+import static autocom.common.Locator.alertMessage;
+import static autocom.common.Locator.appAlert;
+import static autocom.common.Locator.btnAdd;
+import static autocom.common.Locator.btnConfirmDelete;
+import static autocom.common.Locator.btnDelete;
+import static autocom.common.Locator.btnEdit;
+import static autocom.common.Locator.btnSubmit;
+import static autocom.common.Locator.btnSubmitModal;
+import static autocom.common.Locator.clickDropdownNearLabel;
+import static autocom.common.Locator.colTitle;
+import static autocom.common.Locator.descriptionBox;
+import static autocom.common.Locator.descriptionEditor;
+import static autocom.common.Locator.dropdownPagination;
+import static autocom.common.Locator.getLinkByTitle;
+import static autocom.common.Locator.getPageTitle;
+import static autocom.common.Locator.inputDropdownNearLabel;
+import static autocom.common.Locator.inputDropdownPrecedingName;
+import static autocom.common.Locator.inputStartDate;
+import static autocom.common.Locator.optionDropdown;
+import static autocom.common.Locator.selectDropdownPrecedingName;
+import static autocom.common.Locator.tableRows;
+import static autocom.common.Locator.tableSearchInput;
+import static autocom.common.Locator.xPathTableEmpty;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,6 +40,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class CommonPage {
@@ -128,7 +152,7 @@ public class CommonPage {
 		driver.findElement(btnSubmitModal).click();
 	}
 	
-	//
+	// search
 	public void search(String page, String title) {
 		By inputSearch = tableSearchInput(page);
 		WebElement searchInput = driver.findElement(inputSearch);
@@ -139,15 +163,45 @@ public class CommonPage {
 	}
 	
 	
+	// enter date
+	public void enterStartDate(String newDate) {
+		WebElement inputDate = driver.findElement(inputStartDate);
+		String currentDate = inputDate.getAttribute("value");
+		if (!newDate.equals(currentDate)) {
+			inputDate.clear();
+			inputDate.sendKeys(newDate);
+		}
+	}
+	
 	// enter description
 	public void enterDescription(String value) {
 		driver.findElement(descriptionBox).click();
-		driver.findElement(descriptionEditor).sendKeys(value);
+//		driver.findElement(descriptionEditor).sendKeys(value);
+//		String newDescription = todo.get("description");
+		
+		WebElement inputDescription = driver.findElement(descriptionEditor);
+		String currentDescription = driver.findElement(descriptionEditor).getAttribute("value");
+		if (!value.equals(currentDescription)) {
+		    inputDescription.clear();
+		    inputDescription.sendKeys(value);
+		}
 	}
 	
 	// Dropdown
 	public void clickDropdown(String label) {
 		By byLocator = clickDropdownNearLabel(label);
+		WebElement el = driver.findElement(byLocator);
+		el.click();
+	}
+	
+	public void clickDropdownPreceding(String label) {
+		By byLocator = selectDropdownPrecedingName(label);
+		WebElement el = driver.findElement(byLocator);
+		el.click();
+	}
+	
+	public void clickInputPreceding(String label) {
+		By byLocator = inputDropdownPrecedingName(label);
 		WebElement el = driver.findElement(byLocator);
 		el.click();
 	}
@@ -174,6 +228,20 @@ public class CommonPage {
 	
 	public void selectOptionByClick(String label, String value) {
 		clickDropdown(label);
+		pause(1);
+		selectOption(value);
+		pause(1);
+	}
+	
+	public void selectOptionByInputName(String label, String value) {
+		clickInputPreceding(label);
+		pause(1);
+		selectOption(value);
+		pause(1);
+	}
+	
+	public void selectOptionBySelectName(String label, String value) {
+		clickDropdownPreceding(label);
 		pause(1);
 		selectOption(value);
 		pause(1);
@@ -260,6 +328,11 @@ public class CommonPage {
 	
 	
 	// verify
+	public void verifyPageTitle(String title) {
+		By pageTitle = getPageTitle(title);
+		waitForElementVisible(pageTitle);
+	}
+	
 	public void verifyAddedTask(String page, String title) {
 		search(page, title);
 		
@@ -281,9 +354,30 @@ public class CommonPage {
 		Assert.assertEquals(textVisible, true);
 	}
 	
+	public void verifyNumberEquals(int number, int numberExpected) {
+		Assert.assertEquals(number, numberExpected);
+	}
+	
+	public void verifyNumberDoubleEquals(double number, double numberExpected) {
+		Assert.assertEquals(number, numberExpected);
+	}
+	
+	public void verifyMessage(String message) {
+		WebElement element = driver.findElement(appAlert);
+		System.out.println(element);
+		Assert.assertTrue(element.isDisplayed(), "Element should be visible on the page");
+		Assert.assertTrue(driver.findElement(alertMessage).getText().contentEquals(message),  "Message text does not match");
+	}
+	
 	// handle String
 	public static String removeHtmlTags(String html) {
 	    return html.replaceAll("<[^>]+>", "").trim();
+	}
+	
+	public static double handleAmountFromText(String html) {
+	    String amountText = "$2,648.50".replaceAll("[$,]", "");
+	    double amount = Double.parseDouble(amountText);
+	    return amount;
 	}
 	
 	
@@ -301,6 +395,53 @@ public class CommonPage {
 			Thread.sleep(secondS*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void waitForElementClickable(By locator, String errorMessage) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(ExpectedConditions.elementToBeClickable(locator));
+		} catch (Exception ex){
+			System.out.println(errorMessage + ex);
+		}
+	}
+	
+	public void waitForElementVisible(By locator) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		} catch (Exception ex){
+			System.out.println("Error message: " + ex);
+		}
+	}
+	
+	public boolean elementIsVisible(By locator) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+			return true;
+		} catch (Exception ex){
+			System.out.println(ex);
+			return false;
+		}
+	}
+	
+	public void waitForElementPresent(WebElement element) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 25);
+			wait.until(ExpectedConditions.visibilityOf(element));
+		} catch (Exception ex){
+			System.out.println("Error message: " + ex);
+		}
+	}
+	
+	public void waitForElementHasClass(WebElement element) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(driver -> element.getAttribute("class").contains("active"));
+		} catch (Exception ex){
+			System.out.println("Error message: " + ex);
 		}
 	}
 

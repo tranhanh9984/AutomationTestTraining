@@ -92,7 +92,7 @@ public class Tasks extends CommonPage{
 		Assert.assertTrue(actualText.contains(title), "Không tìm thấy nội dung mong muốn!");
 	}
 	
-	private void verifyMessage(String message) {
+	public void verifyMessage(String message) {
 		WebElement element = driver.findElement(By.className("app-alert"));
 		Assert.assertTrue(element.isDisplayed(), "Element should be visible on the page");
 		Assert.assertTrue(driver.findElement(By.className("app-alert-message")).getText().contentEquals(message),  "Message text does not match");

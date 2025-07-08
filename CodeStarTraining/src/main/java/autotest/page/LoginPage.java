@@ -47,10 +47,10 @@ public class LoginPage extends CommonPage {
 	}
 	
 	public void login(String username, String password) {
-//		addCookies();
-		clearAll();
-		fillLogin(username, password);
-		pause(2);
+		addCookies();
+//		clearAll();
+//		fillLogin(username, password);
+//		pause(2);
 		CookieUtil.saveCookies(driver);
 	}
 	
@@ -71,7 +71,7 @@ public class LoginPage extends CommonPage {
 	}
 	
 	private void addCookies() {		 
-		 Cookie cookie = new Cookie.Builder("myCookie", "92e64bd0035827871b012ac2d36c18fd")
+		 Cookie cookie = new Cookie.Builder("ci_session", "2cad73b9d2e66deafbbc40618a10a1fd")
 	                .isHttpOnly(true)
 	                .isSecure(false)
 	                .build();
