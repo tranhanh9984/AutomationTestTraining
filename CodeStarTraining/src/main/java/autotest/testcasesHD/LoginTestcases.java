@@ -46,7 +46,7 @@ public class LoginTestcases extends CommonPage{
 	
 	@BeforeTest
 	@Parameters("browser")
-	public void startBrowser(@Optional("firefox")String browser) {
+	public void startBrowser(@Optional("chrome")String browser) {
 		driver = this.startBrower(KeywordConstant.urlHD, browser);
 		loginPage = new LoginPage(driver);
 		//loginPage.driver = driver;
