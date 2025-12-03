@@ -1,0 +1,23 @@
+# Maven target folder
+target/
+CodeStarTraining\test-output
+
+# Logs
+*.log
+logs/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+.DS_Store
+Thumbs.db
+
+test-output/
+surefire-reports/
+reports/
+reports
+
+*.tmp
+*.swp
