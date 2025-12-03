@@ -1,6 +1,5 @@
 # Maven target folder
 target/
-CodeStarTraining\test-output
 
 # Logs
 *.log
