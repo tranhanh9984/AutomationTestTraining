@@ -1,22 +1,31 @@
-# Maven target folder
+# Ignore Maven/Gradle build
 target/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
 
 # Logs
-*.log
 logs/
+*.log
 
-# Eclipse project files
-.classpath
-.project
-.settings/
-
+# OS stuff
 .DS_Store
 Thumbs.db
 
-test-output/
-surefire-reports/
-reports/
-reports
+# Java
+*.class
 
+# Environment
+.env
+
+# Temporary files
 *.tmp
 *.swp
+
+AutomationTestTraining/test-output/
