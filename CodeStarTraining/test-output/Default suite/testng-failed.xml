@@ -5,7 +5,8 @@
     <classes>
       <class name="autotest.testcasesHD.LoginTestcases">
         <methods>
-          <include name="loginWrongUser"/>
+          <include name="loginNotExistedUser"/>
+          <include name="loginExpiseUser"/>
           <include name="loginWrongpass"/>
           <include name="loginsuccess"/>
           <include name="startBrowser"/>

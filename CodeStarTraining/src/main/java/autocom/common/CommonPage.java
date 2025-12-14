@@ -13,9 +13,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.safari.SafariDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class CommonPage {
 
@@ -68,22 +68,28 @@ public class CommonPage {
 	 * @param URL
 	 */
 	public WebDriver startBrower(String url, String browser) {
-		if ("chrome".equals(browser)) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-			driver = new ChromeDriver();
-		} else if ("edge".equals(browser)) {
-			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-			driver = new EdgeDriver();
-		} else if ("safari".equals(browser)) {
-			driver = new SafariDriver();
-		} else {
-			System.setProperty("webdriver.gecko.driver",  System.getProperty("user.dir") + "/driver/geckodriver.exe");
+		
+		if (browser.equalsIgnoreCase("chrome")) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();			
+		} else if (browser.equalsIgnoreCase("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
+		} else if (browser.equalsIgnoreCase("edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+		} else {
+			throw new IllegalArgumentException("Browser not supported: " + browser);
 		}
-
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		getDriver().manage().window().maximize();	
+		getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(url);
+		
+		return driver;
+	}
+	
+	public WebDriver getDriver() {
 		return driver;
 	}
 	
@@ -109,7 +115,11 @@ public class CommonPage {
 	            "arguments[0].scrollIntoView();", driver.findElement(By.xpath(xpath)));
 	}
 	
-	
+	public void jsClick(String xpath) {
+		JavascriptExecutor jse6 = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].click();", driver.findElement(By.xpath(xpath)));
+	}
 	
 	public void closeBrowser(WebDriver dr) {
 		dr.close();
