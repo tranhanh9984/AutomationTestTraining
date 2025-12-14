@@ -31,11 +31,11 @@ public class Bai1 extends CommonPage {
 		pause(1);
 		driver.navigate().to("https://rise.fairsketch.com/index.php/clients");
 		
-		driver.findElement(By.xpath("//a[contains(@data-bs-target, 'clients_list')]")).click();
-		
-		pause(2);
-		scrollToElement("//div[@id = 'client-table_info']");
-		pause(3);
+//		driver.findElement(By.xpath("//a[contains(@data-bs-target, 'clients_list')]")).click();
+//		
+//		pause(2);
+//		scrollToElement("//div[@id = 'client-table_info']");
+//		pause(3);
 //		Select select = new Select (driver.findElement(By.name("client-table_length")));
 		
 //		Select select = new Select (driver.findElement(By.xpath("//select[contains(@name, 'client-table_length')]")));

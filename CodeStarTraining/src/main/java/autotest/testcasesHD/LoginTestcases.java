@@ -21,8 +21,9 @@ public class LoginTestcases extends CommonPage{
 	WebDriver dr;
 	LoginPage loginPage;
 	HomePage homePage;
+	String url = "https://meet.google.com/wvo-wnov-ncn";
 	
-	//@Test (priority = 1, description = "Kiểm tra trường hợp login thành công")
+	@Test (priority = 1, description = "Kiểm tra trường hợp login thành công")
 	public void loginsuccess() {
 		loginPage.login(KeywordConstant.usernameHD, KeywordConstant.passwordHD);
 		pause(2);
@@ -56,7 +57,7 @@ public class LoginTestcases extends CommonPage{
 	
 	@BeforeTest
 	@Parameters("browser")
-	public void startBrowser(@Optional("firefox") String browser) {
+	public void startBrowser(@Optional("chrome")String browser) {
 		driver = this.startBrower(KeywordConstant.urlHD, browser);
 		loginPage = new LoginPage(driver);
 		//loginPage.driver = driver;
