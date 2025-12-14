@@ -67,8 +67,7 @@ public class CommonPage {
 	 * 
 	 * @param URL
 	 */
-	public WebDriver startBrower(String url, String browser) {
-		
+	public WebDriver startBrower(String url, String browser) {		
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();			

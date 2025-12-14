@@ -8,10 +8,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import autocom.common.CommonPage;
 import autocom.constant.KeywordConstant;
+import autotest.pagesHD.HomePage;
+import autotest.pagesHD.LoginPage;
 
 public class Bai1 extends CommonPage {
 
@@ -114,10 +118,19 @@ public class Bai1 extends CommonPage {
 	
 	@BeforeTest
 	public void startBrowser() {
-		driver = this.startBrower("https://rise.fairsketch.com/index.php/clients", "edge");		
+		driver = this.startBrower("https://rise.fairsketch.com/index.php/clients", "chrome");		
 		this.initDataTest();
 	}
 	
+//	@BeforeTest
+//	@Parameters("browser")
+//	public void startBrowser(@Optional("chrome")String browser) {
+//		driver = this.startBrower(KeywordConstant.urlHD, browser);
+//		loginPage = new LoginPage(driver);
+//		//loginPage.driver = driver;
+//		homePage = new HomePage();
+//		homePage.driver = driver;
+//	}
 	@AfterTest
 	public void closeBrowser() {
 		this.closeBrowser(driver);
