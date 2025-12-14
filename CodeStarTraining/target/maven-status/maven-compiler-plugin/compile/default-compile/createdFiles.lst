@@ -1,6 +1,0 @@
-autocom\common\CommonFuncs.class
-autotest\pagesHD\LoginPage.class
-autotest\pagesHD\HomePage.class
-autocom\common\CommonPage.class
-autotest\pagesHD\EditHoaDon.class
-autocom\constant\KeywordConstant.class
