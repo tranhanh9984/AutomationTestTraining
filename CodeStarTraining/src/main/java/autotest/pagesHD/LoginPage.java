@@ -15,10 +15,11 @@ public class LoginPage extends CommonPage {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	@FindBy(xpath = "//input[@id = 'email']") @CacheLookup WebElement txtUserName;
 	@FindBy(id = "password")  @CacheLookup WebElement txtPassword;
 	@FindBy(xpath = "//button[@type = 'submit']")  @CacheLookup WebElement btnLogin;
-	//String txtPassword = "//input[@id = 'password']";
+//	String txtPassword = "//input[@id = 'password']";
 //	String btnLogin = "//button[@type = 'submit']";		
 	
 	public LoginPage(WebDriver driver) {
@@ -27,6 +28,7 @@ public class LoginPage extends CommonPage {
 	}
 	
 	String msgError = "//div[contains(@class, 'p-toast-detail')]";
+	
 	public void login(String username, String password) {	
 		txtUserName.clear();
 		txtUserName.sendKeys(username);
@@ -51,5 +53,4 @@ public class LoginPage extends CommonPage {
 		return "";
 	}
 	
-
 }
