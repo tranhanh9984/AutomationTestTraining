@@ -10,10 +10,10 @@ public class CommonFuncs {
 	 * 
 	 * @param format
 	 */
-	public String getDateTime(String format) {
-		DateFormat dateFormat = new SimpleDateFormat(format);
-		Calendar cal = Calendar.getInstance();
-		String dateTime = dateFormat.format(cal.getTime());
-		return dateTime;
+	//public String getDateTime(String format) {
+	//	DateFormat dateFormat = new SimpleDateFormat(format);
+	//	Calendar cal = Calendar.getInstance();
+	//	String dateTime = dateFormat.format(cal.getTime());
+	//	return dateTime;
 	}
 }
