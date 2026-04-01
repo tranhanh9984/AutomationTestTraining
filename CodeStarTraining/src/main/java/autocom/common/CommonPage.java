@@ -26,14 +26,14 @@ public class CommonPage {
 	public int loopCount = 0;
 	public final int ACTION_REPEAT = 5;
 	public Actions action;
-	public String DEVICE = "iPhone 8";
-	public String PLATFORM = "iOS";
-	public String PLATFORMVERSION = "12.1";
+//	public String DEVICE = "iPhone 8";
+//	public String PLATFORM = "iOS";
+//	public String PLATFORMVERSION = "12.1";
 	// public String APP = "UAT-My Viettel.zip";
-	public String APP;
+//	public String APP;
 	// public String UDID = "B596E6B8-8776-4E89-AD92-BFE7974A835A";
-	public String UDID = "B596E6B8-8776-4E89-AD92-BFE7974A835A";
-	public String baseUrl = "http://10.60.108.62:9750/SALE_WEB";
+//	public String UDID = "B596E6B8-8776-4E89-AD92-BFE7974A835A";
+//	public String baseUrl = "http://10.60.108.62:9750/SALE_WEB";
 
 	/**
 	 * switch to a frame
