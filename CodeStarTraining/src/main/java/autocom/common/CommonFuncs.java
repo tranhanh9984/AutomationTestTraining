@@ -15,5 +15,5 @@ public class CommonFuncs {
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
 		return dateTime;
-	}
+	}//cmt
 }
