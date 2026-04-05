@@ -21,11 +21,11 @@ public class CommonPage {
 
 	public WebDriver driver;
 
-	protected int DEFAULT_TIMEOUT = 20000;
-	protected int WAIT_INTERVAL = 1000;
-	public int loopCount = 0;
-	public final int ACTION_REPEAT = 5;
-	public Actions action;
+//	protected int DEFAULT_TIMEOUT = 20000;
+//	protected int WAIT_INTERVAL = 1000;
+//	public int loopCount = 0;
+//	public final int ACTION_REPEAT = 5;
+//	public Actions action;
 //	public String DEVICE = "iPhone 8";
 //	public String PLATFORM = "iOS";
 //	public String PLATFORMVERSION = "12.1";
