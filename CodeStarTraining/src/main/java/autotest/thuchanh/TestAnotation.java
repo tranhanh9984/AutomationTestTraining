@@ -1,7 +1,11 @@
 package autotest.thuchanh;
 
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -39,4 +43,26 @@ public class TestAnotation {
 	public void checkAfterTest1() {
 		System.out.println("---@@AfterSuite --------------");
 	}
+	
+	@BeforeMethod
+	public void testxxx() {
+		System.out.println("---@@@@@BeforeMethod --------------");
+	}
+	
+	@AfterMethod
+	public void testxx() {
+		System.out.println("---@@@@AfterMethod --------------");
+	}
+	
+	@BeforeGroups
+	public void testxxxxx() {
+		System.out.println("---@@@@@BeforeGroups --------------");
+	}
+	
+	@AfterGroups
+	public void testx() {
+		System.out.println("---@@@AfterGroups --------------");
+	}
+	
+	
 }
